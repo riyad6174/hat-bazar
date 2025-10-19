@@ -12,20 +12,23 @@ const productVariants = {
       id: '1-pink',
       name: '1 Pcs Gluta Collagen Pink',
       price: 1390,
+      save: null,
       image: '/assets/single.avif',
       quantity: 1,
     },
     {
       id: '2-pink',
       name: '2 Pcs Gluta Collagen Pink',
-      price: 2780,
+      price: 2700,
+      save: '80',
       image: '/assets/double.avif',
       quantity: 2,
     },
     {
       id: '3-pink',
       name: '3 Pcs Gluta Collagen Pink',
-      price: 4000,
+      price: 3900,
+      save: '270',
       image: '/assets/triple.avif',
       quantity: 3,
     },
@@ -485,9 +488,16 @@ const OrderForm = () => {
                     />
                     <div className='flex-1'>
                       <p className='text-sm font-semibold'>{product.name}</p>
-                      <p className='text-lg font-bold text-pink-700'>
-                        {product.price}৳
-                      </p>
+                      <div className='flex items-center justify-start space-x-3'>
+                        <p className='text-lg font-bold text-pink-700'>
+                          {product.price}৳
+                        </p>
+                        {product.save && (
+                          <p className='text-xs font-medium text-teal-700'>
+                            *Save ৳{product.save}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </label>
                 ))}

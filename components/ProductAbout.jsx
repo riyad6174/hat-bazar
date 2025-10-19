@@ -8,9 +8,11 @@ import Link from 'next/link';
 
 const images = [
   '/assets/slider1.jpg',
-  '/assets/slider2.png',
-  '/assets/slider3.png',
+  // '/assets/slider2.png',
+  // '/assets/slider3.png',
   '/assets/slider4.jpg',
+  '/assets/model1.jpg',
+  '/assets/model2.jpg',
 ];
 
 const ProductAbout = () => {
@@ -30,8 +32,8 @@ const ProductAbout = () => {
             <li className='flex items-start border-b-2 border-dotted border-pink-500'>
               <span className='text-pink-500 mr-3 mt-1'>&#10003;</span>
               <span>
-                এতে আছে Glutathion, যা মেলানিন কমিয়ে স্কিন ফেয়ার ও গ্লোয়িং
-                করে তোলে।
+                এতে আছে Glutathion, Collagen যা মেলানিন কমিয়ে স্কিন ফেয়ার ও
+                গ্লোয়িং করে তোলে।
               </span>
             </li>
             <li className='flex items-start border-b-2 border-dotted border-pink-500'>
