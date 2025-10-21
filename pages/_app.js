@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import { useEffect } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { trackEvent, trackPageView } from '@/utils/tracking';
 
@@ -48,5 +49,27 @@ export default function App({ Component, pageProps }) {
     };
   }, [router.events, router.pathname]);
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Head>
+        <title>Hatbazar - Gluta Collagen Pink Dietary Supplement</title>
+        <meta
+          name='description'
+          content='Discover Gluta Collagen Pink, a premium dietary supplement designed to enhance skin health, promote collagen production, and support radiant, youthful skin. Shop now for natural beauty from within.'
+        />
+        <meta
+          property='og:title'
+          content='Hatbazar Gluta Collagen Pink Dietary Supplement'
+        />
+        <meta
+          property='og:description'
+          content='Discover Gluta Collagen Pink, a premium dietary supplement designed to enhance skin health, promote collagen production, and support radiant, youthful skin. Shop now for natural beauty from within.'
+        />
+        <meta property='og:image' content='/assets/model2.jpg' />
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content='https://www.hatbazar.live/' />
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
