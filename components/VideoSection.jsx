@@ -21,7 +21,7 @@ function VideoSection() {
           ত্বকের উজ্জ্বলতা কি শুধু বাইরে থেকে ক্রিম মেখেই সম্ভব?
         </h1>
         <span className='text-pink-600 text-lg '>
-          যতই ভালো স্কিনকেয়ার ব্যবহার করি না কেন, ভিতর থেকে যদি ত্বক পুষ্ট না
+          যতই ভালো স্কিনকেয়ার ব্যবহার করি না কেন, ভিতর থেকে যদি ত্বক পুষ্টি না
           পায় — গ্লো কিন্তু থাকে না।
         </span>
         <h2 className='text-2xl md:text-3xl font-extrabold text-pink-600 mt-3 mb-6 leading-tight'>

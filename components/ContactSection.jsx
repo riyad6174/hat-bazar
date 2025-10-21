@@ -16,7 +16,7 @@ const ContactSection = () => {
         <div className='flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4'>
           {/* Messenger Button */}
           <a
-            href='https://m.me/your_messenger_page' // Replace with your Messenger page link
+            href='https://m.me/hatbazarlive' // Replace with your Messenger page link
             target='_blank'
             rel='noopener noreferrer'
             className='w-full md:w-auto flex items-center justify-center space-x-2 px-6 py-3 rounded-lg text-lg font-semibold transition-colors duration-200
