@@ -71,7 +71,7 @@ export default async (req, res) => {
     const sheets = google.sheets({ version: 'v4', auth });
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 
-    // Check if sheet has headers
+    // Check if sheet has headers (row 1 remains untouched/ fixed)
     const checkSheet = await sheets.spreadsheets.values.get({
       spreadsheetId,
       range: `${sheetName}!A1:K1`,
@@ -82,6 +82,7 @@ export default async (req, res) => {
         spreadsheetId,
         range: `${sheetName}!A1:K1`,
         valueInputOption: 'RAW',
+        insertDataOption: 'INSERT_ROWS', // Ensures safe insertion if needed
         resource: {
           values: [
             [
@@ -112,8 +113,11 @@ export default async (req, res) => {
 
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${sheetName}!A2`,
+      // Fix: Include headers (row 1) + data columns for accurate table detection; appends after last data row
+      range: `${sheetName}!A1:K`,
       valueInputOption: 'USER_ENTERED',
+      // Ensures new rows are inserted at the end (after row 1 headers), no overwrites
+      insertDataOption: 'INSERT_ROWS',
       resource: {
         values: [
           [
@@ -134,6 +138,7 @@ export default async (req, res) => {
     });
 
     console.log(`Rows updated: ${response.data.updates.updatedCells}`);
+    // Optional: Log tableRange from response to verify (e.g., console.log(response.data.tableRange))
 
     return res.status(200).json({
       message: 'Order data submitted successfully!',
