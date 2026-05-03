@@ -84,10 +84,10 @@
   --color-outline: var(--outline);
   --color-error: var(--error);
 
-  --font-display: 'Kafela', 'Cormorant Garamond', serif;
-  --font-headline: 'Kafela', 'Cormorant Garamond', serif;
-  --font-body: 'Kafela', 'Inter', sans-serif;
-  --font-bengali: 'Kafela', 'Noto Serif Bengali', serif;
+  --font-display: 'Kafela', var(--font-cormorant, 'Cormorant Garamond', serif);
+  --font-headline: 'Kafela', var(--font-cormorant, 'Cormorant Garamond', serif);
+  --font-body: 'Kafela', var(--font-inter, Inter, sans-serif);
+  --font-bengali: 'Kafela', var(--font-noto, 'Noto Serif Bengali', serif);
   
   --radius-xl: 1.5rem; /* 24px */
 }

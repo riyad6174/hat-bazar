@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
@@ -105,11 +106,14 @@ const ManeeGlutaCollagenPink = ({ product }) => {
                 className='w-full h-full'
               >
                 {product.gallery?.map((img, idx) => (
-                  <SwiperSlide key={idx}>
-                    <img
+                  <SwiperSlide key={idx} className='relative'>
+                    <Image
+                      fill
                       alt={`${product.name} ${idx + 1}`}
-                      className='w-full h-full object-cover'
+                      className='object-cover'
                       src={img}
+                      sizes='(max-width: 768px) 100vw, 55vw'
+                      priority={idx === 0}
                     />
                   </SwiperSlide>
                 ))}
@@ -129,17 +133,13 @@ const ManeeGlutaCollagenPink = ({ product }) => {
                 <button
                   key={idx}
                   onClick={() => swiper?.slideToLoop(idx)}
-                  className={`aspect-square w-full md:w-20 md:h-24 overflow-hidden border transition-all flex-shrink-0 ${
+                  className={`aspect-square w-full md:w-20 md:h-24 overflow-hidden border transition-all flex-shrink-0 relative ${
                     activeIndex === idx
                       ? 'border-primary'
                       : 'border-surface-dim'
                   }`}
                 >
-                  <img
-                    src={img}
-                    alt=''
-                    className='w-full h-full object-cover'
-                  />
+                  <Image fill src={img} alt='' className='object-cover' sizes='96px' />
                 </button>
               ))}
             </div>

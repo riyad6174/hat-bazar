@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
 import { motion } from 'framer-motion';
 import { 
@@ -37,9 +38,12 @@ const Navbar = () => {
       <header className="bg-surface/95 backdrop-blur-xl border-b border-surface-dim">
         <div className="flex justify-between items-center w-full max-w-[1280px] mx-auto px-6 md:px-16 py-4">
           <Link href="/" className="flex items-center">
-            <img 
-              src="/assets/logo.png" 
-              alt="Hat Bazar" 
+            <Image
+              src="/assets/logo.png"
+              alt="Hat Bazar"
+              width={140}
+              height={56}
+              priority
               className="h-10 md:h-14 w-auto object-contain"
             />
           </Link>

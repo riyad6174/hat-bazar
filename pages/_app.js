@@ -1,8 +1,27 @@
 import '@/styles/globals.css';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import { useEffect } from 'react';
+import { Cormorant_Garamond, Inter, Noto_Serif_Bengali } from 'next/font/google';
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-cormorant',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const noto = Noto_Serif_Bengali({
+  subsets: ['bengali'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-noto',
+  display: 'swap',
+  preload: false,
+});
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { trackEvent, trackPageView } from '@/utils/tracking';
@@ -58,6 +77,7 @@ export default function App({ Component, pageProps }) {
   }, [router.events, router.pathname]);
 
   return (
+    <div className={`${cormorant.variable} ${inter.variable} ${noto.variable}`}>
     <CartProvider>
       <Head>
         <title>Hat Bazar | Premium Organic Skincare & Wellness</title>
@@ -92,5 +112,6 @@ export default function App({ Component, pageProps }) {
         </motion.div>
       </AnimatePresence>
     </CartProvider>
+    </div>
   );
 }

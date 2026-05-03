@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -47,11 +48,14 @@ export default function ProductDetailPage() {
       <main className="flex-grow py-12 md:py-24 max-w-[1280px] mx-auto px-6 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start">
           {/* Product Image */}
-          <div className="aspect-[4/5] rounded-[2rem] overflow-hidden bg-surface-dim shadow-2xl">
-            <img 
-              alt={product.name} 
-              className="w-full h-full object-cover" 
+          <div className="aspect-[4/5] rounded-[2rem] overflow-hidden bg-surface-dim shadow-2xl relative">
+            <Image
+              fill
+              alt={product.name}
+              className="object-cover"
               src={product.image}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
             />
           </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
@@ -31,14 +32,11 @@ export default function HomePage() {
         <Hero />
 
         {/* Featured Categories */}
-        <motion.section 
-          {...fadeInUp}
-          className="py-24 max-w-[1280px] mx-auto px-6 md:px-16"
-        >
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl text-on-surface">Shop by Category</h2>
+        <motion.section {...fadeInUp} className="py-16 max-w-[1280px] mx-auto">
+          <div className="text-center mb-8 px-6 md:px-16">
+            <h2 className="font-display text-3xl md:text-4xl text-on-surface">Shop by Category</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-8 text-center">
+          <div className="flex gap-5 md:gap-10 lg:gap-14 overflow-x-auto md:justify-center scrollbar-hide px-6 md:px-16 pb-2">
             {[
               { name: 'Moisturizer', img: 'https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg?auto=compress&cs=tinysrgb&w=300' },
               { name: 'Toner', img: 'https://images.pexels.com/photos/8128069/pexels-photo-8128069.jpeg?auto=compress&cs=tinysrgb&w=300' },
@@ -48,11 +46,17 @@ export default function HomePage() {
               { name: 'Facewash', img: 'https://images.pexels.com/photos/19049367/pexels-photo-19049367.png?auto=compress&cs=tinysrgb&w=300' },
               { name: 'Supplements', img: 'https://images.pexels.com/photos/31406911/pexels-photo-31406911.jpeg?auto=compress&cs=tinysrgb&w=300' }
             ].map((cat) => (
-              <Link href={`/shop?category=${cat.name.toLowerCase()}`} key={cat.name} className="group cursor-pointer">
-                <div className="aspect-square rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-primary-container transition-all p-1 bg-surface-container">
-                  <img alt={cat.name} className="w-full h-full object-cover rounded-full" src={cat.img} />
+              <Link
+                href={`/shop?category=${cat.name.toLowerCase()}`}
+                key={cat.name}
+                className="group flex-shrink-0 flex flex-col items-center text-center"
+              >
+                <div className="w-16 h-16 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-2.5 border-2 border-transparent group-hover:border-primary transition-all bg-surface-container relative flex-shrink-0">
+                  <Image fill alt={cat.name} className="object-cover" src={cat.img} sizes="(max-width: 768px) 64px, 128px" />
                 </div>
-                <h3 className="font-display text-lg group-hover:text-primary transition-colors">{cat.name}</h3>
+                <span className="font-body text-[11px] md:text-base font-semibold md:font-display text-on-surface group-hover:text-primary transition-colors tracking-wide whitespace-nowrap">
+                  {cat.name}
+                </span>
               </Link>
             ))}
           </div>
@@ -129,8 +133,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
             <div className="lg:col-span-7 group cursor-pointer">
               <Link href={`/journal/${featuredPost.slug}`}>
-                <div className="aspect-[16/10] rounded-[2rem] overflow-hidden mb-6 bg-surface-dim">
-                  <img alt={featuredPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src={featuredPost.image} />
+                <div className="aspect-[16/10] rounded-[2rem] overflow-hidden mb-6 bg-surface-dim relative">
+                  <Image fill alt={featuredPost.title} className="object-cover group-hover:scale-105 transition-transform duration-1000" src={featuredPost.image} sizes="(max-width: 768px) 100vw, 58vw" />
                 </div>
                 <div>
                   <p className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-3">Featured • {featuredPost.author}</p>
@@ -143,8 +147,8 @@ export default function HomePage() {
               {otherPosts.map(post => (
                 <div key={post.slug} className="group cursor-pointer">
                   <Link href={`/journal/${post.slug}`} className="flex flex-col sm:flex-row lg:flex-col gap-6">
-                    <div className="aspect-[16/9] sm:w-1/2 lg:w-full rounded-2xl overflow-hidden bg-surface-dim shrink-0">
-                      <img alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src={post.image} />
+                    <div className="aspect-[16/9] sm:w-1/2 lg:w-full rounded-2xl overflow-hidden bg-surface-dim shrink-0 relative">
+                      <Image fill alt={post.title} className="object-cover group-hover:scale-105 transition-transform duration-1000" src={post.image} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw" />
                     </div>
                     <div>
                       <p className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-2">{post.author}</p>

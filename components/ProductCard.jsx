@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCart } from '@/context/CartContext';
 import { motion } from 'framer-motion';
@@ -21,16 +22,14 @@ const ProductCard = ({ product }) => {
       className='group'
     >
       <div className='aspect-[4/5] bg-surface-container-low rounded-xl overflow-hidden mb-6 relative'>
-        <Link href={`/product/${product.slug}`}>
-          <img
-            alt={product.name}
-            className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-700'
-            src={
-              product.image ||
-              'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop'
-            }
-          />
-        </Link>
+        <Image
+          fill
+          alt={product.name}
+          className='object-cover group-hover:scale-105 transition-transform duration-700'
+          src={product.image || 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop'}
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        />
+        <Link href={`/product/${product.slug}`} className="absolute inset-0 z-[1]" aria-label={product.name} />
         <motion.button
           onClick={() => addToCart(product)}
           whileHover={{ scale: 1.15 }}

@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import Image from 'next/image';
 import { Dialog, Transition } from '@headlessui/react';
 import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/router';
@@ -98,8 +99,8 @@ const CartDrawer = () => {
                                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                                 className="bg-white p-4 rounded-3xl border border-surface-dim flex gap-4 items-center group relative overflow-hidden"
                               >
-                                <div className="w-20 h-24 bg-surface-container rounded-2xl overflow-hidden flex-shrink-0">
-                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                                <div className="w-20 h-24 bg-surface-container rounded-2xl overflow-hidden flex-shrink-0 relative">
+                                  <Image fill src={item.image} alt={item.name} className="object-cover" sizes="80px" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <h4 className="font-display text-base text-on-surface line-clamp-1">{item.name}</h4>

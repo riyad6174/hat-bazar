@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -57,11 +58,14 @@ const Hero = () => {
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="relative order-1 md:order-2"
         >
-          <div className="aspect-[4/5] rounded-xl overflow-hidden  bg-surface-dim shadow-2xl">
-            <img 
-              alt="Luxury Skincare" 
-              className="w-full h-full object-cover" 
+          <div className="aspect-[4/5] rounded-xl overflow-hidden bg-surface-dim shadow-2xl relative">
+            <Image
+              fill
+              alt="Luxury Skincare"
+              className="object-cover"
               src="https://images.pexels.com/photos/16441669/pexels-photo-16441669.jpeg?auto=compress&cs=tinysrgb&w=800"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
             />
           </div>
           <motion.div 
