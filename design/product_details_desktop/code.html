@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#685c54",
+                        "on-primary-fixed-variant": "#613c45",
+                        "surface-variant": "#f0dfdb",
+                        "surface-bright": "#fff8f6",
+                        "secondary-fixed": "#ffd9e0",
+                        "on-tertiary-fixed": "#231a14",
+                        "on-surface": "#221a18",
+                        "tertiary-fixed": "#f1dfd6",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#ffbdcc",
+                        "surface-dim": "#e7d6d3",
+                        "error": "#ba1a1a",
+                        "outline": "#827476",
+                        "on-secondary-container": "#7b4956",
+                        "secondary": "#834f5d",
+                        "on-tertiary-container": "#4f443d",
+                        "background": "#fff8f6",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#c1b1a8",
+                        "surface-container-high": "#f6e4e1",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#fff0ee",
+                        "primary-fixed-dim": "#ecb9c4",
+                        "surface-tint": "#7b535c",
+                        "secondary-fixed-dim": "#f6b5c4",
+                        "on-tertiary-fixed-variant": "#50443e",
+                        "inverse-primary": "#ecb9c4",
+                        "on-primary-fixed": "#2f121a",
+                        "on-primary-container": "#603b44",
+                        "primary-container": "#d8a7b1",
+                        "on-background": "#221a18",
+                        "inverse-on-surface": "#feedea",
+                        "tertiary-fixed-dim": "#d4c3ba",
+                        "primary-fixed": "#ffd9e0",
+                        "on-secondary-fixed": "#340e1a",
+                        "surface-container": "#fbeae7",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#504446",
+                        "surface-container-highest": "#f0dfdb",
+                        "surface": "#fff8f6",
+                        "primary": "#7b535c",
+                        "outline-variant": "#d4c2c5",
+                        "inverse-surface": "#382e2c",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#683945"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Cormorant Garamond"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Cormorant Garamond"],
+                        "display-lg": ["Cormorant Garamond"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 50px -12px rgba(59, 49, 47, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky z-50 bg-[#FAF7F2]/90 backdrop-blur-xl shadow-sm shadow-stone-200/20">
+<nav class="flex justify-between items-center w-full max-w-[1280px] mx-auto px-16 py-6">
+<div class="font-serif text-2xl tracking-tighter text-stone-900">HaatBazar</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-stone-900 font-medium border-b border-stone-900 pb-1 font-body-md text-sm tracking-wide" href="#">Shop All</a>
+<a class="text-stone-500 font-normal hover:text-stone-900 transition-all duration-500 font-body-md text-sm tracking-wide" href="#">Rituals</a>
+<a class="text-stone-500 font-normal hover:text-stone-900 transition-all duration-500 font-body-md text-sm tracking-wide" href="#">Skin Quiz</a>
+<a class="text-stone-500 font-normal hover:text-stone-900 transition-all duration-500 font-body-md text-sm tracking-wide" href="#">Sustainability</a>
+<a class="text-stone-500 font-normal hover:text-stone-900 transition-all duration-500 font-body-md text-sm tracking-wide" href="#">Journal</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-stone-800 cursor-pointer hover:text-[#D8A7B1] transition-colors">person</span>
+<span class="material-symbols-outlined text-stone-800 cursor-pointer hover:text-[#D8A7B1] transition-colors">shopping_bag</span>
+</div>
+</nav>
+</header>
+<main class="max-w-[1280px] mx-auto px-16 py-16">
+<!-- Product Detail Hero -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+<!-- Left: Gallery -->
+<div class="md:col-span-7 flex gap-6">
+<div class="flex flex-col gap-4 w-24">
+<div class="aspect-[4/5] rounded-[24px] overflow-hidden bg-surface-container cursor-pointer border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="A macro close-up of a luxurious glass skincare bottle with a frosted finish. The bottle contains a pearlescent pink serum that reflects soft, warm light. The lighting is diffused and editorial, highlighting the elegant curves and high-end apothecary aesthetic of the product against a neutral, warm ivory background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnyuz_b3dTcS9aRxmwpBZMFyXTRDP2eX3iFBtBwkjDO9UvgW-jjovAiIoMngGQuUw2fRr58ckBzaQRArFzZ-UB0YsQ5Nm3IUynjJIJ_r6tp5zwAf_3z56FoH32ZhRcFJyZHZLBTc4CV2f2uOyOxPAtEBaQt8tsAL7PWVIpnx9igiQjYL61VfihyT-Tjwnu1dmpcm_h3Z7wF5bGwKKK2HgmQBBPo5muFK0iz8qkPDazlnWwbwR7gF4HAyU5xHdKxHE6ZCQXPHeJKM8"/>
+</div>
+<div class="aspect-[4/5] rounded-[24px] overflow-hidden bg-surface-container cursor-pointer hover:opacity-80 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="A detailed shot showing the texture of a hydrating serum being dispensed onto a smooth, pale surface. The liquid is clear with subtle golden shimmer particles suspended within it. The image is captured with a shallow depth of field, emphasizing the tactile, viscous nature of the product in a bright, clean spa-like setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1uQKkqfUXyrGvRwqmBQ1MIrwDOU9j-1YMHUTnr1u7eVc4ncRFWUFZbdvtniLvdcxygpwzTtx6Czeg9pdbxU_mZjxydMS_DWVX6C2x1LOJ5Vi27q8iEqKrbDJharC667jvxXtoSNmn_ILJNksQ95eIsF72eTc91hE2lkjfR4g960_RgV_M8cKs3-TTDfPlJDPbXwchGT0hTP4Apqkhyx7EwwlCnLgAOD2EYHaYJtPGlkJXhxl9O6YAtUkUctpE4iT_a4UPOfdb0W4"/>
+</div>
+<div class="aspect-[4/5] rounded-[24px] overflow-hidden bg-surface-container cursor-pointer hover:opacity-80 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="An editorial lifestyle photograph of a woman with glowing, healthy skin applying a facial serum in front of a minimalist vanity. The lighting is soft and natural, coming from a large window. The atmosphere is serene and sophisticated, capturing a quiet morning beauty ritual in a high-end, minimalist interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9uhgDqziHXhrhaebLzkyz6SlRZT4Vk36H04L3ywtqJqyXs2qq6DgaUxQ0_zbcbMOfDwVfa01NUciY-07hgIaUTRzvaIq0yRsefJFwva9PY5Opypz9oJC-xQcpKTybQh8UOb3ZFLKHwYp8vl6kw_DJ1AnLTA1ihkVOz4o1ele3gn9HfHr134-V50K_gtjsjU9yUFi1RMHFnGiItmgLs-SoU-FG816fhI3ZzpzSdp4BZR4r5k7vWBSTYXgbNWiSDYXy1KH8mIJKo1A"/>
+</div>
+</div>
+<div class="flex-1 aspect-[4/5] rounded-[24px] overflow-hidden editorial-shadow bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="A stunning hero shot of a premium serum bottle made of heavy frosted glass with a minimalist rose gold cap. The bottle is positioned centrally against a textured linen backdrop in warm ivory tones. Soft, ambient shadows dance across the surface, creating a peaceful, luxury spa-like mood that emphasizes the product's premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzwpPaa7JiIoUHmG9r7bR4W_NOlh9dDaMCVbITVjirrsYuk4GAlvTKppnkU8zJbuff8Iyc9hAg3M7O35_gcJ9OiKbVBRmKg1nj1HfEcbWX2VHzptkYcHaarScP0EsCZzcEnH3f2qMfMQkCRXdQbPItVqxCLGYoZMdlQHV7SraZXV2G_ri8DjVpn5z6ARYl-r01f9rudW342fk4dMuXRc5LZ1C0vJeodVUlo1oNObFIbsL8RYU_hCtDJdP2SB34PPgGe9LNMGrPNGo"/>
+</div>
+</div>
+<!-- Right: Info Panel (Sticky) -->
+<div class="md:col-span-5 sticky top-32 space-y-8">
+<div class="space-y-2">
+<div class="flex gap-2 mb-4">
+<span class="px-3 py-1 bg-surface-container-highest text-tertiary font-label-sm text-[10px] uppercase tracking-[0.1em] rounded-full">Dry</span>
+<span class="px-3 py-1 bg-surface-container-highest text-tertiary font-label-sm text-[10px] uppercase tracking-[0.1em] rounded-full">Sensitive</span>
+</div>
+<h1 class="font-headline-lg text-on-surface leading-tight">Hydrating Glow Serum</h1>
+<div class="flex items-center gap-4 py-2">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+<span class="font-label-sm text-tertiary">4.8 (124 Reviews)</span>
+</div>
+<p class="text-headline-md font-medium text-on-surface-variant">$78.00</p>
+</div>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                    A lightweight, fast-absorbing elixir designed to restore your skin's natural radiance. Infused with botanical extracts and clinical actives to lock in moisture for 24 hours.
+                </p>
+<div class="space-y-6 pt-4">
+<div class="flex items-center gap-6">
+<div class="flex items-center border border-outline-variant rounded-full px-4 py-2">
+<button class="text-tertiary hover:text-primary transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<span class="px-6 font-body-md font-medium">1</span>
+<button class="text-tertiary hover:text-primary transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-sm py-5 rounded-full hover:shadow-lg transition-all duration-300 uppercase tracking-widest font-bold">
+                        Add to Cart
+                    </button>
+<div class="flex items-center gap-2 justify-center text-tertiary font-label-sm">
+<span class="material-symbols-outlined text-sm">local_shipping</span>
+<span>Complimentary shipping on orders over $100</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Powerful Ingredients -->
+<section class="mt-40 space-y-16">
+<div class="text-center space-y-4">
+<h2 class="font-headline-lg text-on-surface">Powerful Ingredients</h2>
+<p class="font-body-lg text-tertiary max-w-2xl mx-auto italic">Grounded in nature, refined by science. Only what your skin needs, nothing it doesn't.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface-container-low p-10 rounded-[24px] space-y-6 border border-transparent hover:border-primary-container transition-all">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary editorial-shadow">
+<span class="material-symbols-outlined text-3xl">water_drop</span>
+</div>
+<h3 class="font-headline-md">Hyaluronic Acid</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">Multi-molecular weights penetrate deep into the epidermis to provide multi-layered hydration and instant plumping effects.</p>
+</div>
+<div class="bg-surface-container-low p-10 rounded-[24px] space-y-6 border border-transparent hover:border-primary-container transition-all">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary editorial-shadow">
+<span class="material-symbols-outlined text-3xl">flare</span>
+</div>
+<h3 class="font-headline-md">Niacinamide</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">Vitamin B3 works to visibly improve enlarged pores, uneven skin tone, and strengthen the skin's barrier function.</p>
+</div>
+<div class="bg-surface-container-low p-10 rounded-[24px] space-y-6 border border-transparent hover:border-primary-container transition-all">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary editorial-shadow">
+<span class="material-symbols-outlined text-3xl">eco</span>
+</div>
+<h3 class="font-headline-md">Rosehip Oil</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">Rich in vitamins A and C, this botanical powerhouse promotes cellular turnover and protects against environmental stressors.</p>
+</div>
+</div>
+</section>
+<!-- The Ritual -->
+<section class="mt-40">
+<div class="bg-[#F2E8DF] rounded-[48px] p-16 md:p-24 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+<div class="space-y-12">
+<h2 class="font-headline-lg text-on-surface">The Ritual</h2>
+<div class="space-y-10">
+<div class="flex gap-8 group">
+<span class="font-display-lg text-primary/20 group-hover:text-primary transition-colors duration-500">01</span>
+<div>
+<h4 class="font-headline-md text-on-surface mb-2">Cleanse</h4>
+<p class="font-body-md text-on-surface-variant">Gently remove impurities with our pH-balanced Milky Cleanser to prepare the skin canvas.</p>
+</div>
+</div>
+<div class="flex gap-8 group">
+<span class="font-display-lg text-primary/20 group-hover:text-primary transition-colors duration-500">02</span>
+<div>
+<h4 class="font-headline-md text-on-surface mb-2">Serum</h4>
+<p class="font-body-md text-on-surface-variant">Apply 3-4 drops of Hydrating Glow Serum onto damp skin, pressing gently into the face and neck.</p>
+</div>
+</div>
+<div class="flex gap-8 group">
+<span class="font-display-lg text-primary/20 group-hover:text-primary transition-colors duration-500">03</span>
+<div>
+<h4 class="font-headline-md text-on-surface mb-2">Moisturize</h4>
+<p class="font-body-md text-on-surface-variant">Seal in the moisture with our Barrier Repair Cream for a lasting, radiant finish.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="aspect-square rounded-[32px] overflow-hidden editorial-shadow">
+<img class="w-full h-full object-cover" data-alt="An artistic composition featuring a wooden bowl, a soft cotton towel, and several glass skincare products arranged on a stone surface. The scene is illuminated by dappled sunlight filtering through leaves, creating a peaceful, morning spa ritual atmosphere. The color palette consists of soft beiges, warm wood tones, and cool glass textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIyodk3XUBAcCs34DvB0SNs2HcA9vXxoe5lMvZUA9jPRdVHnEruqokZBBFmlXiYNnnUFIFGEJovbsGxyfpIEuUmblYGgK_Fs1EBb2AFggENraQOnz_coovKNpI2GKAIRLiUz1LDFtVgnggojkEI_uFuw45RekIgYycCDMr5MAzKP7ltGU_nvG5D-J9uPSo8hJIqp2QcrlNjBKU2tiErk7i5fxkCNDI7xGyFocNrgDIcbbppo2gCojFRPpKI33dJa4byKA7v9QWqTg"/>
+</div>
+</div>
+</section>
+<!-- The Transformation -->
+<section class="mt-40 space-y-16">
+<div class="text-center space-y-4">
+<h2 class="font-headline-lg text-on-surface">The Transformation</h2>
+<p class="font-body-lg text-tertiary">Visible results after 14 days of consistent morning use.</p>
+</div>
+<div class="relative w-full max-w-4xl mx-auto aspect-[16/9] rounded-[32px] overflow-hidden editorial-shadow group">
+<div class="absolute inset-0 flex">
+<div class="w-1/2 h-full overflow-hidden border-r border-white/50 relative">
+<img class="absolute inset-0 w-[200%] h-full object-cover grayscale-[0.3]" data-alt="A close-up photograph of a woman's face before using skincare products, showing visible dry patches and uneven skin texture under natural, realistic lighting. The mood is honest and raw, focusing on skin that needs hydration and care. The background is a simple, neutral studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYS_3hLuRGnOLnWmo1p4PvCbQ2oXPKX9-UoOFTodjn9eAIDGwDRkCMEP6SN1iKN712k4NW8HB_WlTMhGWn8uRPXc0A5pRjAveSuwWp3YNUNF_u88NunwxL6iSENcpSNDd6PrSfTorKt5nRCiqHzdvgRCglifFhujnmh6yPs5tWvwPFAwzHAOJE37a4HORs_yGZpHI_yEoTrDzER6X5iBoMMg_g8B008CAosxFHycyHSIjVaK-hFRiQ6oFTNwQQv6Jl4EAKDtPKx_Y"/>
+<span class="absolute top-8 left-8 bg-black/40 backdrop-blur-md text-white px-4 py-1 rounded-full font-label-sm uppercase tracking-widest text-[10px]">Day 0</span>
+</div>
+<div class="w-1/2 h-full overflow-hidden relative">
+<img class="absolute inset-0 -left-full w-[200%] h-full object-cover" data-alt="A close-up photograph of the same woman's face after 14 days of using the hydrating glow serum. Her skin appears visibly radiant, smooth, and deeply hydrated with a healthy dewy glow. The lighting is warm and flattering, highlighting the improved skin texture and luminosity in a clean, high-end beauty photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCViv8go-JXVlzIujVVakBC9NE2kwDZtEIaH0OSgNNHi08wekmvNwRd-_Nz8WR1pMaAsN1IPZ8rvD8luKkD-hjbH6JlcrRMmrg0Ul6sdThIeeYNo_JZ9S2zy5W8ETUNgAZen-T3YtJVrc2mu5NXbkf-PIiY9E_zuFC1UPK1xpLy0tLHYOBUx9OQBUqMH0ZqM8omeqBkL1k992vxfmzk-Gm9vuefYUvdTVBnmge_lE3yMOIGXOunerCoykefdUuOnDLlltx8P0Xp6uE"/>
+<span class="absolute top-8 right-8 bg-primary/80 backdrop-blur-md text-white px-4 py-1 rounded-full font-label-sm uppercase tracking-widest text-[10px]">Day 14</span>
+</div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center editorial-shadow text-primary">
+<span class="material-symbols-outlined">unfold_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Luminous Voices -->
+<section class="mt-40 mb-20 space-y-16">
+<h2 class="font-headline-lg text-center text-on-surface">Luminous Voices</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-8 border-l border-primary/20 space-y-6 italic">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg text-on-surface leading-relaxed">"The texture is unlike anything I've ever used. It feels like silk and leaves my skin looking like I've just had a facial. An absolute ritual essential."</p>
+<div class="font-label-sm text-tertiary not-italic">— ELENA K.</div>
+</div>
+<div class="p-8 border-l border-primary/20 space-y-6 italic">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg text-on-surface leading-relaxed">"My sensitive skin usually reacts to everything, but this serum is so incredibly soothing. My redness has visibly reduced in just one week."</p>
+<div class="font-label-sm text-tertiary not-italic">— SOPHIA M.</div>
+</div>
+<div class="p-8 border-l border-primary/20 space-y-6 italic">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg text-on-surface leading-relaxed">"The glow is real! I've started going foundation-free because my natural skin tone looks so even and healthy now. Worth every penny."</p>
+<div class="font-label-sm text-tertiary not-italic">— JULIA R.</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#F2E8DF] border-t border-stone-200">
+<div class="w-full max-w-[1280px] mx-auto px-16 py-20 flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="space-y-6 max-w-sm">
+<div class="font-serif text-xl text-stone-900">HaatBazar</div>
+<p class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 leading-relaxed">
+                    Rituals for the modern skin. We believe in high-performance skincare that honors the quiet moments of your day.
+                </p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-primary transition-colors">public</span>
+<span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-primary transition-colors">brand_awareness</span>
+<span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-primary transition-colors">alternate_email</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-16">
+<div class="space-y-6">
+<h5 class="font-sans text-[10px] uppercase tracking-[0.2em] font-bold text-stone-900">Experience</h5>
+<ul class="space-y-4">
+<li><a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-stone-900 hover:underline underline-offset-4 transition-all" href="#">Shipping &amp; Returns</a></li>
+<li><a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-stone-900 hover:underline underline-offset-4 transition-all" href="#">Sustainability</a></li>
+<li><a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-stone-900 hover:underline underline-offset-4 transition-all" href="#">Journal</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h5 class="font-sans text-[10px] uppercase tracking-[0.2em] font-bold text-stone-900">Account</h5>
+<ul class="space-y-4">
+<li><a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-stone-900 hover:underline underline-offset-4 transition-all" href="#">Privacy Policy</a></li>
+<li><a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-stone-900 hover:underline underline-offset-4 transition-all" href="#">Contact</a></li>
+<li><a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-stone-900 hover:underline underline-offset-4 transition-all" href="#">FAQ</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="w-full max-w-[1280px] mx-auto px-16 pb-12">
+<p class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-400">© 2024 HaatBazar. Rituals for the modern skin.</p>
+</div>
+</footer>
+</body></html>

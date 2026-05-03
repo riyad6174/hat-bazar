@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HaatBazar | All Products</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#d4c2c5",
+                    "surface-container": "#fbeae7",
+                    "inverse-on-surface": "#feedea",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#603b44",
+                    "secondary-fixed": "#ffd9e0",
+                    "on-tertiary-fixed-variant": "#50443e",
+                    "on-primary-fixed": "#2f121a",
+                    "primary-fixed-dim": "#ecb9c4",
+                    "on-tertiary-container": "#4f443d",
+                    "tertiary-fixed-dim": "#d4c3ba",
+                    "surface-tint": "#7b535c",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#685c54",
+                    "secondary": "#834f5d",
+                    "tertiary-fixed": "#f1dfd6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#7b535c",
+                    "surface-dim": "#e7d6d3",
+                    "primary-fixed": "#ffd9e0",
+                    "secondary-fixed-dim": "#f6b5c4",
+                    "surface-bright": "#fff8f6",
+                    "inverse-primary": "#ecb9c4",
+                    "inverse-surface": "#382e2c",
+                    "primary-container": "#d8a7b1",
+                    "on-background": "#221a18",
+                    "on-surface-variant": "#504446",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#f6e4e1",
+                    "on-secondary-container": "#7b4956",
+                    "outline": "#827476",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#340e1a",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#f0dfdb",
+                    "background": "#fff8f6",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#613c45",
+                    "secondary-container": "#ffbdcc",
+                    "on-secondary-fixed-variant": "#683945",
+                    "surface-container-highest": "#f0dfdb",
+                    "on-surface": "#221a18",
+                    "surface": "#fff8f6",
+                    "surface-container-low": "#fff0ee",
+                    "tertiary-container": "#c1b1a8",
+                    "on-tertiary-fixed": "#231a14"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Cormorant Garamond"],
+                    "headline-lg": ["Cormorant Garamond"],
+                    "headline-md": ["Cormorant Garamond"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 49, 47, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur-md fixed top-0 z-50 w-full border-none shadow-sm shadow-stone-200/50 dark:shadow-none">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<button class="hover:opacity-70 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined text-rose-300 dark:text-rose-200">menu</span>
+</button>
+<h1 class="text-2xl font-serif italic text-stone-800 dark:text-stone-100">HaatBazar</h1>
+<button class="hover:opacity-70 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined text-rose-300 dark:text-rose-200">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32">
+<!-- Collection Header Section -->
+<section class="bg-surface-container-low py-16 md:py-24 px-6 md:px-16 text-center">
+<div class="max-w-4xl mx-auto">
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-[0.2em] mb-4">Curated Collection</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">All Products</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Explore our artisanal selection of skin-nourishing rituals, crafted with botanical precision and sensory delight to elevate your daily routine.
+                </p>
+</div>
+</section>
+<!-- Filter and Sort Controls -->
+<div class="sticky top-[72px] bg-background/80 backdrop-blur-sm z-40 border-b border-surface-variant px-6 py-4">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="flex gap-6 items-center">
+<button class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+                        Filter
+                    </button>
+<div class="hidden md:flex gap-4">
+<span class="px-3 py-1 bg-surface-container rounded-full font-label-sm text-label-sm text-primary">Serums</span>
+<span class="px-3 py-1 bg-surface-container rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">Oils</span>
+<span class="px-3 py-1 bg-surface-container rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">Cleansers</span>
+</div>
+</div>
+<button class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">
+                    Sort By: Newest
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Product Grid -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-12 md:gap-x-8 md:gap-y-16">
+<!-- Product Card 1 -->
+<div class="product-card transition-all duration-500 ease-out group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface-container rounded-[24px] overflow-hidden mb-6">
+<img alt="Botanical Serum" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A minimalist editorial photograph of a frosted glass serum bottle sitting on a smooth, warm ivory surface. The lighting is soft and diffused, creating delicate shadows that emphasize the matte texture of the packaging. The background is a blurred, neutral-toned spa environment, evoking a sense of quiet luxury and clinical serenity with a hint of dusty rose pink accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPhuEetdYJOawpwi-s76MY7hbQ1Xj-R_t2YUiY60boN_LCh21Q_pHAB69kKZji-6huq1k88ztflKY2iW7us15JY7f8HGC_7C5gttJH9dcvi_Usj10-k927YO14iu51N8OwF6cu7xTadPMW1APYB91ufOuNrKBb8DLxtxQtv_YWAdX0hrQqbpS3YwmENApyYdMLbzKzfthBOJ9eWYeoG8vNZS6zOLZAxOpJF3eV80fGduMamNM6g46xpErEH3dy_tywuMKeFyL1P3Y"/>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-tertiary uppercase">Face Care</p>
+<div class="flex items-center text-primary scale-75 origin-right">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Radiance Elixir Serum</h3>
+<p class="font-body-md text-on-surface-variant">$84.00</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="product-card transition-all duration-500 ease-out group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface-container rounded-[24px] overflow-hidden mb-6">
+<img alt="Cleansing Balm" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A close-up photograph of a minimalist ceramic jar containing a silky cleansing balm, positioned against a soft-focus warm taupe backdrop. The surface is textured stone, and the lighting mimics a late afternoon sun casting long, gentle shadows. The aesthetic is clean, sophisticated, and focused on tactile luxury, utilizing a color palette of soft beiges and muted charcoal browns." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDXUv-6yRv75LVKlxcvTcqRo266eNqPYq0U3svjvt-Gl0uGXfChot6CxsHGdGxhS4RW8OH3EPFQJF0mW9cEgOySFiu6piXYaDBcAHLc4idAtoiNMtk9RmHppIi3QjasbMyFW0qAFIC8AlmoDGze-7PCdxiyf1ug9KIxPwW7OVjPQMkB-_zIXYXlXEoDqPnUOs6DWXBow_FxCe6VMbmKTL8CgMHqGlfi3u2zwbBuaTvd5XWC2loStlPC_2D80MfifALMzZgF33Qgcw"/>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-tertiary uppercase">Cleansers</p>
+<div class="flex items-center text-primary scale-75 origin-right">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Velvet Moon Balm</h3>
+<p class="font-body-md text-on-surface-variant">$62.00</p>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="product-card transition-all duration-500 ease-out group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface-container rounded-[24px] overflow-hidden mb-6">
+<img alt="Body Oil" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-end editorial product shot of a tall, sleek glass bottle filled with golden body oil. The bottle stands on a piece of raw travertine stone, illuminated by high-key, natural morning light. The composition is airy and minimal, following a luxury skincare aesthetic with generous negative space and a refined palette of warm ivory and dusty rose accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa4-S87QlAIGF5LktQUsCH5VpIAXn80OCZ42XcS8piw-voQC278JhoZU65sIjIWn8RETjXylgYeS6Tt09Ecj37SAtr913sgNzI77ruNt_Gm-52b7SlMam2vha8YwcPKzlq3U4ltIGVwVQtbQb0bqiFCFxPz_NQdX3C0bz73mSwbeGYZyiggkih5RfHVoOGQh2lLSZEHdT4WpqBrPiSzHv4gzAEOLA-kRHAPoX8yxBPAffUOBbWmfTrGWezoPx8MrmCJ6s1DFy6RZo"/>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-tertiary uppercase">Body Rituals</p>
+<div class="flex items-center text-primary scale-75 origin-right">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Sun-Drenched Oil</h3>
+<p class="font-body-md text-on-surface-variant">$75.00</p>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="product-card transition-all duration-500 ease-out group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface-container rounded-[24px] overflow-hidden mb-6">
+<img alt="Night Mask" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A minimal product layout featuring a luxury face mask jar on a pedestal of stacked handmade paper. The setting is dimly lit with a single spotlight that highlights the matte glass finish of the jar and the subtle texture of the paper. The mood is tranquil and sophisticated, utilizing a color scheme of deep charcoal brown and soft taupe for a high-end apothecary feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDldgusRXrAc9BuONV4hkTLus9lW2aWWsOOqhvlyYZnvsSyJYvMizuot1jTpoPlcUHlwhpG2I4Q186YwnzKPSyFIiYBdmg9CX9bg9Yc0NjXPXshmqEbCbB2i_D9ZfvZr6_rwbN3_XgX4PwrJYVLjhdHTvIK1H8xadQYrBGErSVrUFoCUZGHQerIjXcVcJ9WjeTp3gQ5yTaz9nWH1LaJ84D5rgvygFWp56NDKOU1UR9J3XTPQ7ainHp199x1ROHxJT6BrSBVviYijVk"/>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-tertiary uppercase">Treatment</p>
+<div class="flex items-center text-primary scale-75 origin-right">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Midnight Silk Mask</h3>
+<p class="font-body-md text-on-surface-variant">$92.00</p>
+</div>
+</div>
+<!-- Repeat Product Grid Items for visual density -->
+<div class="product-card transition-all duration-500 ease-out group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface-container rounded-[24px] overflow-hidden mb-6">
+<img alt="Eye Cream" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="An editorial close-up of a premium eye cream tube lying on a surface of white linen. The lighting is ethereal and bright, emphasizing the clean lines and minimalist typography on the packaging. The scene captures the essence of quiet luxury with a soft ivory palette and delicate, organic shadows that suggest a high-end, sensorial experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB0_B_Jd4T8qBy3DJ_cIrJXL_ag6cRdgyRJwKZK_YopvhJU-LWXt5eCzr0t7r4cUWcCNqRkvao4KIfUrTerYMNvTZafhxDMCmtLKpm6in2VdmS3ZYrbc_EpMZ4tXwbhZe2fI98e2fJuYU2VfLv9kg-XXEXJQMsDjbypLu2tgtEHOP9rwLQ5qxotT0M1iTo1tnybs4UND6woRg6pPDF5-U2VfTy2auPQgAK72Bi0C6p_v6aSWprb9-sZURHlynvtzyU4Pt1n94X40U"/>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-tertiary uppercase">Eye Care</p>
+<div class="flex items-center text-primary scale-75 origin-right">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Brighten Focus Cream</h3>
+<p class="font-body-md text-on-surface-variant">$58.00</p>
+</div>
+</div>
+<div class="product-card transition-all duration-500 ease-out group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface-container rounded-[24px] overflow-hidden mb-6">
+<img alt="Mist" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A minimalist photograph of a mist bottle with a fine spray of water droplets captured in mid-air. The background is a soft beige matte texture, and the lighting is diffused to create a refreshed, airy atmosphere. The visual style is rooted in modern apothecary design, focusing on clarity and elegance with a muted taupe and ivory color scheme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt9Fn0FW9y53jw_5yz2uYFG54cfXdUMMS4i0XIAcJaidpiiEIeQpsHSeidyc4ATT9nhvCCvun0CbjCAiwzzzjCsCzAbrzZTAZd313Qs52ELth6QVVPHbUTvGCwPSTcSlNyz7qJIKRqv4dD3S8kghQRaeagZ6yjZ3PlKvik_IxRbFrPsfZXpuEx_td4rBRtrl9txHQ0LLDYsv0QsuAv8OBncHORHvzzG9acgzqcJ2GJRNNzJ8gaGYsiDVrKnob1Y1tunwep8J98-OA"/>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-tertiary uppercase">Mists</p>
+<div class="flex items-center text-primary scale-75 origin-right">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Rose Dew Mist</h3>
+<p class="font-body-md text-on-surface-variant">$38.00</p>
+</div>
+</div>
+<div class="product-card transition-all duration-500 ease-out group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface-container rounded-[24px] overflow-hidden mb-6">
+<img alt="Clay Mask" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A luxury skincare jar with a dollop of thick, grey clay mask next to it on a dark, wet-looking stone slab. The contrast between the soft beige packaging and the dark stone creates a sophisticated editorial aesthetic. Lighting is moody and directional, casting rich shadows and highlighting the tactile, creamy texture of the product, aligned with high-end apothecary branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaP0ID5V6HzVanPaNJDBFY2-uJECyuqLSdtB4eKAoG2Egn67b23uajL1HJQmKe_7qNED6OUfSPL2GHD_gZoIe9gt5QU3aZ6NRixlnsMmztop8I0R7f2R12RjxmCNqGo1bTr-IBvhGjdqthTBrEZHd4oYzDSujvCmLsQpzh47BqIlb9FHSKmyUE9md-fQN_R_ViD9BZsOn4Jl8rMbuK3Glh4MFiaR9v8avunGhyF2gEEZOayzWQJKi8SfIkPmReXFO906GF-qI5wKQ"/>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-tertiary uppercase">Treatment</p>
+<div class="flex items-center text-primary scale-75 origin-right">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Earth Purify Clay</h3>
+<p class="font-body-md text-on-surface-variant">$45.00</p>
+</div>
+</div>
+<div class="product-card transition-all duration-500 ease-out group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface-container rounded-[24px] overflow-hidden mb-6">
+<img alt="Toner" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A tall, slender clear bottle of toner with botanical floating elements inside, resting on a frosted glass surface. The background features soft, out-of-focus green foliage, creating a natural and clinical feel. The lighting is clean and bright, utilizing the system's signature ivory and muted taupe colors to evoke purity, efficacy, and effortless luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuPjLfL0jlwSHch_Qin1pKJyE4li-B285qkqTWKACkF_aTOOqp7DDEH-sLGv5pGKCx53mxizhoJBYNmElbXkf9XrqfBP1AgfLd0qKnLw5gyo5TXNk5KRHGrVHcyKrR50490i3mE6BV2p9rrJvtheZ7PxMXTc-KwnKkfIF3GdPiFG7Mli-SijjJolQXgjUnBmzCjsPUliHaAmzTbbjhhya7derJee0blxVb8YIoV0Tx94sMYwMpxR9l_yjqXWL2YRx3Q-TaNgq4iYY"/>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-tertiary uppercase">Toners</p>
+<div class="flex items-center text-primary scale-75 origin-right">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Botanical Glow Toner</h3>
+<p class="font-body-md text-on-surface-variant">$42.00</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Pagination -->
+<section class="max-w-7xl mx-auto px-6 py-16 flex flex-col items-center gap-8">
+<button class="px-12 py-4 bg-primary text-on-primary rounded-full font-label-sm text-label-sm uppercase tracking-widest hover:opacity-90 active:scale-95 transition-all shadow-md">
+                Load More
+            </button>
+<div class="flex items-center gap-4 font-label-sm text-label-sm text-on-surface-variant">
+<span class="text-primary font-bold">1</span>
+<span class="hover:text-primary cursor-pointer transition-colors">2</span>
+<span class="hover:text-primary cursor-pointer transition-colors">3</span>
+<span class="mx-2">...</span>
+<span class="hover:text-primary cursor-pointer transition-colors">12</span>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950">
+<div class="flex flex-col md:flex-row justify-between items-center w-full py-12 px-8 max-w-7xl mx-auto gap-6">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-serif text-lg text-stone-800 dark:text-stone-200">HaatBazar</span>
+<p class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500">© 2024 HaatBazar. Rituals for the Soul.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors" href="#">Journal</a>
+<a class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors" href="#">Sustainability</a>
+<a class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors" href="#">Shipping</a>
+<a class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors" href="#">Concierge</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-8 px-4 bg-stone-100 dark:bg-stone-900 rounded-t-[32px] z-50 border-t border-stone-200/30 dark:border-stone-800 shadow-[0_-10px_40px_rgba(59,49,47,0.05)] md:hidden">
+<div class="flex flex-col items-center justify-center text-rose-400 dark:text-rose-300 active:translate-y-[-2px] transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">spa</span>
+<span class="text-[10px] uppercase tracking-widest font-medium mt-1">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] uppercase tracking-widest font-medium mt-1">Discover</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px] uppercase tracking-widest font-medium mt-1">Rituals</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] uppercase tracking-widest font-medium mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

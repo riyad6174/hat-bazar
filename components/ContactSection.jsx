@@ -1,46 +1,71 @@
 import React from 'react';
-import { BsWhatsapp, BsMessenger } from 'react-icons/bs';
+import { motion } from 'framer-motion';
 
 const ContactSection = () => {
   return (
-    <div className='bg-[#f6339a] py-12 px-4 text-center'>
-      <div className='container mx-auto max-w-2xl'>
-        {/* Main Text */}
-        <p className='text-pink-100 text-lg md:text-2xl font-bold mb-6 leading-tight'>
-          আমাদের মেসেঞ্জারে ২৪ ঘন্টা প্রতিনিধি এক্টিভ থাকে কোন{' '}
-          <br className='hidden md:block' />
-          সমস্যা হলে সাথে সাথে মেসেঞ্জারে মেসেজ করবেন।
-        </p>
-
-        {/* Buttons Container */}
-        <div className='flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4'>
-          {/* Messenger Button */}
-          <a
-            href='https://m.me/hatbazarlive' // Replace with your Messenger page link
-            target='_blank'
-            rel='noopener noreferrer'
-            className='w-full md:w-auto flex items-center justify-center space-x-2 px-6 py-3 rounded-lg text-lg font-semibold transition-colors duration-200
-                       bg-blue-600 hover:bg-blue-700 text-white shadow-md border-2 border-blue-600 hover:border-blue-700'
+    <motion.section
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      className="py-24 bg-surface-container"
+    >
+      <div className="max-w-[1280px] mx-auto px-6 md:px-16 text-center">
+        <div className="max-w-2xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-display text-4xl md:text-5xl mb-6 text-on-surface"
           >
-            <BsMessenger className='text-2xl' />
-            <span>মেসেঞ্জার</span>
-          </a>
-
-          {/* WhatsApp Button */}
-          <a
-            href='https://wa.me/8801794855675' // Replace with your WhatsApp number
-            target='_blank'
-            rel='noopener noreferrer'
-            className='w-full md:w-auto flex items-center justify-center space-x-2 px-6 py-3 rounded-lg text-lg font-semibold transition-colors duration-200
-                       bg-green-600 hover:bg-green-700 text-white shadow-md border-2 border-green-600 hover:border-green-700'
+            We're Here to Help
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="font-body text-lg text-tertiary mb-10 leading-relaxed"
           >
-            <BsWhatsapp className='text-2xl' />
-            <span>হোয়াটসঅ্যাপ</span>
-          </a>
+            Have questions about your skincare routine? Our team of experts is available to guide you toward the perfect formulations.
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-12"
+          >
+            <motion.a 
+              href="https://m.me/hatbazarlive" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, x: 4 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors font-body font-bold text-xs uppercase tracking-widest"
+            >
+              <span className="material-symbols-outlined text-xl">chat</span> Messenger Support
+            </motion.a>
+            <motion.a 
+              href="https://wa.me/8801794855675" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, x: 4 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors font-body font-bold text-xs uppercase tracking-widest"
+            >
+              <span className="material-symbols-outlined text-xl">phone_iphone</span> WhatsApp Us
+            </motion.a>
+          </motion.div>
+          
+          <p className="font-body text-[10px] text-outline mt-8 uppercase tracking-[0.2em]">Quality care for the modern skin.</p>
         </div>
       </div>
-    </div>
+    </motion.section>
   );
 };
 
 export default ContactSection;
+

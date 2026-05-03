@@ -9,12 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.10",
+    "framer-motion": "^12.38.0",
     "googleapis": "^164.1.0",
     "libphonenumber-js": "^1.12.17",
     "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
+    "react-hot-toast": "^2.6.0",
     "react-icons": "^5.5.0",
     "react-phone-number-input": "^3.4.12",
     "swiper": "^12.0.1"

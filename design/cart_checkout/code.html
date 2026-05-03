@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>HaatBazar | Your Rituals</title>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#d4c2c5",
+                        "surface-container": "#fbeae7",
+                        "inverse-on-surface": "#feedea",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#603b44",
+                        "secondary-fixed": "#ffd9e0",
+                        "on-tertiary-fixed-variant": "#50443e",
+                        "on-primary-fixed": "#2f121a",
+                        "primary-fixed-dim": "#ecb9c4",
+                        "on-tertiary-container": "#4f443d",
+                        "tertiary-fixed": "#f1dfd6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#7b535c",
+                        "surface-dim": "#e7d6d3",
+                        "primary-fixed": "#ffd9e0",
+                        "secondary-fixed-dim": "#f6b5c4",
+                        "surface-bright": "#fff8f6",
+                        "inverse-primary": "#ecb9c4",
+                        "inverse-surface": "#382e2c",
+                        "primary-container": "#d8a7b1",
+                        "on-background": "#221a18",
+                        "on-surface-variant": "#504446",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#f6e4e1",
+                        "on-secondary-container": "#7b4956",
+                        "outline": "#827476",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#340e1a",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#f0dfdb",
+                        "background": "#fff8f6",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#613c45",
+                        "secondary-container": "#ffbdcc",
+                        "on-secondary-fixed-variant": "#683945",
+                        "surface-container-highest": "#f0dfdb",
+                        "on-surface": "#221a18",
+                        "surface": "#fff8f6",
+                        "surface-container-low": "#fff0ee",
+                        "tertiary-container": "#c1b1a8",
+                        "on-tertiary-fixed": "#231a14"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Cormorant Garamond"],
+                        "headline-lg": ["Cormorant Garamond"],
+                        "headline-md": ["Cormorant Garamond"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #FAF7F2;
+            color: #3B312F;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-card {
+            background: #F2E8DF;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .editorial-input {
+            background: #F2E8DF;
+            border: none;
+            border-bottom: 1px solid #8A7C74;
+            border-radius: 0;
+            padding: 12px 0;
+        }
+        .editorial-input:focus {
+            outline: none;
+            border-bottom: 1px solid #D8A7B1;
+            ring: 0;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-stone-50/90 backdrop-blur-md sticky top-0 z-50 shadow-sm shadow-stone-200/50">
+<nav class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<button class="text-stone-500 hover:opacity-70 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-2xl font-serif italic text-stone-800 tracking-tight">HaatBazar</div>
+<div class="flex gap-4">
+<button class="text-rose-400 hover:opacity-70 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-6 md:px-margin-desktop py-12 md:py-20">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Left Column: Cart & Checkout Forms -->
+<div class="lg:col-span-7 space-y-20">
+<!-- Section: Cart Items -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Your Bag</h1>
+<span class="font-label-sm text-label-sm text-outline tracking-[0.2em]">3 ITEMS</span>
+</div>
+<div class="space-y-8">
+<!-- Cart Item 1 -->
+<div class="flex gap-6 items-center pb-8 border-b border-surface-variant">
+<div class="w-24 h-32 rounded-[24px] overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A high-end apothecary bottle with a minimalist label sitting on a soft-beige textured surface. The lighting is diffused and warm, reflecting the serenity and quiet luxury of a spa environment. Soft pastel rose tones accent the background with gentle shadows and a matte finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlV4ySEp399bLpdA25dDQ6tTFTBEEoyskkh1VNBSItxb9e6PbsR1R6OXY-320fnGAU01WM9bJNBNevMLHBgAYQso59Zj8bxCU2wIwyFXd_v7nwKsPW3vhPdrLOaTPfjx8Z6l6ndDJqqN_sZ9MsA8SK4_TjjIl5CuFvVd6YCFg80Hork11dZn094hkWdQ20ubfhSEpctOxqFuzI7wPf4JkqMwKCSH59ufRodU9VmGKu4fxmxbxH0mV9WhjCiMjdHoE4kC0mle6_Wbg"/>
+</div>
+<div class="flex-grow flex flex-col justify-between h-32 py-2">
+<div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Midnight Dew Elixir</h3>
+<p class="font-label-sm text-label-sm text-outline mt-1 uppercase tracking-widest">30ML / Glass</p>
+</div>
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-4 text-outline">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">remove</span>
+<span class="font-body-md text-on-surface">1</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">add</span>
+</div>
+<span class="font-body-lg text-on-surface">$84.00</span>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="flex gap-6 items-center pb-8 border-b border-surface-variant">
+<div class="w-24 h-32 rounded-[24px] overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Close-up of a premium ceramic candle jar with a hand-poured wax surface. The aesthetic is extremely clean and minimal, featuring soft cream colors and subtle shadows. The mood is peaceful and sensorial, evoking the essence of a high-end wellness boutique." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwvGTDWKCesPWZLojog4r-yflUgP0BaV8ZXqbGeDsbTcPspaIa1sw0Qz_n0TWwmv0kLImbN9Uxl5rov2-214kivPiFmFV2dDsALrAZaAh6Qpn-60hS0q22Y2VrvqHo2YTQwf--SBFOv77VPD4OiqTfrZ_LoaNsu1oUn4ttPIhOyF24lPq4GPUHyLVfNu6fZyKky6ju06wxbq3QL_W3XiTwhRIBJxoCgve9PlvN0ablqHlDZulTwPDKovIrmfdF76VnJJQIIsGbPWg"/>
+</div>
+<div class="flex-grow flex flex-col justify-between h-32 py-2">
+<div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Sacred Clay Mask</h3>
+<p class="font-label-sm text-label-sm text-outline mt-1 uppercase tracking-widest">100G / Ceramic</p>
+</div>
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-4 text-outline">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">remove</span>
+<span class="font-body-md text-on-surface">1</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">add</span>
+</div>
+<span class="font-body-lg text-on-surface">$62.00</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Shipping Info -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-10">Shipping Details</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+<div class="flex flex-col">
+<label class="font-label-sm text-label-sm text-outline mb-1">FIRST NAME</label>
+<input class="editorial-input font-body-md text-on-surface" placeholder="Evelyn" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-label-sm text-outline mb-1">LAST NAME</label>
+<input class="editorial-input font-body-md text-on-surface" placeholder="Claridge" type="text"/>
+</div>
+<div class="flex flex-col md:col-span-2">
+<label class="font-label-sm text-label-sm text-outline mb-1">STREET ADDRESS</label>
+<input class="editorial-input font-body-md text-on-surface" placeholder="124 Ritual Way, Apartment 4B" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-label-sm text-outline mb-1">CITY</label>
+<input class="editorial-input font-body-md text-on-surface" placeholder="New York" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-label-sm text-outline mb-1">POSTAL CODE</label>
+<input class="editorial-input font-body-md text-on-surface" placeholder="10001" type="text"/>
+</div>
+</div>
+</section>
+<!-- Section: Payment -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-8">Payment Method</h2>
+<div class="grid grid-cols-1 gap-4">
+<label class="editorial-card p-6 rounded-[24px] flex items-center justify-between cursor-pointer border border-transparent hover:border-primary-container group transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">credit_card</span>
+<span class="font-body-md text-on-surface">Credit or Debit Card</span>
+</div>
+<input checked="" class="text-primary focus:ring-primary border-outline" name="payment" type="radio"/>
+</label>
+<label class="editorial-card p-6 rounded-[24px] flex items-center justify-between cursor-pointer border border-transparent hover:border-primary-container group transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">wallet</span>
+<span class="font-body-md text-on-surface">Digital Wallet (Apple Pay / Google Pay)</span>
+</div>
+<input class="text-primary focus:ring-primary border-outline" name="payment" type="radio"/>
+</label>
+</div>
+<div class="mt-8 p-8 editorial-card rounded-[24px] space-y-6">
+<div class="flex flex-col">
+<label class="font-label-sm text-label-sm text-outline mb-1">CARD NUMBER</label>
+<input class="editorial-input font-body-md text-on-surface" placeholder="0000 0000 0000 0000" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="flex flex-col">
+<label class="font-label-sm text-label-sm text-outline mb-1">EXPIRY</label>
+<input class="editorial-input font-body-md text-on-surface" placeholder="MM / YY" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-label-sm text-outline mb-1">CVC</label>
+<input class="editorial-input font-body-md text-on-surface" placeholder="123" type="text"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary (Sticky) -->
+<div class="lg:col-span-5">
+<div class="sticky top-32">
+<div class="editorial-card rounded-[32px] p-10 space-y-10 shadow-[0_-10px_40px_rgba(59,49,47,0.05)]">
+<h2 class="font-headline-md text-headline-md text-on-surface">Order Summary</h2>
+<div class="space-y-4">
+<div class="flex justify-between">
+<span class="text-outline">Subtotal</span>
+<span class="text-on-surface">$146.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Shipping</span>
+<span class="text-primary">Complimentary</span>
+</div>
+<div class="flex justify-between pt-6 border-t border-outline-variant">
+<span class="font-body-lg text-on-surface">Total</span>
+<span class="font-headline-md text-on-surface">$146.00</span>
+</div>
+</div>
+<div class="space-y-6">
+<button class="w-full bg-primary-container text-on-primary-container py-6 rounded-[24px] font-label-sm tracking-[0.2em] uppercase hover:shadow-lg transition-all active:scale-95">
+                                Complete Purchase
+                            </button>
+<p class="text-center font-label-sm text-outline px-4 leading-relaxed">
+                                YOUR TRANSACTION IS SECURE AND PROTECTED BY INDUSTRY-STANDARD ENCRYPTION.
+                            </p>
+</div>
+<div class="pt-6 flex justify-center gap-8">
+<span class="material-symbols-outlined text-outline-variant text-[32px]">verified_user</span>
+<span class="material-symbols-outlined text-outline-variant text-[32px]">lock</span>
+<span class="material-symbols-outlined text-outline-variant text-[32px]">local_shipping</span>
+</div>
+</div>
+<div class="mt-8 px-6">
+<div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-[20px]">
+<span class="material-symbols-outlined text-primary">eco</span>
+<p class="text-xs text-outline leading-tight">Your order will be shipped in 100% compostable editorial packaging.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-stone-200 mt-24">
+<div class="flex flex-col md:flex-row justify-between items-center w-full py-12 px-8 max-w-7xl mx-auto gap-6">
+<div class="font-serif text-lg text-stone-800 italic">HaatBazar</div>
+<div class="flex gap-8">
+<a class="text-xs font-light tracking-wide text-stone-400 hover:text-rose-300 transition-colors" href="#">Journal</a>
+<a class="text-xs font-light tracking-wide text-stone-400 hover:text-rose-300 transition-colors" href="#">Sustainability</a>
+<a class="text-xs font-light tracking-wide text-stone-400 hover:text-rose-300 transition-colors" href="#">Shipping</a>
+<a class="text-xs font-light tracking-wide text-stone-400 hover:text-rose-300 transition-colors" href="#">Concierge</a>
+</div>
+<div class="text-xs font-light tracking-wide text-stone-400">© 2024 HaatBazar. Rituals for the Soul.</div>
+</div>
+</footer>
+<!-- Mobile Navigation -->
+<div class="md:hidden">
+<nav class="fixed bottom-0 left-0 w-full bg-stone-100 flex justify-around items-center pt-3 pb-8 px-4 rounded-t-[32px] z-50 shadow-[0_-10px_40px_rgba(59,49,47,0.05)] border-t border-stone-200/30">
+<div class="flex flex-col items-center justify-center text-stone-400 hover:text-rose-300 transition-colors">
+<span class="material-symbols-outlined">spa</span>
+<span class="text-[10px] uppercase tracking-widest font-medium">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 hover:text-rose-300 transition-colors">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] uppercase tracking-widest font-medium">Discover</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 hover:text-rose-300 transition-colors">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px] uppercase tracking-widest font-medium">Rituals</span>
+</div>
+<div class="flex flex-col items-center justify-center text-rose-400 active:translate-y-[-2px] transition-transform">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] uppercase tracking-widest font-medium">Profile</span>
+</div>
+</nav>
+</div>
+</body></html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#685c54",
+                        "on-primary-fixed-variant": "#613c45",
+                        "surface-variant": "#f0dfdb",
+                        "surface-bright": "#fff8f6",
+                        "secondary-fixed": "#ffd9e0",
+                        "on-tertiary-fixed": "#231a14",
+                        "on-surface": "#221a18",
+                        "tertiary-fixed": "#f1dfd6",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#ffbdcc",
+                        "surface-dim": "#e7d6d3",
+                        "error": "#ba1a1a",
+                        "outline": "#827476",
+                        "on-secondary-container": "#7b4956",
+                        "secondary": "#834f5d",
+                        "on-background": "#221a18",
+                        "inverse-on-surface": "#feedea",
+                        "tertiary-fixed-dim": "#d4c3ba",
+                        "primary-fixed": "#ffd9e0",
+                        "on-secondary-fixed": "#340e1a",
+                        "surface-container": "#fbeae7",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#504446",
+                        "surface-container-highest": "#f0dfdb",
+                        "surface": "#fff8f6",
+                        "primary": "#7b535c",
+                        "outline-variant": "#d4c2c5",
+                        "inverse-surface": "#382e2c",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#683945",
+                        "primary-container": "#d8a7b1",
+                        "background": "#fff8f6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "brand": "24px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Cormorant Garamond"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Cormorant Garamond"],
+                        "display-lg": ["Cormorant Garamond"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px -10px rgba(59, 49, 47, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container/30">
+<!-- TopAppBar -->
+<header class="bg-[#FAF7F2]/90 dark:bg-stone-950/90 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-sm shadow-stone-200/20 dark:shadow-none">
+<div class="flex justify-between items-center w-full max-w-[1280px] mx-auto px-16 py-6">
+<div class="font-serif text-2xl tracking-tighter text-stone-900 dark:text-stone-50">HaatBazar</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-stone-900 dark:text-stone-100 font-medium border-b border-stone-900 dark:border-stone-100 pb-1 font-body-md text-sm tracking-wide" href="#">Shop All</a>
+<a class="text-stone-500 dark:text-stone-400 font-normal hover:text-[#D8A7B1] transition-all duration-500 ease-out font-body-md text-sm tracking-wide" href="#">Rituals</a>
+<a class="text-stone-500 dark:text-stone-400 font-normal hover:text-[#D8A7B1] transition-all duration-500 ease-out font-body-md text-sm tracking-wide" href="#">Skin Quiz</a>
+<a class="text-stone-500 dark:text-stone-400 font-normal hover:text-[#D8A7B1] transition-all duration-500 ease-out font-body-md text-sm tracking-wide" href="#">Sustainability</a>
+<a class="text-stone-500 dark:text-stone-400 font-normal hover:text-[#D8A7B1] transition-all duration-500 ease-out font-body-md text-sm tracking-wide" href="#">Journal</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">person</button>
+<div class="relative">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">shopping_bag</button>
+<span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white">2</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-16 py-16">
+<!-- Hero Header -->
+<header class="mb-20 max-w-2xl">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6">All Products</h1>
+<p class="font-body-lg text-body-lg text-tertiary">
+                A curated symphony of clinical precision and botanical wisdom. Explore our collection of sensorial formulations designed to transform your daily routine into a grounding ritual for the modern spirit.
+            </p>
+</header>
+<div class="flex gap-16 items-start">
+<!-- Sidebar Filters -->
+<aside class="w-64 sticky top-32 space-y-12 shrink-0">
+<section>
+<h3 class="font-label-sm text-label-sm uppercase tracking-[0.2em] mb-6 text-on-surface">Skin Type</h3>
+<div class="space-y-4">
+<label class="flex items-center group cursor-pointer">
+<input class="rounded-full border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="ml-3 font-body-md text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">All Skin Types</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="rounded-full border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="ml-3 font-body-md text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Dry &amp; Dehydrated</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="rounded-full border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="ml-3 font-body-md text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Sensitive</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="rounded-full border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="ml-3 font-body-md text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Oily / Combination</span>
+</label>
+</div>
+</section>
+<section>
+<h3 class="font-label-sm text-label-sm uppercase tracking-[0.2em] mb-6 text-on-surface">Concern</h3>
+<div class="space-y-4">
+<label class="flex items-center group cursor-pointer">
+<input class="rounded-full border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="ml-3 font-body-md text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Deep Hydration</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="rounded-full border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="ml-3 font-body-md text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Brightening</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="rounded-full border-outline-variant text-primary focus:ring-primary h-4 w-4 bg-transparent" type="checkbox"/>
+<span class="ml-3 font-body-md text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Anti-Aging</span>
+</label>
+</div>
+</section>
+<section>
+<h3 class="font-label-sm text-label-sm uppercase tracking-[0.2em] mb-6 text-on-surface">Price Range</h3>
+<div class="px-2">
+<input class="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<div class="flex justify-between mt-4 font-body-md text-[12px] text-tertiary">
+<span>$40</span>
+<span>$250+</span>
+</div>
+</div>
+</section>
+</aside>
+<!-- Product Grid -->
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16">
+<!-- Product Card 1 -->
+<div class="group">
+<div class="aspect-[4/5] bg-surface-container-low rounded-brand overflow-hidden mb-6 editorial-shadow relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A luxurious glass bottle of facial oil sitting on a piece of smooth, cream-colored travertine stone. The lighting is soft and golden, evocative of late afternoon sun in a minimalist bathroom. The background is a clean, Warm Ivory plaster wall, creating a serene and editorial high-end skincare aesthetic. The scene is calm, tactile, and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOhTaHeSo1IxbetPyacT1VPbju-1dWUHzbbBCh4Bwc7lgxNApwPgK0h1M9PfM91PkpoQkxEKGYHD8bewdGzSIanDF4lxc7UHolv592yT_nDKykwIGewmip0zea121HzZeQgAUID5QB7pnbumQ8f5g0QO9y1lNoG4XgR7Q0xRhH1w9HjqZTaQ2EOLe3fR5C4Yvam8aCtQ04JnH4_XZWtWQXsUg0T2nh0kuJyzNqrhv6rDfDXH72sJoyCTMVUx_vWFsvN3GResk_45c"/>
+<div class="absolute top-4 right-4">
+<span class="bg-white/80 backdrop-blur-md font-label-sm text-[10px] px-3 py-1 rounded-full uppercase tracking-widest">New</span>
+</div>
+</div>
+<div class="space-y-2">
+<p class="font-label-sm text-[11px] uppercase tracking-widest text-tertiary">Serum &amp; Elixir</p>
+<h3 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">Velvet Morning Dew</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body-md text-on-surface">$82.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-md text-[13px] text-on-surface-variant">4.9</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group">
+<div class="aspect-[4/5] bg-surface-container-low rounded-brand overflow-hidden mb-6 editorial-shadow relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist matte porcelain jar containing a soft, pale pink facial cream. The jar sits on a bed of fresh, damp moss in a serene forest environment with dappled sunlight. The overall color palette is composed of muted greens, soft pinks, and warm beige, reflecting a natural and organic luxury skincare brand identity. The lighting is atmospheric and soft-focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByhe3mUgXs6DDouy2kW_ZjW1_8hXyKMYEgrKB5HqvuIxPepX64nO_ST2UndmNgttidVnsKyCPfhD7SMxWfj3sB7CO2bqpzQ9Q9eJg87FJ9qXPDZtLxSgYA_cvWNU82d4jNshyHcKv2oyhn_tWLLry4YtWaOp0tVUOCdg5k8xJPMhO9ix8o_pUHLthnr3hn9NhePw8E23DPZ4fh0F67zXR4-XdcWXBhf2ZhYbnGsBvIL7icCjnf0c-u744jBmP2y16eYqPbwkpMeLI"/>
+</div>
+<div class="space-y-2">
+<p class="font-label-sm text-[11px] uppercase tracking-widest text-tertiary">Moisturizer</p>
+<h3 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">Cloud Milk Repair</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body-md text-on-surface">$64.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-md text-[13px] text-on-surface-variant">4.8</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group">
+<div class="aspect-[4/5] bg-surface-container-low rounded-brand overflow-hidden mb-6 editorial-shadow relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A frosted glass pump bottle with a minimalist label, standing on a stack of linen towels in a bright, modern bathroom. The aesthetic is high-key with soft whites and warm ivory tones. A gentle shadow is cast across the towels from a nearby window. The scene communicates cleanliness, luxury, and a mindful morning ritual using the HaatBazar color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3rMSqOymIgwAi1V3uVjyBvDhb7aoxJcHN3iEVSU2-IB27my39yrvSJkE33RYx9ClumA9HbFeU-OxdDc0de-OqFlMF14rcbfd3rrcaQQYuHbH88FsT6IAeZn3TsSM_xpyiAAumQqUOulQGbtrhCMgzWHDAoqlUTxW3AyLYbfGYBbduIR78lhz3ILMu4YzJhh6pbU6Pv0B40znVwqfMiV7TsrQrsJVLEzDs31ANrHTJsHHQD4S--imPTduqzNQYNPZ3pQihVWV1Jjg"/>
+</div>
+<div class="space-y-2">
+<p class="font-label-sm text-[11px] uppercase tracking-widest text-tertiary">Cleanser</p>
+<h3 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">Gentle Earth Wash</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body-md text-on-surface">$48.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-md text-[13px] text-on-surface-variant">5.0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group">
+<div class="aspect-[4/5] bg-surface-container-low rounded-brand overflow-hidden mb-6 editorial-shadow relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An amber glass bottle with a minimalist pipette, placed on a circular mirror which reflects a clear blue sky and soft white clouds. The setting is ethereal and light, emphasizing the purity of the ingredients. The design is modern, with a focus on negative space and clean lines. The primary colors are warm neutrals and light blue, creating a sense of breathability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTt3M-_Ap7-XhRjHAram1s2XgCfnRW4jUaCK1kfxXC5GRYZTwnpVDfqVMX3yC_agBlrRBQdY37PwWEtDo56FNCvQgffIzmtkrEWpDWW7ZCdgLfxRQaqJSHrfV1Jrc5aYLC0F_d49HwEuNmyPa2esMUAw4yRXhwt28R5tUENgm06gnl7cIf5hSXEyY2leU9sDazQobgYToDQqZrn9E0_VzKZOrQuKncd4NUSbkCVz5CQwxTWdbzEsk6OfqoTMhgVq41n6M0DQjuhs0"/>
+</div>
+<div class="space-y-2">
+<p class="font-label-sm text-[11px] uppercase tracking-widest text-tertiary">Night Treatment</p>
+<h3 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">Midnight Radiance</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body-md text-on-surface">$110.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-md text-[13px] text-on-surface-variant">4.7</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group">
+<div class="aspect-[4/5] bg-surface-container-low rounded-brand overflow-hidden mb-6 editorial-shadow relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A grouping of three high-end skincare products in neutral matte packaging, arranged asymmetrically on a sand-colored surface with architectural shadows. The lighting is dramatic yet soft, highlighting the tactile texture of the matte containers. The mood is sophisticated and intentional, embodying the quiet luxury brand identity of HaatBazar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWzjhSqQ_K572U32vwMhyMSsg09NBw_yXPLy4mVSyF7OtrhPHFqQWMcxg_rQRcfuw2fpGpO6i_SCpV6gDLHaO-udSpVnKdYbYM9ggWgIdRalSZIld5FmRibX6WnOPGePSqq_j5jsVIsI_-9xCvh0dCEGud1fKvnS7iwDxAhEeHiR_juZi2tUz0XA7FiQbkqNnIaQtAQgRok59YiYhbrnumJlp5NE8YhfQXmpcqZrchu4U0TA2LWt30BLRG5131WxIrt5KfacrxEkM"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary/20 backdrop-blur-md font-label-sm text-[10px] px-3 py-1 rounded-full uppercase tracking-widest text-primary">Best Seller</span>
+</div>
+</div>
+<div class="space-y-2">
+<p class="font-label-sm text-[11px] uppercase tracking-widest text-tertiary">Exfoliant</p>
+<h3 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">Moonstone Polish</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body-md text-on-surface">$56.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-md text-[13px] text-on-surface-variant">4.9</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group">
+<div class="aspect-[4/5] bg-surface-container-low rounded-brand overflow-hidden mb-6 editorial-shadow relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A close-up shot of a thick, silky white mask being applied to a smooth ceramic surface with a wooden spatula. The lighting is bright and clean, emphasizing the luxurious texture of the product. The color palette is restricted to whites, beiges, and light wood tones. It feels like a high-end editorial for a luxury skin ritual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfjIrLhzUsZE6dORB9hEO8-OT9R0AMbZdN1l1ox3sQX1rwVjpGPObnAXtJKVz_b56erb-74wbXd1KyUpAHzMvvFlCkW4w0FbZE8-Z-JnTW_740D0rwwIWfZuYM7EbG2ZtDDpw4-4NWpIdJCMxF653j7g6KXm5wWkBgjBCLIZyYAGOYP7iJ9ChJN4a9n8d0AFspY_Yhfn7Qpq6TwWyg3zxbWZLhHtxzKBmOPPzyLjsaqsh4HZW--0_WGRY2aHXYS2q87WMwot0_RM0"/>
+</div>
+<div class="space-y-2">
+<p class="font-label-sm text-[11px] uppercase tracking-widest text-tertiary">Mask</p>
+<h3 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">Resurrection Clay</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body-md text-on-surface">$72.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-md text-[13px] text-on-surface-variant">4.8</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#F2E8DF] dark:bg-stone-900 border-t border-stone-200 dark:border-stone-800 mt-32">
+<div class="w-full max-w-[1280px] mx-auto px-16 py-20 flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="space-y-8 max-w-sm">
+<div class="font-serif text-xl text-stone-900 dark:text-stone-100">HaatBazar</div>
+<p class="font-body-md text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
+                    We believe skincare is more than a routine; it is an act of presence. Our formulations are crafted with intention, merging botanical heritage with modern science.
+                </p>
+<div class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-800 dark:text-stone-100">
+                    © 2024 HaatBazar. Rituals for the modern skin.
+                </div>
+</div>
+<div class="grid grid-cols-2 gap-x-20 gap-y-10">
+<div class="space-y-6">
+<h4 class="font-label-sm text-[10px] uppercase tracking-[0.2em] font-medium text-stone-900 dark:text-stone-100">Care</h4>
+<nav class="flex flex-col gap-4">
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-[#D8A7B1] underline-offset-4 underline transition-all" href="#">Shipping &amp; Returns</a>
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-[#D8A7B1] underline-offset-4 underline transition-all" href="#">Privacy Policy</a>
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-[#D8A7B1] underline-offset-4 underline transition-all" href="#">Contact</a>
+</nav>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-sm text-[10px] uppercase tracking-[0.2em] font-medium text-stone-900 dark:text-stone-100">Explore</h4>
+<nav class="flex flex-col gap-4">
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-[#D8A7B1] underline-offset-4 underline transition-all" href="#">Sustainability</a>
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-[#D8A7B1] underline-offset-4 underline transition-all" href="#">Journal</a>
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-stone-500 hover:text-[#D8A7B1] underline-offset-4 underline transition-all" href="#">Stockists</a>
+</nav>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-sm text-[10px] uppercase tracking-[0.2em] font-medium text-stone-900 dark:text-stone-100">The Ritual Letter</h4>
+<div class="relative w-64">
+<input class="w-full bg-transparent border-b border-stone-300 dark:border-stone-700 py-2 focus:border-primary focus:ring-0 text-[10px] uppercase tracking-widest outline-none" placeholder="YOUR EMAIL" type="email"/>
+<button class="absolute right-0 bottom-2 text-primary material-symbols-outlined text-sm">arrow_forward</button>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

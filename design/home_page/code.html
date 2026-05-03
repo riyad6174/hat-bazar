@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HaatBazar | Skincare That Feels Like Self-Care</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#d4c2c5",
+                        "surface-container": "#fbeae7",
+                        "inverse-on-surface": "#feedea",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#603b44",
+                        "secondary-fixed": "#ffd9e0",
+                        "on-tertiary-fixed-variant": "#50443e",
+                        "on-primary-fixed": "#2f121a",
+                        "primary-fixed-dim": "#ecb9c4",
+                        "on-tertiary-container": "#4f443d",
+                        "tertiary-fixed": "#f1dfd6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#7b535c",
+                        "surface-dim": "#e7d6d3",
+                        "primary-fixed": "#ffd9e0",
+                        "secondary-fixed-dim": "#f6b5c4",
+                        "surface-bright": "#fff8f6",
+                        "inverse-primary": "#ecb9c4",
+                        "inverse-surface": "#382e2c",
+                        "primary-container": "#d8a7b1",
+                        "on-background": "#221a18",
+                        "on-surface-variant": "#504446",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#f6e4e1",
+                        "on-secondary-container": "#7b4956",
+                        "outline": "#827476",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#340e1a",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#f0dfdb",
+                        "background": "#fff8f6",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#613c45",
+                        "secondary-container": "#ffbdcc",
+                        "on-secondary-fixed-variant": "#683945",
+                        "surface-container-highest": "#f0dfdb",
+                        "on-surface": "#221a18",
+                        "surface": "#fff8f6",
+                        "surface-container-low": "#fff0ee",
+                        "tertiary-container": "#c1b1a8",
+                        "on-tertiary-fixed": "#231a14",
+                        "brand-warm-ivory": "#FAF7F2",
+                        "brand-soft-beige": "#F2E8DF",
+                        "brand-dusty-rose": "#D8A7B1",
+                        "brand-charcoal": "#3B312F"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "brand": "24px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Cormorant Garamond"],
+                        "headline-lg": ["Cormorant Garamond"],
+                        "headline-md": ["Cormorant Garamond"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #FAF7F2 0%, #F2E8DF 100%);
+        }
+        .offer-gradient {
+            background: linear-gradient(90deg, #FAD0C4 0%, #D8A7B1 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur-md border-none shadow-sm shadow-stone-200/50 dark:shadow-none">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-rose-300 dark:text-rose-200 hover:opacity-70 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+<h1 class="text-2xl font-serif italic text-stone-800 dark:text-stone-100 tracking-tight">HaatBazar</h1>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 items-center text-xs uppercase tracking-widest font-medium">
+<a class="text-rose-400 dark:text-rose-300" href="#">Shop</a>
+<a class="text-stone-500 dark:text-stone-400 hover:opacity-70 transition-opacity" href="#">Discover</a>
+<a class="text-stone-500 dark:text-stone-400 hover:opacity-70 transition-opacity" href="#">Rituals</a>
+</nav>
+<button class="text-rose-300 dark:text-rose-200 hover:opacity-70 transition-opacity active:scale-95 duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[751px] flex items-center overflow-hidden px-8 lg:px-16 hero-gradient">
+<div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="z-10 order-2 lg:order-1">
+<h2 class="font-display-lg text-display-lg text-brand-charcoal mb-6">Skincare That Feels Like Self-Care</h2>
+<p class="font-body-lg text-body-lg text-tertiary mb-10 max-w-md">Minimal ingredients. Maximum glow. Experience the ritual of mindful apothecary for your most radiant skin yet.</p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-4 bg-brand-dusty-rose text-brand-charcoal rounded-brand font-label-sm uppercase hover:shadow-xl transition-all duration-300">Shop Now</button>
+<button class="px-8 py-4 border border-outline text-brand-charcoal rounded-brand font-label-sm uppercase hover:bg-brand-soft-beige transition-all duration-300">Explore Collection</button>
+</div>
+</div>
+<div class="relative order-1 lg:order-2 flex justify-center">
+<div class="w-full aspect-[4/5] rounded-brand overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A premium, frosted glass serum bottle with a minimalist label, sitting elegantly on a natural stone surface. The lighting is soft and warm, casting gentle shadows in a bright, airy room with a warm ivory color palette. The composition is editorial and minimalist, emphasizing quiet luxury and high-end tactile quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-uDfMnnu9XnoP8zEB3xrB_NGUZeHXIiB8FvdOeXgYXInkArVNkpBI4GLBcVkxmao4j6jyxkkk9WytNkJ9irF8u-rolLbNGemrrAqlAjuMZQG9anc93A-In3kZxWdRRRNqEL-S6xBtEvVrmy_IfAjWTp3nlGFzMNEHL7kHfHeKEssnMXYxoUFHmjcwJH6JnseSyxmoaC5gjmvSagGmO9SxqE1uyXKx4hrzeB87t4z3DHIDIzl7sXf9kUXhPUHV93zEwv2z3ZIyO5A"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories -->
+<section class="py-24 px-8 max-w-7xl mx-auto overflow-hidden">
+<div class="flex justify-between items-center mb-16 overflow-x-auto no-scrollbar gap-8">
+<div class="flex flex-col items-center gap-4 flex-shrink-0 group">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-dusty-rose transition-all duration-500">
+<img class="w-full h-full object-cover" data-alt="Close-up of a luxurious, clear gel cleanser with small air bubbles, reflecting soft daylight. The aesthetic is clinical yet ethereal, using a palette of soft whites and cool ivory. Minimalist packaging is partially visible in a bright, modern bathroom setting with natural textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC2rXar3eT_MWP1JwYRog0_RQOxnztI6Gvsx0H8aoADgH82BBMXL5O8ydDZPHa8xKHmandGz_CRWTYPBpmzwZFzhayxn_4Lcn74V9egMftCIj12K7ZHz903qvoQ3qfZm6bjCZQwqYKFt9uImuTfbOjYXHx7fTWNme46SIlPqmluLG9YJYy-v_Tqg_SWoM16OsQ2DMYHMsIPZegAA93O7t80tyFW_KXc8YG2VNHdZsCG7h9nfgwBIq0bSaE2pBuyAMUqfhKt8LozLA"/>
+</div>
+<span class="font-label-sm uppercase tracking-widest text-on-surface">Cleansers</span>
+</div>
+<div class="flex flex-col items-center gap-4 flex-shrink-0 group">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-dusty-rose transition-all duration-500">
+<img class="w-full h-full object-cover" data-alt="A golden, viscous serum droplet mid-air, captured against a muted taupe background. The lighting is focused and warm, highlighting the smooth texture and premium quality of the oil. The overall mood is sensorial and expensive, following a minimalist editorial skincare style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd8unQBYk3OYPF7sZ5GOyW1v0X5HXqwjKhv3Yt-h4tfS7ukPyvRvjyMw-LejuA1F7AOgUHF6lN5BQ8zBfixLJIbQLJVSxK8I2wK2ZYe42570zWuU9HkIdwJxOO2OUvE3gHnBYmVZ2Q1BGc-EL-AS1uRwEquiYealQs3dTSNo---g-KBhc1sy9bVzrq4ruxENWlpueARzDGv-pg5HieVO-xQalp8Vo79nw8OB-UbyAwwquwKSYzUu9xBJq0pV7Lb9QX67wd58ts_c0"/>
+</div>
+<span class="font-label-sm uppercase tracking-widest text-on-surface">Serums</span>
+</div>
+<div class="flex flex-col items-center gap-4 flex-shrink-0 group">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-dusty-rose transition-all duration-500">
+<img class="w-full h-full object-cover" data-alt="A dollop of thick, whipped white moisturizer cream on a piece of frosted glass. The background is a soft beige linen texture, creating a tactile and organic feel. High-key lighting emphasizes the velvety finish and clean ingredients of the luxury product." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7R0lZaBioz0vfL_unZcAbVodrKRThoBrHkC0GqTKdVNBkB_H-lEaGR8ta8vo8T7_xb3zEnrLf7rHaONM0i2v-c1jg0NzEDE5sYD1505KZVQq-2QD9pCkKhOHEiRmV5zEhTqcVN_VGnCClz8I0338WAnjGEj9U1DwjBF0xLwKdpgSEX1MC0Y_DXGyOkCPpxurIYzIuzGg_WMshesncuwD2dEHh9ChKeaHfSslzG0iG5v97O6BV26eLzG-4mEpdUyLPE37m16SfGLQ"/>
+</div>
+<span class="font-label-sm uppercase tracking-widest text-on-surface">Moisturizers</span>
+</div>
+<div class="flex flex-col items-center gap-4 flex-shrink-0 group">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-dusty-rose transition-all duration-500">
+<img class="w-full h-full object-cover" data-alt="A lightweight sunscreen lotion being spread onto a sun-drenched wooden surface. The scene is bright and airy, suggesting summer mornings and protection. The color palette is composed of warm tans, whites, and soft dusty rose pink accents in the surrounding decor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzD2yti3Qe1nMQlQQT_YaPTsWvNxXlPWrQt8r5EBJHHOLaHWLnf8SEcgT89hCsszmxugOq5GoTHbfqf9CNEnIegOLcAP1U3177x7Asf07h19ClKzg7CvmHM2cMbZXqJ9ahJyp-jKHRVsNyG0sy20qdackG-82tJFi3TZ3xpAr1HvJ4lP4uPXsViIZh2GxIbmj5173NaD9ZTw48YjFjmn1F6Lhcj4Iyu1eDdvLJ0DQXouIWszNxkQ8iiEnj5C8DDSnH7wkU3z164yk"/>
+</div>
+<span class="font-label-sm uppercase tracking-widest text-on-surface">Sunscreen</span>
+</div>
+<div class="flex flex-col items-center gap-4 flex-shrink-0 group">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-dusty-rose transition-all duration-500">
+<img class="w-full h-full object-cover" data-alt="A jar of dark botanical face mask with a wooden applicator spoon resting nearby. The setting is a serene spa-like environment with dim, atmospheric lighting and natural stone textures. Deep charcoal browns and muted greens provide a sophisticated, grounding color story." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD32nmMyWNdhrbM-VhHkUz3Z8EUja9dQ8QagFmjY-HBN1YsJLWZ17hTeKcn3DHDjzj9UzXRT_nyGDKcD6mjNk5eipzPL5pQ70mLpw8fb0Q_fhLYDl4IeUoUIH38-KFE7rimrNapInlaQFU0bKYv9AObdMPpF3Cy7Zl-oFcT1Sscrm_eKqVdxxSyWKK4N2XSo1RVRuJIimvhIpWXHmfAH1fi8SBO27ORuhzJy9i8UK10JAMP5yGET7F9inm8f2-mLprs5zsLQFzvNsg"/>
+</div>
+<span class="font-label-sm uppercase tracking-widest text-on-surface">Face Masks</span>
+</div>
+</div>
+</section>
+<!-- Best Sellers Section -->
+<section class="py-24 bg-brand-warm-ivory px-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<h2 class="font-headline-lg text-headline-lg text-brand-charcoal">Best Sellers</h2>
+<p class="font-body-md text-tertiary mt-4">The community's favorite rituals for glowing skin.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product Card 1 -->
+<div class="bg-white rounded-brand overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group">
+<div class="aspect-[4/5] overflow-hidden bg-brand-soft-beige">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A minimalist product shot of a luxury face oil in a clear glass bottle with a white dropper. The bottle is placed on a stack of clean linen, surrounded by soft morning light filtering through a window. The aesthetic is calm, clean, and extremely high-end." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDITP_W3Q-Am95BTnFyTF_66cAF-joC0KN5R1-irdAZCAk4SNpUbnFgf0cvqND0rl0Sn778xOxcxxQnblq62yA60hKvE_dZFN-vSeZqO3ZLy_Mp8FXZ5ocWlOpVpW4xM-VTuNpL-IqY7r7S5El8-4T4Y8Fk1FJ7Nn4HDMdME-E5gQoAcoF-2xpavc3-sJ6Phu80ba-Aftwc-1B3rWHvRuZgYhOdeYYdcZXA7D_LsQ9lEgfJDem1ysSetDtgqKsY2piS8duC7_WaW5Y"/>
+</div>
+<div class="p-6">
+<span class="font-label-sm text-brand-dusty-rose uppercase tracking-widest">Hydrating</span>
+<h3 class="font-headline-md text-xl mt-2 text-brand-charcoal">Botanical Nectar Oil</h3>
+<p class="font-body-md text-tertiary mt-1">$48.00</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-white rounded-brand overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group">
+<div class="aspect-[4/5] overflow-hidden bg-brand-soft-beige">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A sleek, matte white tube of facial cleanser resting on a wet marble surface with artistic water ripples. The scene is illuminated by crisp, bright lighting that emphasizes the clean and fresh brand identity. Soft shadows add depth without cluttering the frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaNsjk0_7UAt8tvm0zjAz6FxGI4UfdmQy5M9OfzNPVaaiTPxqQ6USO3_w8wqCUu7RPcaICFQyD1CBfPb7tPv_InWtNGOkgUcUbN__PtyCJKmgcQVwaITfgoZnCsf-3pd2_PPIM3Zn9QQZEXngjOf4KAYThIUZRGdmihyjN8lWxhpADUz9n8P6MegVNBsEp1vNsv3hQuAT-zXbHKjZrN-I38PwLzSgJ3-t_Bt_lQIVggkOlVk1eX7LV0TGKdwn0iQehe7ZuoRl0bRw"/>
+</div>
+<div class="p-6">
+<span class="font-label-sm text-brand-dusty-rose uppercase tracking-widest">Gentle</span>
+<h3 class="font-headline-md text-xl mt-2 text-brand-charcoal">Cloud Foam Wash</h3>
+<p class="font-body-md text-tertiary mt-1">$32.00</p>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-white rounded-brand overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group">
+<div class="aspect-[4/5] overflow-hidden bg-brand-soft-beige">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A luxury glass jar of night cream with a gold lid, sitting on a dark wooden tray. Beside it is a single sprig of dried lavender. The mood is cozy and nocturnal, using a sophisticated palette of deep browns and muted taupes to suggest rest and repair." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3mgb47AL8SXpjUjmAU3XZZNCZQb89GqPVrMW_Ku72-K11CyXmxk-Ln8F2iIippH3B5E1z5YvLeK94voePcrv7MN6zoz6V4jeMeWBCYMX6eLNNoLPgZgb3YYK6KF_j2T6hpqU-zo0_rriQt0kKPd07d0eUL7MhguBqIntJfmoKtPkfjFdxu-VQFYn-shL4l8uoHNotDc0c8qLflVCKXVi411kIAgd5Fs_tR6wWxVMuA3OtqFe9X1RCt8WNZ_k154y6QsmoOi492oE"/>
+</div>
+<div class="p-6">
+<span class="font-label-sm text-brand-dusty-rose uppercase tracking-widest">Nightly</span>
+<h3 class="font-headline-md text-xl mt-2 text-brand-charcoal">Moonlight Repair Cream</h3>
+<p class="font-body-md text-tertiary mt-1">$65.00</p>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-white rounded-brand overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group">
+<div class="aspect-[4/5] overflow-hidden bg-brand-soft-beige">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A tall, minimalist glass bottle of exfoliating toner against a backdrop of soft, overlapping paper textures in shades of ivory and nude pink. The lighting is flat and editorial, reminiscent of a high-fashion skincare advertisement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKKxgnj3n3U2iP1M7j4-d3_jbhR6V1ySkPvfeZeUHzjJTyU0hKjzpLP1JW9tQBM2f6IjXsdHss8sj_QuabMJXucscQyaEGnhYtkl-RJc0deCIrgCAhf7i1XaGPBnVzbnOxDe75oO3aQVw0y2NNOAbTLDoNm3FyczcbdT7CqAPy6ANhaMl7-TNmQbLCcPj1dWC1gpdQKhuodHj1MvgREyNi1OWSSCtkhL8_wsQ85-PCa0KcfBFUaX8vvqYNxF7CT41smNdrYanhUvo"/>
+</div>
+<div class="p-6">
+<span class="font-label-sm text-brand-dusty-rose uppercase tracking-widest">Brightening</span>
+<h3 class="font-headline-md text-xl mt-2 text-brand-charcoal">Dewy Tonic Water</h3>
+<p class="font-body-md text-tertiary mt-1">$38.00</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Offer Banner -->
+<section class="mx-8 my-24 rounded-brand overflow-hidden offer-gradient">
+<div class="max-w-7xl mx-auto px-12 py-16 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8">
+<div>
+<h2 class="font-display-lg text-4xl lg:text-5xl text-brand-charcoal mb-4">Glow Week Sale</h2>
+<p class="font-headline-md text-brand-charcoal opacity-80 italic">Up to 40% Off Your Entire Routine</p>
+</div>
+<button class="bg-brand-charcoal text-white px-10 py-5 rounded-brand font-label-sm uppercase tracking-widest hover:scale-105 transition-transform">Unlock Savings</button>
+</div>
+</section>
+<!-- Instagram Grid -->
+<section class="py-24 px-8 max-w-7xl mx-auto">
+<div class="mb-12 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-brand-charcoal">On The Journal</h2>
+<p class="font-body-md text-tertiary mt-2">Follow @HaatBazar for daily glow inspiration.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="aspect-square rounded-brand overflow-hidden">
+<img class="w-full h-full object-cover hover:opacity-80 transition-opacity" data-alt="A minimalist flatlay of a morning coffee, an open skincare journal, and a bottle of serum on a white linen sheet. Soft, scattered shadows from a nearby plant fall across the scene, creating a peaceful and lifestyle-focused aesthetic in warm neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgGphW3FTA5XE9TfN7362y57f_qF_dzP03PKITZWtU9ZZ5jIMcTORwouUmedjwg_TivXdbViZkjdfa4gLX7ZXbXNg8iHQLO7HBJBPwpuAxnq30KmNI7yJQaQpzNRen0_L7ugEC6RuxU_x1nKShAe9GEeRRu2Y-aY-my6LVy53uEevX5YKBVnk29a57MMoXhroNoONqVfoOptjZIP5WeQIp9US6ScgRub6iat2XrZ03MCxgThtkORiJmN0Vrn-KiTVX2w974ASlJbE"/>
+</div>
+<div class="aspect-square rounded-brand overflow-hidden">
+<img class="w-full h-full object-cover hover:opacity-80 transition-opacity" data-alt="Close-up of clean skin with a noticeable glow, focusing on the cheekbone where a single drop of product is visible. The lighting is high-key and flattering, emphasizing health and natural beauty in a high-end editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIU45Lx7mFYdaeE6sCBx7XHGHbw8rbG0_TRrMHJj4O9IvgMKKcr-5gHryW1-f1Gf_YjvJLlpzzUVDwrUq2i8PkPw5IlYX2z-_yzp8wTKFWP5XoE8btQRb2i-pVamjuOEiIjQBdhnOyjFlUSnM4aDWPRO-6Ahkz1R-A_VwmaxZ23q4RW0oTK2soqeX6-4nFoYps1T7fk9mrSshUpZZF_A746e16X401uveTtmBnMGHqiHdIXJhYqO6M2zTZUP5oSykVLE3Or0bRogI"/>
+</div>
+<div class="aspect-square rounded-brand overflow-hidden">
+<img class="w-full h-full object-cover hover:opacity-80 transition-opacity" data-alt="An artistic arrangement of raw skincare ingredients like rose petals, aloe vera slices, and crushed nuts on a beige stone surface. The composition is balanced and serene, highlighting the brand's commitment to natural ingredients and tactile quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3MRaXR2VN6T_1eS9bTHRnhxqO_IwnX0Y56d2VugPm0I8_Nomksb9lvwv9Ckzyv6XdMnIbwtIi8lcjBRbMq3i5VGUKmxgtRNhnAIK0Wxbcwd7GerOpoVyIjQ7tfBY4Ms9fXgBxpDW0P_NlBAR9ow_HBv4XpfRV_6_FeoVd2piiOIgqW8U9mZwwaoh-bCpwiZS7XBCjGL4E3u6SsNitb0yug6DhuUovDdU4J6fEkxK2KR4xadzBDXFH-FWo_wJ1cg51opfzXQ5SQMs"/>
+</div>
+<div class="aspect-square rounded-brand overflow-hidden">
+<img class="w-full h-full object-cover hover:opacity-80 transition-opacity" data-alt="A bathroom shelf organized with various HaatBazar products, showing off the consistent minimalist packaging design. The setting is modern and clean, with soft beige tiles and a small eucalyptus branch for a touch of organic green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBesQ-YL8b-SKsYY5lXVgZUP0jNwpuiBJrhhhigGMeKLqdJ2Vg6EcPiRfhuz1ApQ2xwhdPhzxC7V3UWV7mnMHdgqxClSzORV8rjrAX3_S0zMnizFEBCZx-yRwy_VVGgjQ1VHpLnMxzloNCcAfS-Ne3VLjaOjKmVk4w-3ea1AniWU48n0caQu6yahMhKK2qzpq7yhSf4NOLG7AkpXNW9EII0nMEnbNs2-YjzDg8YpPXMW2hPqBHLMzFMeXkY9n4eyBqAMAPsKhHhtFo"/>
+</div>
+</div>
+</section>
+<!-- Newsletter -->
+<section class="bg-brand-soft-beige py-24 px-8">
+<div class="max-w-2xl mx-auto text-center">
+<h2 class="font-headline-lg text-headline-lg text-brand-charcoal mb-6">Join the Glow Club</h2>
+<p class="font-body-lg text-tertiary mb-10">Subscribe to receive early access to new launches, ritual tips, and exclusive offers.</p>
+<form class="flex flex-col sm:flex-row gap-4">
+<input class="flex-grow bg-white border-none rounded-brand px-6 py-4 focus:ring-1 focus:ring-brand-dusty-rose outline-none" placeholder="Your email address" type="email"/>
+<button class="bg-brand-charcoal text-white px-8 py-4 rounded-brand font-label-sm uppercase whitespace-nowrap hover:bg-opacity-90 transition-all">Subscribe</button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950">
+<div class="flex flex-col md:flex-row justify-between items-center w-full py-12 px-8 max-w-7xl mx-auto gap-6">
+<div class="font-serif text-lg text-stone-800 dark:text-stone-200">HaatBazar</div>
+<div class="flex gap-8">
+<a class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500 no-underline hover:text-rose-300 transition-colors" href="#">Journal</a>
+<a class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500 no-underline hover:text-rose-300 transition-colors" href="#">Sustainability</a>
+<a class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500 no-underline hover:text-rose-300 transition-colors" href="#">Shipping</a>
+<a class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500 no-underline hover:text-rose-300 transition-colors" href="#">Concierge</a>
+</div>
+<p class="text-xs font-light tracking-wide text-stone-400 dark:text-stone-500">© 2024 HaatBazar. Rituals for the Soul.</p>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-8 px-4 bg-stone-100 dark:bg-stone-900 rounded-t-[32px] z-50 border-t border-stone-200/30 dark:border-stone-800 shadow-[0_-10px_40px_rgba(59,49,47,0.05)]">
+<button class="flex flex-col items-center justify-center text-rose-400 dark:text-rose-300 active:translate-y-[-2px] transition-transform">
+<span class="material-symbols-outlined" data-icon="spa">spa</span>
+<span class="text-[10px] uppercase tracking-widest font-medium mt-1">Shop</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors active:translate-y-[-2px] transition-transform">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[10px] uppercase tracking-widest font-medium mt-1">Discover</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors active:translate-y-[-2px] transition-transform">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-[10px] uppercase tracking-widest font-medium mt-1">Rituals</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-300 transition-colors active:translate-y-[-2px] transition-transform">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] uppercase tracking-widest font-medium mt-1">Profile</span>
+</button>
+</nav>
+</body></html>
