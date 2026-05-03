@@ -18,11 +18,11 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     // Page View on route change (for SPA navigation)
     const handleRouteChange = (url) => {
-      trackPageView(`Page: ${router.pathname}`);
+      trackPageView(router.pathname, document.title);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     // Initial load
-    trackPageView();
+    trackPageView(router.pathname, document.title);
 
     // Scroll tracking (50% depth)
     let scrolled = false;

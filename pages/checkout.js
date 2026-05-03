@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -8,11 +8,31 @@ import OrderSuccessModal from '@/components/OrderSuccessModal';
 import Link from 'next/link';
 import products from '@/data/products.json';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackEvent } from '@/utils/tracking';
 
 export default function CheckoutPage() {
   const { cartItems, getCartTotal, removeFromCart, updateQuantity, addToCart } =
     useCart();
   const [orderData, setOrderSuccessData] = useState(null);
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      trackEvent('begin_checkout', {
+        ecommerce: {
+          currency: 'BDT',
+          value: getCartTotal(),
+          items: cartItems.map((item) => ({
+            item_id: String(item.id),
+            item_name: item.name,
+            item_category: item.category || '',
+            price: item.price,
+            quantity: item.quantity,
+          })),
+        },
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className='min-h-screen flex flex-col bg-surface'>

@@ -40,12 +40,18 @@ export const CartProvider = ({ children }) => {
       return [...prevItems, { ...product, quantity }];
     });
 
-    // Track GTM Event
     trackEvent('add_to_cart', {
-      product_id: product.id,
-      product_name: product.name,
-      price: product.price,
-      quantity: quantity,
+      ecommerce: {
+        currency: 'BDT',
+        value: product.price * quantity,
+        items: [{
+          item_id: String(product.id),
+          item_name: product.name,
+          item_category: product.category || '',
+          price: product.price,
+          quantity: quantity,
+        }],
+      },
     });
 
     // Show Toast

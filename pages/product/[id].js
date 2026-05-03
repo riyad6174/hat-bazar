@@ -23,10 +23,17 @@ export default function ProductDetailPage() {
   useEffect(() => {
     if (id && product) {
       trackEvent('view_item', {
-        item_id: product.id,
-        item_name: product.name,
-        price: product.price,
-        currency: 'BDT'
+        ecommerce: {
+          currency: 'BDT',
+          value: product.price,
+          items: [{
+            item_id: String(product.id),
+            item_name: product.name,
+            item_category: product.category || '',
+            price: product.price,
+            quantity: 1,
+          }],
+        },
       });
     }
   }, [id, product]);

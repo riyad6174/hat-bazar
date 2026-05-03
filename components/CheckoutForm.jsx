@@ -80,9 +80,25 @@ const CheckoutForm = ({ onOrderSuccess }) => {
       });
       if (response.ok) {
         trackEvent('purchase', {
-          value: grandTotal, currency: 'BDT',
-          items: cartItems.map(item => ({ item_id: item.id, item_name: item.name, price: item.price, quantity: item.quantity })),
-          customer_name: formData.fullName, customer_district: formData.district
+          ecommerce: {
+            transaction_id: sheetData.orderId,
+            value: grandTotal,
+            currency: 'BDT',
+            shipping: shippingCharge,
+            items: cartItems.map((item) => ({
+              item_id: String(item.id),
+              item_name: item.name,
+              item_category: item.category || '',
+              price: item.price,
+              quantity: item.quantity,
+            })),
+          },
+          user_data: {
+            name: formData.fullName,
+            phone: formData.phoneNumber,
+            district: formData.district,
+            address: formData.address,
+          },
         });
         onOrderSuccess(sheetData);
         clearCart();
