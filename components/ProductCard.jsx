@@ -10,7 +10,8 @@ const ProductCard = ({ product }) => {
   const router = useRouter();
 
   const handleOrderNow = () => {
-    router.push(`/product/${product.slug}`);
+    addToCart(product);
+    router.push('/checkout');
   };
 
   return (
