@@ -1,43 +1,67 @@
 [
   {
-    "id": "mielle-hair-oil",
-    "name": "Mielle Rosemary Mint Scalp & Hair Strengthening Oil (59ml)",
-    "price": 1350,
-    "image": "/products/mielle-hair-oil.png",
-    "category": "Haircare",
-    "slug": "mielle-rosemary-mint-oil",
-    "description": "Our Rosemary Mint scalp and hair oil is a nutrient-rich, intensive formula meant to help you address your hair concerns.",
-    "longDescription": "From nourishing hair follicles, smoothing split ends and help with dry scalp, this hair oil uses natural, organic ingredients and essential oils to provide the care your hair deserves. Use it on protective styles, including braids and weaves, and enjoy its fresh, invigorating scent during your next hot oil treatment.",
-    "benefits": ["Infused with Biotin", "Use for daily hair care or specialized scalp treatments", "Features more than 30 essential oils and extracts", "Helps improve length retention", "Conditions dry scalp", "Smooths split ends"],
-    "usage": "মাত্র কয়েক ফোঁটা নিয়ে নিন অথবা প্রয়োজন মতো। এরপর মাথার স্কাল্পে ভালো করে মাসাজ করুন। গোসল করার ৩০ মিনিট বা ১ ঘন্টা আগে ব্যবহার করুন। Mielle Rosemary oil লিকুইড হওয়ায় ব্যাবহার করা খুবই সহজ। -এটা লাগানর ৩০ মিনিট থেকে ১ ঘন্টা পর ওয়াশ করে ফেলুন",
-    "relatedProducts": ["ordinary-multi-peptide-hair-serum", "manee-gluta-collagen-pink", "frozen-collagen-2in1"]
-  },
-  {
-    "id": "ordinary-hair-care",
-    "name": "The Ordinary Hair Care Multi-Peptide Serum 60ml",
-    "price": 1450,
-    "image": "/products/ordinary-hair-care.png",
-    "category": "Haircare",
-    "slug": "ordinary-multi-peptide-hair-serum",
-    "description": "Multi-peptide serum for hair density. Highly recommended serum for hair growth!",
-    "longDescription": "Specially formulated to strengthen hair roots, reduce hair fall, and help hair appear thicker while promoting new growth.",
-    "benefits": ["Strengthens roots", "Reduces hair fall", "Peptide-based formula", "Promotes hair density"],
-    "usage": "মাত্র কয়েক ফোঁটা নিয়ে নিন অথবা প্রয়োজন মতো। এরপর মাথার স্কাল্পে ভালো করে মাসাজ করুন। রাতে ঘুমাতে যাওয়ার আগে ব্যাবহার করাই উত্তম। অবশ্যই চুল/মাথার স্কাল্প পরিষ্কার থাকতে হবে। প্রতিদিন একবার ব্যাবহার করলেই হবে।",
-    "relatedProducts": ["mielle-rosemary-mint-oil", "manee-gluta-collagen-pink", "red-c-multivitamins"]
+    "id": "mulan-gluta-60",
+    "name": "Mulan Gluta 60piece capsule",
+    "price": 2000,
+    "oldPrice": 2600,
+    "rating": 4.9,
+    "reviewCount": 500,
+    "image": "/products/mulan.png",
+    "gallery": [
+      "/products/mulan.png",
+      "/products/iso.jpeg",
+      "/products/hologram.jpeg",
+      "/products/certificate.jpeg"
+    ],
+    "category": "Supplements",
+    "slug": "mulan-gluta-60",
+    "description": "Naturally formulated, Mulan Gluta 60-capsule pieces encourage glowing skin, detoxification, and youthful radiance.",
+    "longDescription": "Mulan Gluta 60pcs capsule হলো একটি beauty/food supplement যেখানে সাধারণত L-Glutathione, Collagen, Pearl Powder এবং NAC (N-Acetyl Cysteine) থাকে। এটি মূলত skin brightening, antioxidant support এবং skin glow-এর জন্য ব্যবহার করা হয়।",
+    "benefits": [
+      "Skin glow ও brightness বাড়াতে সাহায্য করতে পারে",
+      "Acne spot / blemish কিছুটা fade হতে সাহায্য করতে পারে",
+      "Anti-aging support",
+      "Hair ও nails support",
+      "Antioxidant support ও detox support"
+    ],
+    "ingredients": [
+      {
+        "name": "L-Glutathione",
+        "desc": "শরীরের একটি শক্তিশালী antioxidant। oxidative stress কমাতে সাহায্য করে এবং melanin production কিছুটা কমাতে পারে, ফলে skin tone উজ্জ্বল দেখায়।"
+      },
+      {
+        "name": "NAC (N-Acetyl Cysteine)",
+        "desc": "শরীরে glutathione level বাড়াতে সাহায্য করতে পারে এবং antioxidant defense শক্তিশালী করে।"
+      },
+      {
+        "name": "Collagen",
+        "desc": "Skin elasticity ও hydration support করতে পারে, ত্বককে তরুণ ও সতেজ রাখতে সহায়ক।"
+      },
+      {
+        "name": "Pearl Powder",
+        "desc": "Minerals ও antioxidants সমৃদ্ধ যা skin health support করে এবং ত্বকের উজ্জ্বলতা বাড়াতে সহায়তা করে।"
+      }
+    ],
+    "usage": "সাধারণত ১–২ capsule daily। খাবারের পরে অথবা রাতে ঘুমানোর আগে খান।",
+    "relatedProducts": [
+      "manee-gluta-collagen-pink",
+      "frozen-collagen-2in1",
+      "red-c-multivitamins"
+    ]
   },
   {
     "id": "gluta-collagen-pink",
     "name": "Manee Gluta Collagen Pink",
-    "price": 1450,
-    "oldPrice": 1800,
+    "price": 1390,
+    "oldPrice": 1700,
     "rating": 4.9,
     "reviewCount": 5000,
     "image": "/products/gluta-collagen-pink.png",
     "gallery": [
-       "/products/gluta-collagen-pink.png",
-       "/products/gluta2.png",
-       "/products/model2.jpg",
-       "/products/slider1.png"
+      "/products/gluta-collagen-pink.png",
+      "/products/gluta2.png",
+      "/products/model2.jpg",
+      "/products/slider1.png"
     ],
     "category": "Supplements",
     "slug": "manee-gluta-collagen-pink",
@@ -53,14 +77,30 @@
       "বিষমুক্ত করতে, ত্বকের বর্ণ হাল্কা করতে এবং অক্সিডেটিভ স্ট্রেস থেকে রক্ষা করতে সাহায্য করে।"
     ],
     "ingredients": [
-      { "name": "গ্লুটাথিয়ন", "desc": "ত্বকের উজ্জ্বলতা বজায় রাখতে জনপ্রিয় একটি বিউটি উপাদান।" },
-      { "name": "কোলাজেন", "desc": "স্কিনের ইলাস্টিসিটি ও স্মুথনেস বজায় রাখতে সহায়ক।" },
-      { "name": "ভিটামিন C", "desc": "ত্বকের সতেজতা ও গ্লো ধরে রাখতে সাহায্য করে।" },
-      { "name": "হাইড্রেশন সাপোর্ট", "desc": "স্কিনকে ময়েশ্চারাইজড অনুভব করতে সহায়তা করে।" }
+      {
+        "name": "গ্লুটাথিয়ন",
+        "desc": "ত্বকের উজ্জ্বলতা বজায় রাখতে জনপ্রিয় একটি বিউটি উপাদান।"
+      },
+      {
+        "name": "কোলাজেন",
+        "desc": "স্কিনের ইলাস্টিসিটি ও স্মুথনেস বজায় রাখতে সহায়ক।"
+      },
+      {
+        "name": "ভিটামিন C",
+        "desc": "ত্বকের সতেজতা ও গ্লো ধরে রাখতে সাহায্য করে।"
+      },
+      {
+        "name": "হাইড্রেশন সাপোর্ট",
+        "desc": "স্কিনকে ময়েশ্চারাইজড অনুভব করতে সহায়তা করে।"
+      }
     ],
     "usage": "প্রতিদিন নির্দিষ্ট সময়ে গ্রহণ করুন। পর্যাপ্ত পানি পান করুন। নিয়মিত ব্যবহার বজায় রাখুন।",
     "video": "/assets/intro.mp4",
-    "relatedProducts": ["frozen-collagen-2in1", "red-c-multivitamins", "anua-niacinamide-dark-spot-serum"]
+    "relatedProducts": [
+      "frozen-collagen-2in1",
+      "red-c-multivitamins",
+      "anua-niacinamide-dark-spot-serum"
+    ]
   },
   {
     "id": "frozen-collagen",
@@ -71,9 +111,39 @@
     "slug": "frozen-collagen-2in1",
     "description": "Frozen Collagen gluta 2 in 1 whitening Capsule. 60 capsules per pack.",
     "longDescription": "A powerful 2-in-1 formula for skin whitening and collagen support.",
-    "benefits": ["Permanent whitening effect", "Skin nourishment", "Original Thailand product"],
+    "benefits": [
+      "Permanent whitening effect",
+      "Skin nourishment",
+      "Original Thailand product"
+    ],
     "usage": "এক প্যাকে ৬০ পিস ক্যাপসুল থাকে।রাতে খাবারের ১০ মিনিট পর একসাথে দুইটা করে Frozen collagen ক্যাপসুল খাবেন এক মাস।",
-    "relatedProducts": ["manee-gluta-collagen-pink", "red-c-multivitamins", "anua-niacinamide-dark-spot-serum"]
+    "relatedProducts": [
+      "manee-gluta-collagen-pink",
+      "red-c-multivitamins",
+      "anua-niacinamide-dark-spot-serum"
+    ]
+  },
+  {
+    "id": "ordinary-hair-care",
+    "name": "The Ordinary Hair Care Multi-Peptide Serum 60ml",
+    "price": 1450,
+    "image": "/products/ordinary-hair-care.png",
+    "category": "Haircare",
+    "slug": "ordinary-multi-peptide-hair-serum",
+    "description": "Multi-peptide serum for hair density. Highly recommended serum for hair growth!",
+    "longDescription": "Specially formulated to strengthen hair roots, reduce hair fall, and help hair appear thicker while promoting new growth.",
+    "benefits": [
+      "Strengthens roots",
+      "Reduces hair fall",
+      "Peptide-based formula",
+      "Promotes hair density"
+    ],
+    "usage": "মাত্র কয়েক ফোঁটা নিয়ে নিন অথবা প্রয়োজন মতো। এরপর মাথার স্কাল্পে ভালো করে মাসাজ করুন। রাতে ঘুমাতে যাওয়ার আগে ব্যাবহার করাই উত্তম। অবশ্যই চুল/মাথার স্কাল্প পরিষ্কার থাকতে হবে। প্রতিদিন একবার ব্যাবহার করলেই হবে।",
+    "relatedProducts": [
+      "mielle-rosemary-mint-oil",
+      "manee-gluta-collagen-pink",
+      "red-c-multivitamins"
+    ]
   },
   {
     "id": "red-c",
@@ -84,9 +154,42 @@
     "slug": "red-c-multivitamins",
     "description": "Red-C Multi Vitamins is a drink enriched with multiple vitamins, ideal for skin care and general body vitality.",
     "longDescription": "Nourishes and brightens the skin while reducing wrinkles. Strengthens hair and nails.",
-    "benefits": ["Brightens skin permanently", "Reduces acne and dark spots", "Tightens skin", "Reduces dark circles"],
+    "benefits": [
+      "Brightens skin permanently",
+      "Reduces acne and dark spots",
+      "Tightens skin",
+      "Reduces dark circles"
+    ],
     "usage": "Mix 1 sachet (10 g) in 120 ml of water and drink before breakfast, 1 sachet per day.",
-    "relatedProducts": ["manee-gluta-collagen-pink", "frozen-collagen-2in1", "skin1004-centella-brightening-ampoule"]
+    "relatedProducts": [
+      "manee-gluta-collagen-pink",
+      "frozen-collagen-2in1",
+      "skin1004-centella-brightening-ampoule"
+    ]
+  },
+  {
+    "id": "mielle-hair-oil",
+    "name": "Mielle Rosemary Mint Scalp & Hair Strengthening Oil (59ml)",
+    "price": 1350,
+    "image": "/products/mielle-hair-oil.png",
+    "category": "Haircare",
+    "slug": "mielle-rosemary-mint-oil",
+    "description": "Our Rosemary Mint scalp and hair oil is a nutrient-rich, intensive formula meant to help you address your hair concerns.",
+    "longDescription": "From nourishing hair follicles, smoothing split ends and help with dry scalp, this hair oil uses natural, organic ingredients and essential oils to provide the care your hair deserves. Use it on protective styles, including braids and weaves, and enjoy its fresh, invigorating scent during your next hot oil treatment.",
+    "benefits": [
+      "Infused with Biotin",
+      "Use for daily hair care or specialized scalp treatments",
+      "Features more than 30 essential oils and extracts",
+      "Helps improve length retention",
+      "Conditions dry scalp",
+      "Smooths split ends"
+    ],
+    "usage": "মাত্র কয়েক ফোঁটা নিয়ে নিন অথবা প্রয়োজন মতো। এরপর মাথার স্কাল্পে ভালো করে মাসাজ করুন। গোসল করার ৩০ মিনিট বা ১ ঘন্টা আগে ব্যবহার করুন। Mielle Rosemary oil লিকুইড হওয়ায় ব্যাবহার করা খুবই সহজ। -এটা লাগানর ৩০ মিনিট থেকে ১ ঘন্টা পর ওয়াশ করে ফেলুন",
+    "relatedProducts": [
+      "ordinary-multi-peptide-hair-serum",
+      "manee-gluta-collagen-pink",
+      "frozen-collagen-2in1"
+    ]
   },
   {
     "id": "anua-niacinamide",
@@ -97,9 +200,18 @@
     "slug": "anua-niacinamide-dark-spot-serum",
     "description": "Dark Spot Correcting, Reducing Hyperpigmentation, Evens Skin Tone.",
     "longDescription": "Featuring Ceramides and Hyaluronic Acid, this serum helps maintain the skin’s natural moisture barrier while enhancing a luminous complexion.",
-    "benefits": ["Corrects dark spots", "Reduces hyperpigmentation", "Evens skin tone", "Non-greasy texture"],
+    "benefits": [
+      "Corrects dark spots",
+      "Reduces hyperpigmentation",
+      "Evens skin tone",
+      "Non-greasy texture"
+    ],
     "usage": "Apply a few drops to affected areas and gently pat in with your fingertips. Gradually increase the usage as needed.",
-    "relatedProducts": ["cerave-moisturizing-lotion", "skin1004-centella-cleansing-oil", "skin1004-centella-brightening-ampoule"]
+    "relatedProducts": [
+      "cerave-moisturizing-lotion",
+      "skin1004-centella-cleansing-oil",
+      "skin1004-centella-brightening-ampoule"
+    ]
   },
   {
     "id": "centella-brightening",
@@ -110,9 +222,18 @@
     "slug": "skin1004-centella-brightening-ampoule",
     "description": "Ideal daily-use ampoule with 4% Niacinamide and 2% Tranexamic Acid.",
     "longDescription": "Essence-like textured ampoule with Madewhite™ micro-beads quickly absorbs with a soft and non-sticky finish.",
-    "benefits": ["Calming and brightening", "Corrects dark spots", "Non-sticky finish", "Deep hydration"],
+    "benefits": [
+      "Calming and brightening",
+      "Corrects dark spots",
+      "Non-sticky finish",
+      "Deep hydration"
+    ],
     "usage": "Drop an appropriate amount and evenly apply to the skin. Pat to promote absorption.",
-    "relatedProducts": ["skin1004-centella-cleansing-oil", "cerave-moisturizing-cream", "anua-niacinamide-dark-spot-serum"]
+    "relatedProducts": [
+      "skin1004-centella-cleansing-oil",
+      "cerave-moisturizing-cream",
+      "anua-niacinamide-dark-spot-serum"
+    ]
   },
   {
     "id": "cerave-lotion",
@@ -123,9 +244,18 @@
     "slug": "cerave-moisturizing-lotion",
     "description": "Nourishes and moisturises dry to very dry skin without altering the protective barrier.",
     "longDescription": "Developed by dermatologists, this formula contains 3 essential ceramides and hyaluronic acid.",
-    "benefits": ["Hypoallergenic", "Non-comedogenic", "Fragrance-free", "Made in France"],
+    "benefits": [
+      "Hypoallergenic",
+      "Non-comedogenic",
+      "Fragrance-free",
+      "Made in France"
+    ],
     "usage": "Apply liberally to the face and body, as often as needed.",
-    "relatedProducts": ["skin1004-centella-cleansing-oil", "cosrx-snail-radiance-dual-essence", "skin1004-centella-soothing-ampoule"]
+    "relatedProducts": [
+      "skin1004-centella-cleansing-oil",
+      "cosrx-snail-radiance-dual-essence",
+      "skin1004-centella-soothing-ampoule"
+    ]
   },
   {
     "id": "cerave-cream",
@@ -136,9 +266,18 @@
     "slug": "cerave-moisturizing-cream",
     "description": "Rich, non-greasy, fast-absorbing moisturizing cream features MVE Delivery Technology.",
     "longDescription": "Includes three essential ceramides and hyaluronic acid to effectively hydrate the skin and restore the protective barrier.",
-    "benefits": ["24-hour hydration", "Restores skin barrier", "Non-greasy", "Fragrance-free"],
+    "benefits": [
+      "24-hour hydration",
+      "Restores skin barrier",
+      "Non-greasy",
+      "Fragrance-free"
+    ],
     "usage": "Apply liberally as often as needed, or as directed by a physician.",
-    "relatedProducts": ["skin1004-centella-cleansing-oil", "cosrx-snail-radiance-dual-essence", "skin1004-centella-brightening-ampoule"]
+    "relatedProducts": [
+      "skin1004-centella-cleansing-oil",
+      "cosrx-snail-radiance-dual-essence",
+      "skin1004-centella-brightening-ampoule"
+    ]
   },
   {
     "id": "skin1004-cleansing-oil",
@@ -151,7 +290,11 @@
     "longDescription": "A lightweight, oil-based cleanser that gently melts away impurities without stinging the eye area.",
     "benefits": ["Calming", "Hydrating", "Mild exfoliating", "Non-comedogenic"],
     "usage": "Apply onto dry face, massage, emulsify with water, and rinse off.",
-    "relatedProducts": ["skin1004-centella-soothing-ampoule", "cerave-moisturizing-lotion", "cosrx-snail-radiance-dual-essence"]
+    "relatedProducts": [
+      "skin1004-centella-soothing-ampoule",
+      "cerave-moisturizing-lotion",
+      "cosrx-snail-radiance-dual-essence"
+    ]
   },
   {
     "id": "skin1004-soothing-ampoule",
@@ -162,9 +305,18 @@
     "slug": "skin1004-centella-soothing-ampoule",
     "description": "All rounder ampoule for redness and irritation relief.",
     "longDescription": "Signature ampoule with high-quality Madagascan Centella Asiatica extract for soothing and antioxidant properties.",
-    "benefits": ["Hydrating", "Anti-inflammatory", "Barrier strengthening", "Immediately calms"],
+    "benefits": [
+      "Hydrating",
+      "Anti-inflammatory",
+      "Barrier strengthening",
+      "Immediately calms"
+    ],
     "usage": "Drop an appropriate amount and evenly apply to the skin. Pat to promote absorption.",
-    "relatedProducts": ["skin1004-centella-cleansing-oil", "cerave-moisturizing-lotion", "cosrx-snail-radiance-dual-essence"]
+    "relatedProducts": [
+      "skin1004-centella-cleansing-oil",
+      "cerave-moisturizing-lotion",
+      "cosrx-snail-radiance-dual-essence"
+    ]
   },
   {
     "id": "cosrx-snail-essence",
@@ -175,8 +327,17 @@
     "slug": "cosrx-snail-radiance-dual-essence",
     "description": "2 in 1 Elasticity & Radiance in One Pump.",
     "longDescription": "High-efficacy snail essence mixes with the radiance essence to create a combination of plumping and brightening care.",
-    "benefits": ["Elasticity and Radiance", "Strengthens skin barrier", "Triple Snail Complex", "Improves skin tone"],
+    "benefits": [
+      "Elasticity and Radiance",
+      "Strengthens skin barrier",
+      "Triple Snail Complex",
+      "Improves skin tone"
+    ],
     "usage": "Pump an appropriate amount, mix the two essences, and apply gently on the face.",
-    "relatedProducts": ["cerave-moisturizing-cream", "skin1004-centella-cleansing-oil", "anua-niacinamide-dark-spot-serum"]
+    "relatedProducts": [
+      "cerave-moisturizing-cream",
+      "skin1004-centella-cleansing-oil",
+      "anua-niacinamide-dark-spot-serum"
+    ]
   }
 ]
