@@ -7,9 +7,11 @@ import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import ContactSection from '@/components/ContactSection';
 import Link from 'next/link';
-import products from '@/data/products.json';
+import staticProducts from '@/data/products.json';
 import journalData from '@/data/journal.json';
 import { motion } from 'framer-motion';
+import { connectDB } from '@/lib/mongodb';
+import Product from '@/models/Product';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -18,10 +20,31 @@ const fadeInUp = {
   transition: { duration: 0.8, ease: "easeOut" }
 };
 
-// Get first 4 products as best sellers
-const bestSellers = products.slice(0, 4);
+export async function getServerSideProps() {
+  try {
+    await connectDB();
+    const dbProducts = await Product.find({ inStock: true, sectionType: 'hot' }).sort({ createdAt: -1 }).limit(4).lean();
+    const normalized = dbProducts.map((p) => ({
+      id: p._id.toString(),
+      name: p.title,
+      price: p.price,
+      oldPrice: p.originalPrice,
+      image: p.thumbnail || '',
+      category: p.category || '',
+      slug: p.slug,
+      description: p.shortDescription || '',
+      _isDB: true,
+    }));
+    return { props: { dbHotProducts: normalized } };
+  } catch {
+    return { props: { dbHotProducts: [] } };
+  }
+}
 
-export default function HomePage() {
+export default function HomePage({ dbHotProducts = [] }) {
+  const allProducts = [...dbHotProducts, ...staticProducts];
+  const bestSellers = allProducts.slice(0, 4);
+
   const featuredPost = journalData[0];
   const otherPosts = journalData.slice(1, 3);
   return (

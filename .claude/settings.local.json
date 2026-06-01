@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell($out = & cmd /c \"cd E:\\\\hat-bazar && npx next build 2>&1\"; Write-Output \"EXIT: $LASTEXITCODE\"; $out | Select-Object -Last 50)"
+      "PowerShell($out = & cmd /c \"cd E:\\\\hat-bazar && npx next build 2>&1\"; Write-Output \"EXIT: $LASTEXITCODE\"; $out | Select-Object -Last 50)",
+      "Bash(Get-ChildItem -Path \"E:\\\\hat-bazar\" -Recurse -Force)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)",
+      "Read(//mnt/e/**)",
+      "Bash(npm install *)"
     ]
   }
 }

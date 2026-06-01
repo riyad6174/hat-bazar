@@ -1,4 +1,6 @@
 import { google } from 'googleapis';
+import { connectDB } from '@/lib/mongodb';
+import Order from '@/models/Order';
 
 export default async (req, res) => {
   try {
@@ -139,6 +141,25 @@ export default async (req, res) => {
 
     console.log(`Rows updated: ${response.data.updates.updatedCells}`);
     // Optional: Log tableRange from response to verify (e.g., console.log(response.data.tableRange))
+
+    // Save to MongoDB (non-blocking — Google Sheets is the primary record)
+    connectDB()
+      .then(() =>
+        Order.create({
+          name,
+          phone,
+          district,
+          address,
+          items,
+          totalPrice: Number(totalPrice),
+          shippingCharge: Number(shippingCharge),
+          grandTotal: Number(grandTotal),
+          orderId,
+          orderDate,
+          submissionTime,
+        })
+      )
+      .catch((err) => console.error('[MongoDB] Order save failed:', err.message));
 
     return res.status(200).json({
       message: 'Order data submitted successfully!',
