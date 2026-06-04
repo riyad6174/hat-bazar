@@ -19,6 +19,7 @@ const VARIANT_PRODUCTS = [
 
 function DBProductPage({ product }) {
   const { addToCart } = useCart();
+  const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [swiper, setSwiper] = useState(null);
@@ -62,6 +63,11 @@ function DBProductPage({ product }) {
     category: product.category,
     slug: product.slug,
     selectedColor: selectedVariant ? `${selectedVariant.name}: ${selectedVariant.value}` : undefined,
+  };
+
+  const handleOrderNow = () => {
+    addToCart(cartProduct, quantity);
+    router.push('/checkout');
   };
 
   return (
@@ -193,20 +199,25 @@ function DBProductPage({ product }) {
               </div>
             )}
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-6">
-                <div className="flex items-center border border-outline rounded-full px-6 py-3 gap-8 bg-white">
-                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors">remove</button>
-                  <span className="font-body font-bold text-lg w-4 text-center">{quantity}</span>
-                  <button onClick={() => setQuantity(q => q + 1)} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors">add</button>
+            <div className="flex flex-col gap-3 pt-2">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center border border-surface-dim rounded-full px-4 py-2.5 gap-6 bg-white">
+                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors text-lg">remove</button>
+                  <span className="font-body font-bold text-base w-4 text-center">{quantity}</span>
+                  <button onClick={() => setQuantity(q => q + 1)} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors text-lg">add</button>
                 </div>
+                <button
+                  onClick={handleOrderNow}
+                  className="flex-1 bg-primary text-white font-body font-bold py-3.5 rounded-full uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-3"
+                >
+                  Order Now <span className="material-symbols-outlined text-lg">shopping_bag</span>
+                </button>
               </div>
-
               <button
-                onClick={() => addToCart(cartProduct, quantity)}
-                className="w-full bg-primary text-on-primary font-body font-bold py-5 rounded-full uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-3"
+                onClick={handleOrderNow}
+                className="w-full bg-on-surface text-surface font-body font-bold py-3.5 rounded-full uppercase tracking-widest text-xs hover:opacity-90 transition-all"
               >
-                Add to Bag <span className="material-symbols-outlined text-lg">shopping_bag</span>
+                Order Now
               </button>
             </div>
 
