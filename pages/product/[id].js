@@ -5,6 +5,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useCart } from '@/context/CartContext';
 import { trackEvent } from '@/utils/tracking';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 
 // Hardcoded variant products for the main Gluta Collagen pages
 const VARIANT_PRODUCTS = [
@@ -17,8 +21,22 @@ function DBProductPage({ product }) {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const [swiper, setSwiper] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [thumbSwiper, setThumbSwiper] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const galleryImages = [...new Set([product.thumbnail, ...(product.images || [])].filter(Boolean))];
+  const useThumbSlider = galleryImages.length > 4;
 
   const effectivePrice = product.price + (selectedVariant?.priceModifier || 0);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   useEffect(() => {
     trackEvent('view_item', {
@@ -51,14 +69,98 @@ function DBProductPage({ product }) {
       <Navbar />
       <main className="flex-grow py-12 md:py-24 max-w-[1280px] mx-auto px-6 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start">
-          <div className="aspect-[4/5] rounded-[2rem] overflow-hidden bg-surface-dim shadow-2xl relative">
-            <Image fill alt={product.title} className="object-cover" src={product.thumbnail || product.images?.[0] || 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000'} sizes="(max-width: 768px) 100vw, 50vw" priority />
+          <div className="flex flex-col gap-4">
+            {/* Main image swiper */}
+            <div className="aspect-square overflow-hidden bg-white relative border border-surface-dim rounded-2xl">
+              <Swiper
+                modules={[Autoplay, EffectFade]}
+                effect="fade"
+                autoplay={{ delay: 4000, disableOnInteraction: false }}
+                loop={galleryImages.length > 1}
+                onSwiper={setSwiper}
+                onSlideChange={(s) => setActiveIndex(s.realIndex)}
+                className="w-full h-full"
+              >
+                {galleryImages.map((img, idx) => (
+                  <SwiperSlide key={idx} className="relative">
+                    <Image
+                      fill
+                      alt={`${product.title} ${idx + 1}`}
+                      className="object-cover"
+                      src={img}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={idx === 0}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+
+            {/* Thumbnail strip */}
+            {galleryImages.length > 1 && (
+              useThumbSlider ? (
+                /* Slider with prev/next for >4 images */
+                <div className="relative group">
+                  <button
+                    onClick={() => thumbSwiper?.slidePrev()}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 w-8 h-8 bg-white border border-surface-dim rounded-full flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <span className="material-symbols-outlined text-on-surface" style={{ fontSize: 16 }}>chevron_left</span>
+                  </button>
+
+                  <Swiper
+                    modules={[Autoplay]}
+                    slidesPerView={4}
+                    spaceBetween={8}
+                    loop={true}
+                    onSwiper={setThumbSwiper}
+                    autoplay={isMobile ? { delay: 2000, disableOnInteraction: false } : false}
+                    className="w-full"
+                  >
+                    {galleryImages.map((img, idx) => (
+                      <SwiperSlide key={idx}>
+                        <button
+                          onClick={() => swiper?.slideToLoop(idx)}
+                          className={`w-full aspect-square overflow-hidden border-2 transition-all relative rounded-xl ${
+                            activeIndex === idx ? 'border-primary' : 'border-surface-dim'
+                          }`}
+                        >
+                          <Image fill src={img} alt="" className="object-cover" sizes="120px" />
+                        </button>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+
+                  <button
+                    onClick={() => thumbSwiper?.slideNext()}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 w-8 h-8 bg-white border border-surface-dim rounded-full flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <span className="material-symbols-outlined text-on-surface" style={{ fontSize: 16 }}>chevron_right</span>
+                  </button>
+                </div>
+              ) : (
+                /* Simple equal-width grid for ≤4 images */
+                <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${galleryImages.length}, 1fr)` }}>
+                  {galleryImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => swiper?.slideToLoop(idx)}
+                      className={`aspect-square overflow-hidden border-2 transition-all relative rounded-xl ${
+                        activeIndex === idx ? 'border-primary' : 'border-surface-dim'
+                      }`}
+                    >
+                      <Image fill src={img} alt="" className="object-cover" sizes="120px" />
+                    </button>
+                  ))}
+                </div>
+              )
+            )}
           </div>
 
           <div className="space-y-8 py-4">
             <div>
               <span className="font-body text-xs font-bold text-primary tracking-[0.2em] uppercase mb-2 block">{product.category}</span>
-              <h1 className="font-display text-4xl md:text-6xl text-on-surface leading-tight">{product.title}</h1>
+              <h1 className="font-display text-2xl md:text-4xl lg:text-5xl text-on-surface leading-tight">{product.title}</h1>
               <div className="flex items-center gap-4 mt-4">
                 <p className="font-display text-2xl md:text-3xl text-on-surface">{effectivePrice}৳</p>
                 {product.originalPrice > product.price && (
@@ -256,7 +358,7 @@ export default function ProductDetailPage({ variantProduct, dbProduct }) {
           <div className="space-y-8 py-4">
             <div>
               <span className="font-body text-xs font-bold text-primary tracking-[0.2em] uppercase mb-2 block">{product.category}</span>
-              <h1 className="font-display text-4xl md:text-6xl text-on-surface leading-tight">{product.name}</h1>
+              <h1 className="font-display text-2xl md:text-4xl lg:text-5xl text-on-surface leading-tight">{product.name}</h1>
               <p className="font-display text-2xl md:text-3xl text-on-surface mt-4">{product.price}৳</p>
             </div>
 
