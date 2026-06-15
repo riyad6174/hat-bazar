@@ -234,6 +234,25 @@ function DBProductPage({ product }) {
           </div>
         )}
 
+        {/* Gallery images */}
+        {product.gallery && product.gallery.length > 0 && (
+          <div className="mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4">
+              {product.gallery.map((img, idx) => (
+                <div key={idx} className="relative w-full aspect-square">
+                  <Image
+                    fill
+                    src={img}
+                    alt={`${product.title} gallery ${idx + 1}`}
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Specifications */}
         {product.specifications && product.specifications.length > 0 && (
           <div className="mt-16">
