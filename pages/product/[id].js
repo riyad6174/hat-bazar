@@ -10,6 +10,57 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
+function CountdownToMidnight() {
+  const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
+
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      const midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0);
+      const diff = Math.max(0, Math.floor((midnight - now) / 1000));
+      setTimeLeft({
+        h: Math.floor(diff / 3600),
+        m: Math.floor((diff % 3600) / 60),
+        s: diff % 60,
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const pad = (n) => String(n).padStart(2, '0');
+
+  return (
+    <div className="rounded-xl px-4 py-3 my-3" style={{ background: 'var(--surface-container-low)', border: '1.5px solid var(--primary-container)' }}>
+      <p className="text-sm font-semibold text-center mb-2 font-body" style={{ color: 'var(--on-primary-container)' }}>
+        ⏰ অফার টি চলবে আর
+      </p>
+      <div className="flex items-center justify-center gap-2">
+        {[
+          { val: pad(timeLeft.h), label: 'ঘণ্টা' },
+          { val: pad(timeLeft.m), label: 'মিনিট' },
+          { val: pad(timeLeft.s), label: 'সেকেন্ড' },
+        ].map((unit, i) => (
+          <React.Fragment key={unit.label}>
+            {i > 0 && <span className="font-black text-2xl leading-none mb-4" style={{ color: 'var(--primary)' }}>:</span>}
+            <div className="flex flex-col items-center">
+              <span
+                className="font-mono font-extrabold text-lg px-3 py-1.5 rounded-lg min-w-[44px] text-center shadow-md"
+                style={{ background: 'var(--primary)', color: 'var(--on-primary)' }}
+              >
+                {unit.val}
+              </span>
+              <span className="text-[10px] mt-1 font-medium font-body" style={{ color: 'var(--primary)' }}>{unit.label}</span>
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // Hardcoded variant products for the main Gluta Collagen pages
 const VARIANT_PRODUCTS = [
   { id: '1-pink', name: 'Gluta Collagen Pink', price: 1390, image: '/assets/single.avif', category: 'Supplements', description: 'Experience the ultimate glow with our premium Gluta Collagen Pink. Formulated with high-quality botanical extracts and collagen peptides.' },
@@ -31,6 +82,8 @@ function DBProductPage({ product }) {
   const useThumbSlider = galleryImages.length > 4;
 
   const effectivePrice = product.price + (selectedVariant?.priceModifier || 0);
+  const hasDiscount = product.discountTimer && product.originalPrice > product.price;
+  const discountPct = hasDiscount ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -73,7 +126,23 @@ function DBProductPage({ product }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow py-12 md:py-24 max-w-[1280px] mx-auto px-6 md:px-16">
+
+      {hasDiscount && (
+        <div
+          className="sticky top-0 z-40 py-2.5 px-4 text-center"
+          style={{
+            background: 'linear-gradient(90deg, #ea580c 0%, #c2410c 50%, #ea580c 100%)',
+            borderBottom: '2px solid #9a3412',
+            animation: 'offer-pulse 2.2s ease-in-out infinite',
+          }}
+        >
+          <p className="text-white font-bold text-sm md:text-base tracking-wide drop-shadow font-body">
+            🎉 {discountPct}% ডিস্কাউন্ট পাচ্ছেন শুধু আজকের জন্য 🎉
+          </p>
+        </div>
+      )}
+
+      <main className={`flex-grow py-12 md:py-24 max-w-[1280px] mx-auto px-6 md:px-16 ${hasDiscount ? 'pb-28' : ''}`}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start">
           <div className="flex flex-col gap-4">
             {/* Main image swiper */}
@@ -172,7 +241,14 @@ function DBProductPage({ product }) {
                 {product.originalPrice > product.price && (
                   <p className="font-body text-lg text-tertiary line-through">{product.originalPrice}৳</p>
                 )}
+                {hasDiscount && (
+                  <span className="font-body text-sm font-bold px-2 py-0.5 rounded-lg" style={{ background: '#fee2e2', color: '#dc2626' }}>
+                    {product.originalPrice - product.price}৳ ছাড়
+                  </span>
+                )}
               </div>
+
+              {hasDiscount && <CountdownToMidnight />}
             </div>
 
             {product.shortDescription && (
@@ -311,6 +387,38 @@ function DBProductPage({ product }) {
         )}
       </main>
       <Footer />
+
+      {hasDiscount && (
+        <>
+          <style jsx global>{`
+            @keyframes offer-pulse {
+              0%, 100% { opacity: 1; }
+              50% { opacity: 0.88; }
+            }
+          `}</style>
+          <div
+            className="fixed bottom-0 left-0 right-0 z-50 py-3 px-4"
+            style={{
+              background: 'linear-gradient(90deg, #ea580c 0%, #c2410c 50%, #ea580c 100%)',
+              borderTop: '2px solid #9a3412',
+              animation: 'offer-pulse 2.2s ease-in-out infinite',
+            }}
+          >
+            <div className="flex items-center justify-between max-w-4xl mx-auto gap-3">
+              <p className="text-white font-bold font-body text-sm md:text-base">
+                🔥 সীমিত সময়ের অফার! আজই {discountPct}% ছাড়ে কিনুন
+              </p>
+              <button
+                onClick={handleOrderNow}
+                className="flex-shrink-0 bg-white font-body font-extrabold px-5 py-2 rounded-lg text-sm hover:bg-orange-50 transition-all duration-200 shadow-md"
+                style={{ color: '#ea580c' }}
+              >
+                এখনই কিনুন →
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
