@@ -23,7 +23,7 @@ const fadeInUp = {
 export async function getServerSideProps() {
   try {
     await connectDB();
-    const dbProducts = await Product.find({ inStock: true, sectionType: 'hot' }).sort({ createdAt: -1 }).limit(4).lean();
+    const dbProducts = await Product.find({ inStock: true }).sort({ createdAt: -1 }).limit(8).lean();
     const normalized = dbProducts.map((p) => ({
       id: p._id.toString(),
       name: p.title,
@@ -35,15 +35,14 @@ export async function getServerSideProps() {
       description: p.shortDescription || '',
       _isDB: true,
     }));
-    return { props: { dbHotProducts: normalized } };
+    return { props: { dbLatestProducts: normalized } };
   } catch {
-    return { props: { dbHotProducts: [] } };
+    return { props: { dbLatestProducts: [] } };
   }
 }
 
-export default function HomePage({ dbHotProducts = [] }) {
-  const allProducts = [...dbHotProducts, ...staticProducts];
-  const bestSellers = allProducts.slice(0, 4);
+export default function HomePage({ dbLatestProducts = [] }) {
+  const bestSellers = [...staticProducts, ...dbLatestProducts];
 
   const featuredPost = journalData[0];
   const otherPosts = journalData.slice(1, 3);
