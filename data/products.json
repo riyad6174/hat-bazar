@@ -1,54 +1,5 @@
 [
-  {
-    "id": "mulan-gluta-60",
-    "name": "Mulan Gluta 60piece capsule",
-    "price": 1800,
-    "oldPrice": 2400,
-    "rating": 4.9,
-    "reviewCount": 500,
-    "image": "/products/mulan.png",
-    "gallery": [
-      "/products/mulan.png",
-      "/products/iso.jpeg",
-      "/products/hologram.jpeg",
-      "/products/certificate.jpeg"
-    ],
-    "category": "Supplements",
-    "slug": "mulan-gluta-60",
-    "description": "Naturally formulated, Mulan Gluta 60-capsule pieces encourage glowing skin, detoxification, and youthful radiance.",
-    "longDescription": "Mulan Gluta 60pcs capsule হলো একটি beauty/food supplement যেখানে সাধারণত L-Glutathione, Collagen, Pearl Powder এবং NAC (N-Acetyl Cysteine) থাকে। এটি মূলত skin brightening, antioxidant support এবং skin glow-এর জন্য ব্যবহার করা হয়।",
-    "benefits": [
-      "Skin glow ও brightness বাড়াতে সাহায্য করতে পারে",
-      "Acne spot / blemish কিছুটা fade হতে সাহায্য করতে পারে",
-      "Anti-aging support",
-      "Hair ও nails support",
-      "Antioxidant support ও detox support"
-    ],
-    "ingredients": [
-      {
-        "name": "L-Glutathione",
-        "desc": "শরীরের একটি শক্তিশালী antioxidant। oxidative stress কমাতে সাহায্য করে এবং melanin production কিছুটা কমাতে পারে, ফলে skin tone উজ্জ্বল দেখায়।"
-      },
-      {
-        "name": "NAC (N-Acetyl Cysteine)",
-        "desc": "শরীরে glutathione level বাড়াতে সাহায্য করতে পারে এবং antioxidant defense শক্তিশালী করে।"
-      },
-      {
-        "name": "Collagen",
-        "desc": "Skin elasticity ও hydration support করতে পারে, ত্বককে তরুণ ও সতেজ রাখতে সহায়ক।"
-      },
-      {
-        "name": "Pearl Powder",
-        "desc": "Minerals ও antioxidants সমৃদ্ধ যা skin health support করে এবং ত্বকের উজ্জ্বলতা বাড়াতে সহায়তা করে।"
-      }
-    ],
-    "usage": "সাধারণত ১–২ capsule daily। খাবারের পরে অথবা রাতে ঘুমানোর আগে খান।",
-    "relatedProducts": [
-      "manee-gluta-collagen-pink",
-      "frozen-collagen-2in1",
-      "red-c-multivitamins"
-    ]
-  },
+  
   {
     "id": "gluta-collagen-pink",
     "name": "Manee Gluta Collagen Pink",
