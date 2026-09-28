@@ -54,11 +54,11 @@ export default function HomePage({ dbLatestProducts = [] }) {
         <Hero />
 
         {/* Featured Categories */}
-        <motion.section {...fadeInUp} className="py-16 max-w-[1280px] mx-auto">
-          <div className="text-center mb-8 px-6 md:px-16">
-            <h2 className="font-display text-3xl md:text-4xl text-on-surface">Shop by Category</h2>
+        <motion.section {...fadeInUp} className="py-8 md:py-16 max-w-[1280px] mx-auto">
+          <div className="text-center mb-4 md:mb-8 px-6 md:px-16">
+            <h2 className="font-display text-2xl md:text-4xl text-on-surface">Shop by Category</h2>
           </div>
-          <div className="flex gap-5 md:gap-10 lg:gap-14 overflow-x-auto md:justify-center scrollbar-hide px-6 md:px-16 pb-2">
+          <div className="flex gap-3 md:gap-10 lg:gap-14 overflow-x-auto md:justify-center scrollbar-hide px-4 md:px-16 pb-2">
             {[
               { name: 'Moisturizer', img: 'https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg?auto=compress&cs=tinysrgb&w=300' },
               { name: 'Toner', img: 'https://images.pexels.com/photos/8128069/pexels-photo-8128069.jpeg?auto=compress&cs=tinysrgb&w=300' },
@@ -73,10 +73,10 @@ export default function HomePage({ dbLatestProducts = [] }) {
                 key={cat.name}
                 className="group flex-shrink-0 flex flex-col items-center text-center"
               >
-                <div className="w-16 h-16 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-2.5 border-2 border-transparent group-hover:border-primary transition-all bg-surface-container relative flex-shrink-0">
+                <div className="w-14 h-14 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-2 md:mb-2.5 border-2 border-transparent group-hover:border-primary transition-all bg-surface-container relative flex-shrink-0">
                   <Image fill alt={cat.name} className="object-cover" src={cat.img} sizes="(max-width: 768px) 64px, 128px" />
                 </div>
-                <span className="font-body text-[11px] md:text-base font-semibold md:font-display text-on-surface group-hover:text-primary transition-colors tracking-wide whitespace-nowrap">
+                <span className="font-body text-[10px] md:text-base font-semibold md:font-display text-on-surface group-hover:text-primary transition-colors tracking-wide whitespace-nowrap">
                   {cat.name}
                 </span>
               </Link>
@@ -85,14 +85,14 @@ export default function HomePage({ dbLatestProducts = [] }) {
         </motion.section>
 
         {/* Offer Banner */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="mx-6 md:mx-16 mb-24"
+          className="mx-4 md:mx-16 mb-12 md:mb-24"
         >
-          <div className="rounded-[2rem] p-12 md:p-20 relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[400px] md:min-h-[500px]">
+          <div className="rounded-2xl md:rounded-[2rem] p-8 md:p-20 relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[300px] md:min-h-[500px]">
             {/* Background Video */}
             <video 
               autoPlay 
@@ -108,25 +108,25 @@ export default function HomePage({ dbLatestProducts = [] }) {
             {/* Overlay for better text readability */}
             <div className="absolute inset-0 bg-black/40 z-10"></div>
 
-            <div className="relative z-20 space-y-6">
-              <h2 className="font-display text-4xl md:text-7xl text-white mb-6 leading-tight">Glow Week Sale</h2>
-              <p className="font-body text-lg md:text-xl text-white/90 mb-10 max-w-xl mx-auto leading-relaxed">
-                Enjoy 25% off our award-winning Botanical Skincare set. Limited time offer for our community members.
+                <div className="relative z-20 space-y-4 md:space-y-6">
+              <h2 className="font-display text-3xl md:text-7xl text-white mb-4 md:mb-6 leading-tight">Special Offers</h2>
+              <p className="font-body text-sm md:text-xl text-white/90 mb-6 md:mb-10 max-w-xl mx-auto leading-relaxed">
+                Enjoy discounts on selected products. Limited time offer for our community members.
               </p>
               <Link href="/shop" className="inline-block bg-white text-on-surface px-12 py-4 rounded-full font-body text-xs font-bold tracking-widest hover:bg-primary hover:text-white transition-all uppercase shadow-xl">
-                Shop the Sale
+                Shop Now
               </Link>
             </div>
           </div>
         </motion.section>
 
         {/* Best Sellers */}
-        <motion.section 
+        <motion.section
           {...fadeInUp}
-          className="py-24 bg-surface-container-low"
+          className="py-12 md:py-24 bg-surface-container-low"
         >
           <div className="max-w-[1280px] mx-auto px-6 md:px-16">
-            <div className="flex justify-between items-end mb-16">
+            <div className="flex justify-between items-end mb-8 md:mb-16">
               <div>
                 <span className="font-body text-xs font-bold text-primary tracking-[0.2em] uppercase mb-2 block">Top Rated</span>
                 <h2 className="font-display text-4xl md:text-5xl text-on-surface">Best Sellers</h2>
@@ -135,8 +135,8 @@ export default function HomePage({ dbLatestProducts = [] }) {
                 View All
               </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-              {bestSellers.map(product => (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8">
+              {bestSellers.slice(0, 8).map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -144,37 +144,37 @@ export default function HomePage({ dbLatestProducts = [] }) {
         </motion.section>
 
         {/* Journal Teaser */}
-        <motion.section 
+        <motion.section
           {...fadeInUp}
-          className="py-24 max-w-[1280px] mx-auto px-6 md:px-16"
+          className="py-12 md:py-24 max-w-[1280px] mx-auto px-4 md:px-16"
         >
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-16">
             <span className="font-body text-xs font-bold text-primary tracking-[0.2em] uppercase mb-2 block">The Journal</span>
-            <h2 className="font-display text-4xl md:text-5xl text-on-surface">Living in the Glow</h2>
+            <h2 className="font-display text-2xl md:text-5xl text-on-surface">Living in the Glow</h2>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-12">
             <div className="lg:col-span-7 group cursor-pointer">
               <Link href={`/journal/${featuredPost.slug}`}>
-                <div className="aspect-[16/10] rounded-[2rem] overflow-hidden mb-6 bg-surface-dim relative">
+                <div className="aspect-[16/10] rounded-2xl md:rounded-[2rem] overflow-hidden mb-4 md:mb-6 bg-surface-dim relative">
                   <Image fill alt={featuredPost.title} className="object-cover group-hover:scale-105 transition-transform duration-1000" src={featuredPost.image} sizes="(max-width: 768px) 100vw, 58vw" />
                 </div>
                 <div>
-                  <p className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-3">Featured • {featuredPost.author}</p>
-                  <h3 className="font-display text-3xl md:text-4xl group-hover:text-primary transition-colors mb-4">{featuredPost.title}</h3>
-                  <p className="font-body text-tertiary leading-relaxed text-lg">{featuredPost.excerpt}</p>
+                  <p className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-2 md:mb-3">Featured • {featuredPost.author}</p>
+                  <h3 className="font-display text-xl md:text-4xl group-hover:text-primary transition-colors mb-2 md:mb-4">{featuredPost.title}</h3>
+                  <p className="font-body text-tertiary leading-relaxed text-sm md:text-lg line-clamp-2 md:line-clamp-none">{featuredPost.excerpt}</p>
                 </div>
               </Link>
             </div>
-            <div className="lg:col-span-5 flex flex-col gap-10">
+            <div className="lg:col-span-5 flex flex-col gap-4 md:gap-10">
               {otherPosts.map(post => (
                 <div key={post.slug} className="group cursor-pointer">
-                  <Link href={`/journal/${post.slug}`} className="flex flex-col sm:flex-row lg:flex-col gap-6">
-                    <div className="aspect-[16/9] sm:w-1/2 lg:w-full rounded-2xl overflow-hidden bg-surface-dim shrink-0 relative">
+                  <Link href={`/journal/${post.slug}`} className="flex flex-col sm:flex-row lg:flex-col gap-3 md:gap-6">
+                    <div className="aspect-[16/9] sm:w-1/2 lg:w-full rounded-xl md:rounded-2xl overflow-hidden bg-surface-dim shrink-0 relative">
                       <Image fill alt={post.title} className="object-cover group-hover:scale-105 transition-transform duration-1000" src={post.image} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw" />
                     </div>
                     <div>
-                      <p className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-2">{post.author}</p>
-                      <h4 className="font-display text-2xl group-hover:text-primary transition-colors leading-snug">{post.title}</h4>
+                      <p className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-1 md:mb-2">{post.author}</p>
+                      <h4 className="font-display text-base md:text-2xl group-hover:text-primary transition-colors leading-snug line-clamp-2">{post.title}</h4>
                     </div>
                   </Link>
                 </div>

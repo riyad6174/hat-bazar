@@ -10,15 +10,14 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
-function CountdownToMidnight() {
+function CountdownTimer({ endTime }) {
   const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
 
   useEffect(() => {
     const tick = () => {
       const now = new Date();
-      const midnight = new Date(now);
-      midnight.setHours(24, 0, 0, 0);
-      const diff = Math.max(0, Math.floor((midnight - now) / 1000));
+      const end = new Date(endTime);
+      const diff = Math.max(0, Math.floor((end - now) / 1000));
       setTimeLeft({
         h: Math.floor(diff / 3600),
         m: Math.floor((diff % 3600) / 60),
@@ -28,7 +27,7 @@ function CountdownToMidnight() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [endTime]);
 
   const pad = (n) => String(n).padStart(2, '0');
 
@@ -142,7 +141,7 @@ function DBProductPage({ product }) {
         </div>
       )}
 
-      <main className={`flex-grow py-12 md:py-24 max-w-[1280px] mx-auto px-6 md:px-16 ${hasDiscount ? 'pb-28' : ''}`}>
+      <main className={`flex-grow py-8 md:py-24 max-w-[1280px] mx-auto px-4 md:px-16 ${hasDiscount ? 'pb-32 md:pb-28' : 'pb-24 md:pb-24'}`}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start">
           <div className="flex flex-col gap-4">
             {/* Main image swiper */}
@@ -248,14 +247,48 @@ function DBProductPage({ product }) {
                 )}
               </div>
 
-              {hasDiscount && <CountdownToMidnight />}
+              {hasDiscount && <CountdownTimer endTime={product.discountEndTime || new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()} />}
             </div>
 
             {product.shortDescription && (
-              <div className="border-y border-surface-dim py-8">
-                <p className="font-body text-tertiary leading-relaxed text-lg">{product.shortDescription}</p>
+              <div className="border-y border-surface-dim py-6 md:py-8">
+                <p className="font-body text-tertiary leading-relaxed text-base md:text-lg">{product.shortDescription}</p>
               </div>
             )}
+
+            {/* Structured Product Details */}
+            <div className="border-b border-surface-dim pb-6 md:pb-8">
+              <h3 className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-3">Product Details</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {product.specifications && product.specifications.length > 0 ? (
+                  product.specifications.slice(0, 6).map((spec, i) => (
+                    <div key={i} className="flex flex-col">
+                      <span className="font-body text-[10px] text-outline uppercase tracking-wide">{spec.label}</span>
+                      <span className="font-body text-sm text-on-surface font-medium">{spec.value}</span>
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="flex flex-col">
+                      <span className="font-body text-[10px] text-outline uppercase tracking-wide">Category</span>
+                      <span className="font-body text-sm text-on-surface font-medium">{product.category || 'Not provided'}</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-body text-[10px] text-outline uppercase tracking-wide">Availability</span>
+                      <span className="font-body text-sm text-on-surface font-medium">{product.inStock !== false ? 'In Stock' : 'Out of Stock'}</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-body text-[10px] text-outline uppercase tracking-wide">Delivery</span>
+                      <span className="font-body text-sm text-on-surface font-medium">2-3 business days</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-body text-[10px] text-outline uppercase tracking-wide">Payment</span>
+                      <span className="font-body text-sm text-on-surface font-medium">COD, bKash, Nagad</span>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
 
             {product.variants && product.variants.length > 0 && (
               <div>
@@ -276,25 +309,19 @@ function DBProductPage({ product }) {
             )}
 
             <div className="flex flex-col gap-3 pt-2">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center border border-surface-dim rounded-full px-4 py-2.5 gap-6 bg-white">
-                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors text-lg">remove</button>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center border border-surface-dim rounded-full px-3 py-2 gap-4 bg-white">
+                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors text-lg" aria-label="Decrease quantity">remove</button>
                   <span className="font-body font-bold text-base w-4 text-center">{quantity}</span>
-                  <button onClick={() => setQuantity(q => q + 1)} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors text-lg">add</button>
+                  <button onClick={() => setQuantity(q => q + 1)} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors text-lg" aria-label="Increase quantity">add</button>
                 </div>
                 <button
                   onClick={handleOrderNow}
-                  className="flex-1 bg-primary text-white font-body font-bold py-3.5 rounded-full uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-3"
+                  className="flex-1 bg-primary text-white font-body font-bold py-3 rounded-full uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2"
                 >
                   Order Now <span className="material-symbols-outlined text-lg">shopping_bag</span>
                 </button>
               </div>
-              <button
-                onClick={handleOrderNow}
-                className="w-full bg-on-surface text-surface font-body font-bold py-3.5 rounded-full uppercase tracking-widest text-xs hover:opacity-90 transition-all"
-              >
-                Order Now
-              </button>
             </div>
 
           </div>
@@ -388,6 +415,27 @@ function DBProductPage({ product }) {
       </main>
       <Footer />
 
+      {/* Mobile Bottom Purchase Bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-surface-dim px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col">
+            <span className="font-body text-[10px] text-outline uppercase tracking-wide">Price</span>
+            <div className="flex items-baseline gap-2">
+              <span className="font-display text-xl font-bold text-on-surface">{effectivePrice}৳</span>
+              {product.originalPrice > product.price && (
+                <span className="font-body text-sm text-tertiary line-through">{product.originalPrice}৳</span>
+              )}
+            </div>
+          </div>
+          <button
+            onClick={handleOrderNow}
+            className="flex-1 bg-primary text-white font-body font-bold py-3 rounded-full uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2"
+          >
+            Order Now <span className="material-symbols-outlined text-lg">shopping_bag</span>
+          </button>
+        </div>
+      </div>
+
       {hasDiscount && (
         <>
           <style jsx global>{`
@@ -397,7 +445,7 @@ function DBProductPage({ product }) {
             }
           `}</style>
           <div
-            className="fixed bottom-0 left-0 right-0 z-50 py-3 px-4"
+            className="hidden md:block fixed bottom-0 left-0 right-0 z-50 py-3 px-4"
             style={{
               background: 'linear-gradient(90deg, #ea580c 0%, #c2410c 50%, #ea580c 100%)',
               borderTop: '2px solid #9a3412',
@@ -487,36 +535,36 @@ export default function ProductDetailPage({ variantProduct, dbProduct }) {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="flex-grow py-12 md:py-24 max-w-[1280px] mx-auto px-6 md:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start">
-          <div className="aspect-[4/5] rounded-[2rem] overflow-hidden bg-surface-dim shadow-2xl relative">
+      <main className="flex-grow py-8 md:py-24 max-w-[1280px] mx-auto px-4 md:px-16 pb-24 md:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-24 items-start">
+          <div className="aspect-[4/5] rounded-2xl md:rounded-[2rem] overflow-hidden bg-surface-dim shadow-2xl relative">
             <Image fill alt={product.name} className="object-cover" src={product.image} sizes="(max-width: 768px) 100vw, 50vw" priority />
           </div>
 
-          <div className="space-y-8 py-4">
+          <div className="space-y-6 py-4">
             <div>
               <span className="font-body text-xs font-bold text-primary tracking-[0.2em] uppercase mb-2 block">{product.category}</span>
               <h1 className="font-display text-2xl md:text-4xl lg:text-5xl text-on-surface leading-tight">{product.name}</h1>
               <p className="font-display text-2xl md:text-3xl text-on-surface mt-4">{product.price}৳</p>
             </div>
 
-            <div className="border-y border-surface-dim py-8">
+            <div className="border-y border-surface-dim py-6 md:py-8">
               <h3 className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-4">Description</h3>
-              <p className="font-body text-tertiary leading-relaxed text-lg">{product.description}</p>
+              <p className="font-body text-tertiary leading-relaxed text-base md:text-lg">{product.description}</p>
             </div>
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-6">
-                <div className="flex items-center border border-outline rounded-full px-6 py-3 gap-8 bg-white">
-                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors">remove</button>
-                  <span className="font-body font-bold text-lg w-4 text-center">{quantity}</span>
-                  <button onClick={() => setQuantity(q => q + 1)} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors">add</button>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center border border-outline rounded-full px-4 py-2.5 gap-6 bg-white">
+                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors" aria-label="Decrease quantity">remove</button>
+                  <span className="font-body font-bold text-base w-4 text-center">{quantity}</span>
+                  <button onClick={() => setQuantity(q => q + 1)} className="material-symbols-outlined text-outline hover:text-on-surface transition-colors" aria-label="Increase quantity">add</button>
                 </div>
               </div>
 
               <button
                 onClick={() => addToCart(product, quantity)}
-                className="w-full bg-primary text-on-primary font-body font-bold py-5 rounded-full uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-3"
+                className="w-full bg-primary text-on-primary font-body font-bold py-4 rounded-full uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-3"
               >
                 Add to Bag <span className="material-symbols-outlined text-lg">shopping_bag</span>
               </button>
@@ -537,6 +585,22 @@ export default function ProductDetailPage({ variantProduct, dbProduct }) {
       </main>
 
       <Footer />
+
+      {/* Mobile Bottom Purchase Bar for variant products */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-surface-dim px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col">
+            <span className="font-body text-[10px] text-outline uppercase tracking-wide">Price</span>
+            <span className="font-display text-xl font-bold text-on-surface">{product.price}৳</span>
+          </div>
+          <button
+            onClick={() => addToCart(product, quantity)}
+            className="flex-1 bg-primary text-white font-body font-bold py-3 rounded-full uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2"
+          >
+            Add to Bag <span className="material-symbols-outlined text-lg">shopping_bag</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
