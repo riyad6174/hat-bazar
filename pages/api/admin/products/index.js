@@ -1,5 +1,7 @@
 import { connectDB } from '@/lib/mongodb';
 import Product from '@/models/Product';
+import '@/models/Category';
+import { resolveCategoryIds } from '@/lib/catalog';
 import { verifyAdmin } from '@/lib/auth';
 
 export default async function handler(req, res) {
@@ -10,12 +12,17 @@ export default async function handler(req, res) {
     await connectDB();
 
     if (req.method === 'GET') {
-      const products = await Product.find({}).sort({ createdAt: -1 }).lean();
+      const products = await Product.find({})
+        .sort({ createdAt: -1 })
+        .populate('categories', 'name slug')
+        .lean();
       return res.status(200).json({ products });
     }
 
     if (req.method === 'POST') {
-      const product = await Product.create(req.body);
+      const body = { ...req.body };
+      body.categories = await resolveCategoryIds(body.categories);
+      const product = await Product.create(body);
       return res.status(201).json({ product });
     }
 

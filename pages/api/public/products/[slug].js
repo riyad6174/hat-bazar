@@ -1,5 +1,6 @@
 import { connectDB } from '@/lib/mongodb';
 import Product from '@/models/Product';
+import '@/models/Category';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -10,7 +11,7 @@ export default async function handler(req, res) {
 
   try {
     await connectDB();
-    const product = await Product.findOne({ slug }).lean();
+    const product = await Product.findOne({ slug }).populate('categories', 'name slug').lean();
     if (!product) return res.status(404).json({ message: 'Not found' });
     return res.status(200).json({ product });
   } catch (err) {

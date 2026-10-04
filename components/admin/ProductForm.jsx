@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { FiArrowLeft, FiSave, FiPlus, FiTrash2, FiUpload } from 'react-icons/fi';
+import { FiArrowLeft, FiSave, FiPlus, FiTrash2, FiUpload, FiCheck } from 'react-icons/fi';
 import HtmlEditor from './HtmlEditor';
 
 function slugify(text) {
@@ -173,9 +173,81 @@ function ReviewEditor({ reviews, onChange }) {
   );
 }
 
+function CategoryPicker({ categories, selected, onChange, onCreated }) {
+  const [newName, setNewName] = useState('');
+  const [adding, setAdding] = useState(false);
+  const [error, setError] = useState('');
+
+  function toggle(id) {
+    onChange(selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id]);
+  }
+
+  async function addCategory() {
+    const name = newName.trim();
+    if (!name) return;
+    setAdding(true);
+    setError('');
+    try {
+      const r = await fetch('/api/admin/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.message || 'Failed');
+      onCreated(data.category);
+      onChange([...selected, data.category._id]);
+      setNewName('');
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setAdding(false);
+    }
+  }
+
+  return (
+    <div>
+      {categories.length === 0 ? (
+        <p className="text-xs text-slate-400 mb-2">No categories yet — add one below.</p>
+      ) : (
+        <div className="flex flex-wrap gap-2 mb-3">
+          {categories.map((c) => {
+            const active = selected.includes(c._id);
+            return (
+              <button
+                key={c._id}
+                type="button"
+                onClick={() => toggle(c._id)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors ${active ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-slate-400'}`}
+              >
+                {active && <FiCheck className="w-3 h-3" />}
+                {c.name}
+              </button>
+            );
+          })}
+        </div>
+      )}
+      <div className="flex items-center gap-2">
+        <input
+          type="text"
+          value={newName}
+          onChange={(e) => setNewName(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addCategory(); } }}
+          placeholder="New category name"
+          className="form-input flex-1"
+        />
+        <button type="button" onClick={addCategory} disabled={adding || !newName.trim()} className="flex items-center gap-1 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors disabled:opacity-50 flex-shrink-0">
+          <FiPlus className="w-3.5 h-3.5" /> {adding ? 'Adding…' : 'Add'}
+        </button>
+      </div>
+      {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
+    </div>
+  );
+}
+
 const EMPTY = {
   title: '', slug: '', shortDescription: '', descriptionHTML: '',
-  category: '', thumbnail: '', images: [],
+  categories: [], thumbnail: '', images: [],
   price: '', originalPrice: '',
   inStock: true, sectionType: 'hot', discountTimer: false,
   variants: [], faqs: [], specifications: [], reviews: [], gallery: [],
@@ -197,7 +269,7 @@ export default function ProductForm({ title, initialData, onSubmit, saving, erro
       slug: initialData.slug || '',
       shortDescription: initialData.shortDescription || '',
       descriptionHTML: initialData.descriptionHTML || '',
-      category: initialData.category || '',
+      categories: (initialData.categories || []).map((c) => String(c?._id || c)),
       thumbnail: initialData.thumbnail || '',
       images: initialData.images || [],
       price: initialData.price || '',
@@ -222,6 +294,10 @@ export default function ProductForm({ title, initialData, onSubmit, saving, erro
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (form.categories.length === 0) {
+      alert('Please select at least one category');
+      return;
+    }
     onSubmit({ ...form, price: Number(form.price), originalPrice: Number(form.originalPrice) });
   }
 
@@ -251,16 +327,16 @@ export default function ProductForm({ title, initialData, onSubmit, saving, erro
               <input required type="text" value={form.slug} onChange={(e) => { setSlugManual(true); set('slug', e.target.value); }} className="form-input font-mono text-xs" placeholder="anua-niacinamide-serum" />
             </Field>
 
-            <Field label="Category">
-              {categories.length > 0 ? (
-                <select value={form.category} onChange={(e) => set('category', e.target.value)} className="form-input">
-                  <option value="">— No Category —</option>
-                  {categories.map((c) => <option key={c._id} value={c.name}>{c.name}</option>)}
-                </select>
-              ) : (
-                <input type="text" value={form.category} onChange={(e) => set('category', e.target.value)} className="form-input" placeholder="e.g. Serum, Supplements, Haircare" />
-              )}
-            </Field>
+            <div className="md:col-span-2">
+              <Field label="Categories *" hint="Select one or more — product appears under each">
+                <CategoryPicker
+                  categories={categories}
+                  selected={form.categories}
+                  onChange={(v) => set('categories', v)}
+                  onCreated={(c) => setCategories((prev) => [...prev, c])}
+                />
+              </Field>
+            </div>
 
             <Field label="Section Type">
               <select value={form.sectionType} onChange={(e) => set('sectionType', e.target.value)} className="form-input">

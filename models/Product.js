@@ -29,7 +29,7 @@ const productSchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true },
     shortDescription: { type: String, default: '' },
     descriptionHTML: { type: String, default: '' },
-    category: { type: String, default: '' },
+    categories: { type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }], default: [] },
     thumbnail: { type: String, default: '' },
     images: { type: [String], default: [] },
     price: { type: Number, required: true },

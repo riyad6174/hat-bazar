@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -77,6 +78,8 @@ function DBProductPage({ product }) {
   const [thumbSwiper, setThumbSwiper] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  const categories = (product.categories || []).filter((c) => c && c.slug);
+  const categoryNames = categories.map((c) => c.name).join(', ');
   const galleryImages = [...new Set([product.thumbnail, ...(product.images || [])].filter(Boolean))];
   const useThumbSlider = galleryImages.length > 4;
 
@@ -99,7 +102,7 @@ function DBProductPage({ product }) {
         items: [{
           item_id: product._id || product.slug,
           item_name: product.title,
-          item_category: product.category || '',
+          item_category: categoryNames,
           price: effectivePrice,
           quantity: 1,
         }],
@@ -112,7 +115,7 @@ function DBProductPage({ product }) {
     name: product.title,
     price: effectivePrice,
     image: product.thumbnail || product.images?.[0] || '',
-    category: product.category,
+    category: categoryNames,
     slug: product.slug,
     selectedColor: selectedVariant ? `${selectedVariant.name}: ${selectedVariant.value}` : undefined,
   };
@@ -233,7 +236,18 @@ function DBProductPage({ product }) {
 
           <div className="space-y-8 py-4">
             <div>
-              <span className="font-body text-xs font-bold text-primary tracking-[0.2em] uppercase mb-2 block">{product.category}</span>
+              {categories.length > 0 && (
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-2">
+                  {categories.map((c, i) => (
+                    <React.Fragment key={c.slug}>
+                      {i > 0 && <span className="text-outline text-xs">•</span>}
+                      <Link href={`/shop?category=${c.slug}`} className="font-body text-xs font-bold text-primary tracking-[0.2em] uppercase hover:underline">
+                        {c.name}
+                      </Link>
+                    </React.Fragment>
+                  ))}
+                </div>
+              )}
               <h1 className="font-display text-2xl md:text-4xl lg:text-5xl text-on-surface leading-tight">{product.title}</h1>
               <div className="flex items-center gap-4 mt-4">
                 <p className="font-display text-2xl md:text-3xl text-on-surface">{effectivePrice}৳</p>
@@ -260,6 +274,19 @@ function DBProductPage({ product }) {
             <div className="border-b border-surface-dim pb-6 md:pb-8">
               <h3 className="font-body text-[10px] font-bold text-outline tracking-[0.2em] uppercase mb-3">Product Details</h3>
               <div className="grid grid-cols-2 gap-3">
+                {categories.length > 0 && (
+                  <div className="flex flex-col col-span-2">
+                    <span className="font-body text-[10px] text-outline uppercase tracking-wide">{categories.length > 1 ? 'Categories' : 'Category'}</span>
+                    <span className="font-body text-sm text-on-surface font-medium">
+                      {categories.map((c, i) => (
+                        <React.Fragment key={c.slug}>
+                          {i > 0 && ', '}
+                          <Link href={`/shop?category=${c.slug}`} className="hover:text-primary hover:underline">{c.name}</Link>
+                        </React.Fragment>
+                      ))}
+                    </span>
+                  </div>
+                )}
                 {product.specifications && product.specifications.length > 0 ? (
                   product.specifications.slice(0, 6).map((spec, i) => (
                     <div key={i} className="flex flex-col">
@@ -269,10 +296,6 @@ function DBProductPage({ product }) {
                   ))
                 ) : (
                   <>
-                    <div className="flex flex-col">
-                      <span className="font-body text-[10px] text-outline uppercase tracking-wide">Category</span>
-                      <span className="font-body text-sm text-on-surface font-medium">{product.category || 'Not provided'}</span>
-                    </div>
                     <div className="flex flex-col">
                       <span className="font-body text-[10px] text-outline uppercase tracking-wide">Availability</span>
                       <span className="font-body text-sm text-on-surface font-medium">{product.inStock !== false ? 'In Stock' : 'Out of Stock'}</span>
@@ -484,8 +507,9 @@ export async function getServerSideProps({ params }) {
   try {
     const { connectDB } = await import('@/lib/mongodb');
     const Product = (await import('@/models/Product')).default;
+    await import('@/models/Category');
     await connectDB();
-    const product = await Product.findOne({ slug: id }).lean();
+    const product = await Product.findOne({ slug: id }).populate('categories', 'name slug').lean();
     if (product) {
       return {
         props: {

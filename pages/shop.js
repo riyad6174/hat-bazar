@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -6,6 +6,8 @@ import ProductCard from '@/components/ProductCard';
 import staticProducts from '@/data/products.json';
 import { connectDB } from '@/lib/mongodb';
 import Product from '@/models/Product';
+import { normalizeDbProduct, getCategoriesWithCounts } from '@/lib/catalog';
+import { getProductCategories } from '@/lib/categoryUtils';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -19,27 +21,18 @@ const SORT_OPTIONS = [
 export async function getServerSideProps() {
   try {
     await connectDB();
-    const dbProducts = await Product.find({ inStock: true }).sort({ createdAt: -1 }).lean();
+    const [dbProducts, categories] = await Promise.all([
+      Product.find({ inStock: true }).sort({ createdAt: -1 }).populate('categories', 'name slug').lean(),
+      getCategoriesWithCounts(),
+    ]);
 
-    const normalized = dbProducts.map((p) => ({
-      id: p._id.toString(),
-      name: p.title,
-      price: p.price,
-      oldPrice: p.originalPrice,
-      image: p.thumbnail || '',
-      category: p.category || '',
-      slug: p.slug,
-      description: p.shortDescription || '',
-      _isDB: true,
-    }));
-
-    return { props: { dbProducts: normalized } };
+    return { props: { dbProducts: dbProducts.map(normalizeDbProduct), categories } };
   } catch {
-    return { props: { dbProducts: [] } };
+    return { props: { dbProducts: [], categories: [] } };
   }
 }
 
-export default function ShopPage({ dbProducts = [] }) {
+export default function ShopPage({ dbProducts = [], categories = [] }) {
   const router = useRouter();
   const { category } = router.query;
   const [searchQuery, setSearchQuery] = useState('');
@@ -48,19 +41,26 @@ export default function ShopPage({ dbProducts = [] }) {
   const [priceRange, setPriceRange] = useState([0, 5000]);
   const [selectedCategories, setSelectedCategories] = useState(category ? [category] : []);
 
+  // Keep the filter in sync when navbar/category links change ?category= on this page.
+  useEffect(() => {
+    setSelectedCategories(category ? [category] : []);
+  }, [category]);
+
   const allProducts = useMemo(() => [...dbProducts, ...staticProducts], [dbProducts]);
 
-  const availableCategories = useMemo(() => {
-    const cats = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
-    return cats.sort();
-  }, [allProducts]);
+  const availableCategories = useMemo(
+    () => categories.filter(c => c.productCount > 0),
+    [categories]
+  );
+
+  const categoryName = (slug) => categories.find(c => c.slug === slug)?.name || slug;
 
   const filteredProducts = useMemo(() => {
     let result = [...allProducts];
 
     if (selectedCategories.length > 0) {
       result = result.filter(p =>
-        selectedCategories.includes(p.category?.toLowerCase())
+        getProductCategories(p).some(c => selectedCategories.includes(c.slug))
       );
     }
 
@@ -68,7 +68,7 @@ export default function ShopPage({ dbProducts = [] }) {
       const q = searchQuery.toLowerCase();
       result = result.filter(p =>
         p.name?.toLowerCase().includes(q) ||
-        p.category?.toLowerCase().includes(q) ||
+        getProductCategories(p).some(c => c.name.toLowerCase().includes(q)) ||
         p.description?.toLowerCase().includes(q)
       );
     }
@@ -109,7 +109,7 @@ export default function ShopPage({ dbProducts = [] }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar categories={categories} />
 
       <main className="flex-grow pt-8 md:pt-16 max-w-[1280px] mx-auto px-4 md:px-16 w-full">
         <motion.header
@@ -119,7 +119,7 @@ export default function ShopPage({ dbProducts = [] }) {
           className="mb-8"
         >
           <h1 className="font-display text-3xl md:text-5xl text-on-surface mb-2">
-            {category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Shop All'}
+            {selectedCategories.length === 1 ? categoryName(selectedCategories[0]) : 'Shop All'}
           </h1>
           <p className="font-body text-sm text-tertiary">
             {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
@@ -167,6 +167,35 @@ export default function ShopPage({ dbProducts = [] }) {
           </div>
         </div>
 
+        {/* Category Chips */}
+        {availableCategories.length > 0 && (
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap pb-1 mb-6">
+            <button
+              onClick={() => setSelectedCategories([])}
+              className={`flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+                selectedCategories.length === 0
+                  ? 'bg-primary text-white'
+                  : 'bg-white border border-surface-dim text-on-surface hover:border-primary'
+              }`}
+            >
+              All
+            </button>
+            {availableCategories.map(cat => (
+              <button
+                key={cat.slug}
+                onClick={() => toggleCategory(cat.slug)}
+                className={`flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all whitespace-nowrap ${
+                  selectedCategories.includes(cat.slug)
+                    ? 'bg-primary text-white'
+                    : 'bg-white border border-surface-dim text-on-surface hover:border-primary'
+                }`}
+              >
+                {cat.name} <span className="opacity-60">({cat.productCount})</span>
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* Filter Panel */}
         {showFilters && (
           <motion.div
@@ -176,25 +205,7 @@ export default function ShopPage({ dbProducts = [] }) {
             className="mb-6 p-4 md:p-6 bg-surface-container-low rounded-2xl border border-surface-dim"
           >
             <div className="flex flex-col md:flex-row gap-6">
-              <div className="flex-grow">
-                <h3 className="font-body text-xs font-bold text-outline uppercase tracking-wider mb-3">Category</h3>
-                <div className="flex flex-wrap gap-2">
-                  {availableCategories.map(cat => (
-                    <button
-                      key={cat}
-                      onClick={() => toggleCategory(cat.toLowerCase())}
-                      className={`px-3 py-1.5 rounded-full text-xs font-body font-medium transition-all ${
-                        selectedCategories.includes(cat.toLowerCase())
-                          ? 'bg-primary text-white'
-                          : 'bg-white border border-surface-dim text-on-surface hover:border-primary'
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="md:w-48">
+              <div className="md:w-64">
                 <h3 className="font-body text-xs font-bold text-outline uppercase tracking-wider mb-3">Max Price</h3>
                 <input
                   type="range"
@@ -218,20 +229,6 @@ export default function ShopPage({ dbProducts = [] }) {
               </button>
             )}
           </motion.div>
-        )}
-
-        {/* Active Filter Chips */}
-        {selectedCategories.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {selectedCategories.map(cat => (
-              <span key={cat} className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-body font-medium">
-                {cat}
-                <button onClick={() => toggleCategory(cat)} aria-label={`Remove ${cat} filter`}>
-                  <span className="material-symbols-outlined text-sm">close</span>
-                </button>
-              </span>
-            ))}
-          </div>
         )}
 
         {/* Product Grid */}

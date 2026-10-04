@@ -1,5 +1,6 @@
 import { connectDB } from '@/lib/mongodb';
 import Product from '@/models/Product';
+import { resolveCategoryIds } from '@/lib/catalog';
 import { verifyAdmin } from '@/lib/auth';
 
 export default async function handler(req, res) {
@@ -17,7 +18,9 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'PUT') {
-      const product = await Product.findByIdAndUpdate(id, req.body, {
+      const body = { ...req.body };
+      if ('categories' in body) body.categories = await resolveCategoryIds(body.categories);
+      const product = await Product.findByIdAndUpdate(id, body, {
         new: true,
         runValidators: true,
       });

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FiPackage, FiPlus, FiList, FiLogOut, FiGrid, FiChevronDown, FiChevronRight, FiMenu, FiX } from 'react-icons/fi';
+import { FiPackage, FiPlus, FiList, FiLogOut, FiGrid, FiChevronDown, FiChevronRight, FiMenu, FiX, FiTag } from 'react-icons/fi';
 
 function NavItem({ href, label, icon: Icon, active, sub }) {
   return (
@@ -63,6 +63,7 @@ export default function AdminProductLayout({ children, title }) {
         <SidebarSection title="Products" icon={FiPackage} defaultOpen>
           <NavItem href="/admin/products" label="All Products" icon={FiList} active={path === '/admin/products'} sub />
           <NavItem href="/admin/products/create" label="Add New" icon={FiPlus} active={path === '/admin/products/create'} sub />
+          <NavItem href="/admin/categories" label="Categories" icon={FiTag} active={path === '/admin/categories'} sub />
         </SidebarSection>
 
         <div className="pt-2 border-t border-slate-200">

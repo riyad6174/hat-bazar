@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { slugifyCategory } from '@/lib/categoryUtils';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -142,7 +144,7 @@ const ProductPageLayout = ({ product, customSections }) => {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <nav className="flex gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-outline">
-                  <span className="text-primary">{product.category}</span>
+                  <Link href={`/shop?category=${slugifyCategory(product.category || '')}`} className="text-primary hover:underline">{product.category}</Link>
                 </nav>
                 <div className="h-4 w-[1px] bg-surface-dim"></div>
                 <div className="flex items-center gap-1">

@@ -91,7 +91,17 @@ export default function AdminProducts() {
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-slate-500 text-xs">{p.category || '—'}</td>
+                    <td className="px-4 py-3">
+                      {p.categories?.length > 0 ? (
+                        <div className="flex flex-wrap gap-1">
+                          {p.categories.map((c) => (
+                            <span key={c._id} className="inline-block px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[11px] font-medium">{c.name}</span>
+                          ))}
+                        </div>
+                      ) : (
+                        <span className="text-xs text-red-400">No category</span>
+                      )}
+                    </td>
                     <td className="px-4 py-3 text-right">
                       <span className="font-bold text-slate-800">৳{p.price}</span>
                       {p.originalPrice > p.price && (

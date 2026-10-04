@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useCart } from '@/context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -10,23 +11,66 @@ import {
   RiScissorsCutLine,
   RiSunLine,
   RiBubbleChartLine,
-  RiCapsuleLine
+  RiCapsuleLine,
+  RiMoonClearLine,
+  RiHandSanitizerLine,
+  RiPriceTag3Line,
 } from 'react-icons/ri';
 
-const categories = [
-  { name: 'Moisturizer', icon: RiDropLine, slug: 'moisturizer' },
-  { name: 'Toner', icon: RiWaterFlashLine, slug: 'toner' },
-  { name: 'Serum', icon: RiFlaskLine, slug: 'serum' },
-  { name: 'Haircare', icon: RiScissorsCutLine, slug: 'haircare' },
-  { name: 'Sunscreen', icon: RiSunLine, slug: 'sunscreen' },
-  { name: 'Facewash', icon: RiBubbleChartLine, slug: 'facewash' },
-  { name: 'Supplements', icon: RiCapsuleLine, slug: 'supplements' },
-];
+const CATEGORY_ICONS = {
+  moisturizer: RiDropLine,
+  toner: RiWaterFlashLine,
+  serum: RiFlaskLine,
+  haircare: RiScissorsCutLine,
+  sunscreen: RiSunLine,
+  facewash: RiBubbleChartLine,
+  supplements: RiCapsuleLine,
+  'night-cream': RiMoonClearLine,
+  soap: RiHandSanitizerLine,
+};
 
-const Navbar = () => {
+// Shared across Navbar mounts so client-side navigation doesn't refetch.
+let categoriesCache = null;
+let categoriesRequest = null;
+
+function loadCategories() {
+  if (!categoriesRequest) {
+    categoriesRequest = fetch('/api/public/categories')
+      .then((r) => (r.ok ? r.json() : { categories: [] }))
+      .then((d) => {
+        categoriesCache = d.categories || [];
+        return categoriesCache;
+      })
+      .catch(() => {
+        categoriesRequest = null;
+        return [];
+      });
+  }
+  return categoriesRequest;
+}
+
+const Navbar = ({ categories: initialCategories }) => {
   const { getCartCount, setIsDrawerOpen } = useCart();
   const cartCount = getCartCount();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [allCategories, setAllCategories] = useState(initialCategories || categoriesCache || []);
+
+  useEffect(() => {
+    if (initialCategories) {
+      categoriesCache = initialCategories;
+      return;
+    }
+    let active = true;
+    loadCategories().then((cats) => { if (active) setAllCategories(cats); });
+    return () => { active = false; };
+  }, [initialCategories]);
+
+  const router = useRouter();
+  const activeSlug = router.pathname === '/shop' ? router.query.category : null;
+
+  const categories = (initialCategories || allCategories)
+    .filter((c) => c.productCount > 0)
+    .map((c) => ({ ...c, icon: CATEGORY_ICONS[c.slug] || RiPriceTag3Line }));
 
   return (
     <motion.div
@@ -90,9 +134,13 @@ const Navbar = () => {
             <Link
               key={cat.slug}
               href={`/shop?category=${cat.slug}`}
-              className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 border border-surface-dim hover:border-primary hover:text-primary transition-all group whitespace-nowrap"
+              className={`flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all group whitespace-nowrap ${
+                activeSlug === cat.slug
+                  ? 'bg-primary border-primary text-white'
+                  : 'bg-white/50 border-surface-dim hover:border-primary hover:text-primary'
+              }`}
             >
-              <cat.icon className="text-lg text-tertiary group-hover:text-primary transition-colors" />
+              <cat.icon className={`text-lg transition-colors ${activeSlug === cat.slug ? 'text-white' : 'text-tertiary group-hover:text-primary'}`} />
               <span className="font-body text-xs font-bold uppercase tracking-wider">{cat.name}</span>
             </Link>
           ))}

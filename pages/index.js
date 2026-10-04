@@ -12,6 +12,7 @@ import journalData from '@/data/journal.json';
 import { motion } from 'framer-motion';
 import { connectDB } from '@/lib/mongodb';
 import Product from '@/models/Product';
+import { normalizeDbProduct, getCategoriesWithCounts } from '@/lib/catalog';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -23,58 +24,48 @@ const fadeInUp = {
 export async function getServerSideProps() {
   try {
     await connectDB();
-    const dbProducts = await Product.find({ inStock: true }).sort({ createdAt: -1 }).limit(8).lean();
-    const normalized = dbProducts.map((p) => ({
-      id: p._id.toString(),
-      name: p.title,
-      price: p.price,
-      oldPrice: p.originalPrice,
-      image: p.thumbnail || '',
-      category: p.category || '',
-      slug: p.slug,
-      description: p.shortDescription || '',
-      _isDB: true,
-    }));
-    return { props: { dbLatestProducts: normalized } };
+    const [dbProducts, categories] = await Promise.all([
+      Product.find({ inStock: true }).sort({ createdAt: -1 }).limit(8).populate('categories', 'name slug').lean(),
+      getCategoriesWithCounts(),
+    ]);
+    return { props: { dbLatestProducts: dbProducts.map(normalizeDbProduct), categories } };
   } catch {
-    return { props: { dbLatestProducts: [] } };
+    return { props: { dbLatestProducts: [], categories: [] } };
   }
 }
 
-export default function HomePage({ dbLatestProducts = [] }) {
+export default function HomePage({ dbLatestProducts = [], categories = [] }) {
+  const shopCategories = categories.filter((c) => c.productCount > 0);
   const bestSellers = [...staticProducts, ...dbLatestProducts];
 
   const featuredPost = journalData[0];
   const otherPosts = journalData.slice(1, 3);
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar categories={categories} />
       
       <main className="flex-grow">
         <Hero />
 
         {/* Featured Categories */}
+        {shopCategories.length > 0 && (
         <motion.section {...fadeInUp} className="py-8 md:py-16 max-w-[1280px] mx-auto">
           <div className="text-center mb-4 md:mb-8 px-6 md:px-16">
             <h2 className="font-display text-2xl md:text-4xl text-on-surface">Shop by Category</h2>
           </div>
-          <div className="flex gap-3 md:gap-10 lg:gap-14 overflow-x-auto md:justify-center scrollbar-hide px-4 md:px-16 pb-2">
-            {[
-              { name: 'Moisturizer', img: 'https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg?auto=compress&cs=tinysrgb&w=300' },
-              { name: 'Toner', img: 'https://images.pexels.com/photos/8128069/pexels-photo-8128069.jpeg?auto=compress&cs=tinysrgb&w=300' },
-              { name: 'Serum', img: 'https://images.pexels.com/photos/12024065/pexels-photo-12024065.jpeg?auto=compress&cs=tinysrgb&w=300' },
-              { name: 'Haircare', img: 'https://images.pexels.com/photos/8467957/pexels-photo-8467957.jpeg?auto=compress&cs=tinysrgb&w=300' },
-              { name: 'Sunscreen', img: 'https://images.pexels.com/photos/22821334/pexels-photo-22821334.jpeg?auto=compress&cs=tinysrgb&w=300' },
-              { name: 'Facewash', img: 'https://images.pexels.com/photos/19049367/pexels-photo-19049367.png?auto=compress&cs=tinysrgb&w=300' },
-              { name: 'Supplements', img: 'https://images.pexels.com/photos/31406911/pexels-photo-31406911.jpeg?auto=compress&cs=tinysrgb&w=300' }
-            ].map((cat) => (
+          <div className="flex gap-3 md:gap-10 lg:gap-14 overflow-x-auto scrollbar-hide px-4 md:px-16 pb-2 [&>:first-child]:ml-auto [&>:last-child]:mr-auto">
+            {shopCategories.map((cat) => (
               <Link
-                href={`/shop?category=${cat.name.toLowerCase()}`}
-                key={cat.name}
+                href={`/shop?category=${cat.slug}`}
+                key={cat.slug}
                 className="group flex-shrink-0 flex flex-col items-center text-center"
               >
                 <div className="w-14 h-14 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden mb-2 md:mb-2.5 border-2 border-transparent group-hover:border-primary transition-all bg-surface-container relative flex-shrink-0">
-                  <Image fill alt={cat.name} className="object-cover" src={cat.img} sizes="(max-width: 768px) 64px, 128px" />
+                  {cat.displayImage ? (
+                    <Image fill alt={cat.name} className="object-cover" src={cat.displayImage} sizes="(max-width: 768px) 64px, 128px" />
+                  ) : (
+                    <span className="absolute inset-0 flex items-center justify-center font-display text-xl md:text-4xl text-primary">{cat.name.charAt(0)}</span>
+                  )}
                 </div>
                 <span className="font-body text-[10px] md:text-base font-semibold md:font-display text-on-surface group-hover:text-primary transition-colors tracking-wide whitespace-nowrap">
                   {cat.name}
@@ -83,6 +74,7 @@ export default function HomePage({ dbLatestProducts = [] }) {
             ))}
           </div>
         </motion.section>
+        )}
 
         {/* Offer Banner */}
         <motion.section
