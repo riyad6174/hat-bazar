@@ -49,7 +49,7 @@ const ContactSection = () => {
               <span className="material-symbols-outlined text-xl">chat</span> Messenger Support
             </motion.a>
             <motion.a 
-              href="https://wa.me/8801794855675" 
+              href="https://wa.me/8801609599652" 
               target="_blank" 
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, x: 4 }}

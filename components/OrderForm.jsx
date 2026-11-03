@@ -377,7 +377,7 @@ const OrderForm = () => {
         {/* Top Header */}
         <div className='bg-pink-500 text-white text-center py-2 mb-8 rounded-lg shadow-md'>
           <p className='font-bold text-lg md:text-xl'>
-            ফোনে অর্ডার করুন <a href='tel:+8801794855675'>01794855675</a>
+            ফোনে অর্ডার করুন <a href='tel:+8801609599652'>016 0959 9652</a>
           </p>
           <p className='text-md md:text-lg'>
             অর্ডার করতে নিচের ফরমটি সঠিক ভাবে পূরন করুন!
@@ -689,13 +689,13 @@ const OrderForm = () => {
             </div>
             <div className='space-y-3 mb-6'>
               <a
-                href='tel:+8801794855675'
+                href='tel:+8801609599652'
                 className='block w-full bg-green-600 cursor-pointer text-white py-3 px-4 rounded-lg text-center font-semibold hover:bg-green-700 transition-colors'
               >
-                কল করুন: 01794855675
+                কল করুন: 016 0959 9652
               </a>
               <a
-                href='https://wa.me/8801794855675'
+                href='https://wa.me/8801609599652'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='block w-full bg-green-500 cursor-pointer text-white py-3 px-4 rounded-lg text-center font-semibold hover:bg-green-600 transition-colors'

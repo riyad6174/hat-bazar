@@ -220,7 +220,7 @@ export default function CheckoutPage() {
 
       {/* WhatsApp floating button */}
       <a
-        href='https://wa.me/8801794855675'
+        href='https://wa.me/8801609599652'
         target='_blank'
         rel='noopener noreferrer'
         className='fixed right-6 bottom-24 md:bottom-12 z-[90] bg-[#553f26] w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform'
