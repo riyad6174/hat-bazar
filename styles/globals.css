@@ -268,6 +268,11 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--foreground);
   width: 100%;
 }
+@media (max-width: 767px) {
+  .PhoneInputInput {
+    padding: 10px 12px;
+  }
+}
 .PhoneInputInput::placeholder {
   color: color-mix(in srgb, var(--outline) 60%, transparent);
 }
