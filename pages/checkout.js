@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CheckoutForm from '@/components/CheckoutForm';
+import CheckoutProgress from '@/components/CheckoutProgress';
 import { useCart } from '@/context/CartContext';
 import OrderSuccessModal from '@/components/OrderSuccessModal';
 import Link from 'next/link';
@@ -14,6 +15,7 @@ export default function CheckoutPage() {
   const { cartItems, getCartTotal, removeFromCart, updateQuantity, addToCart } =
     useCart();
   const [orderData, setOrderSuccessData] = useState(null);
+  const [formProgress, setFormProgress] = useState(0);
 
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -36,7 +38,15 @@ export default function CheckoutPage() {
 
   return (
     <div className='min-h-screen flex flex-col bg-surface'>
-      <Navbar />
+      <Navbar
+        belowHeader={
+          cartItems.length > 0 && !orderData ? (
+            <div className='lg:hidden bg-surface/95 backdrop-blur-xl border-b border-surface-dim px-4 py-2'>
+              <CheckoutProgress progress={formProgress} />
+            </div>
+          ) : null
+        }
+      />
 
       <main className='flex-grow max-w-[1280px] mx-auto px-6 md:px-16 py-12 md:py-24 w-full'>
         {cartItems.length === 0 && !orderData ? (
@@ -150,6 +160,7 @@ export default function CheckoutPage() {
               <div className='bg-surface-container rounded-[2rem] p-6 md:p-10 shadow-2xl shadow-stone-900/5 border border-surface-dim/50'>
                 <CheckoutForm
                   onOrderSuccess={(data) => setOrderSuccessData(data)}
+                  onProgressChange={setFormProgress}
                 />
               </div>
             </motion.aside>

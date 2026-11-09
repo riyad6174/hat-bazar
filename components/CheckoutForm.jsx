@@ -17,9 +17,10 @@ import {
   saveCheckoutDraft,
   useCheckoutTracking,
 } from '@/utils/useCheckoutTracking';
+import CheckoutProgress from '@/components/CheckoutProgress';
 import { motion } from 'framer-motion';
 
-const inputBase = 'w-full bg-white border pl-4 pr-11 py-3.5 font-body text-sm outline-none transition-all rounded-xl text-on-surface placeholder:text-outline/60';
+const inputBase = 'w-full bg-white border pl-3 md:pl-4 pr-10 md:pr-11 py-2.5 md:py-3.5 font-body text-sm outline-none transition-all rounded-xl text-on-surface placeholder:text-outline/60';
 const inputNormal = `${inputBase} border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/10`;
 const inputError  = `${inputBase} border-error focus:border-error focus:ring-2 focus:ring-error/10`;
 
@@ -30,9 +31,9 @@ const FieldCheck = ({ valid, className = '' }) => (
   />
 );
 
-const insideInput = 'absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none';
+const insideInput = 'absolute right-3 md:right-4 top-1/2 -translate-y-1/2 pointer-events-none';
 
-const CheckoutForm = ({ onOrderSuccess }) => {
+const CheckoutForm = ({ onOrderSuccess, onProgressChange }) => {
   const { cartItems, getCartTotal, clearCart } = useCart();
   const [formData, setFormData] = useState({
     fullName: '',
@@ -71,6 +72,10 @@ const CheckoutForm = ({ onOrderSuccess }) => {
         }
       : null
   );
+
+  useEffect(() => {
+    onProgressChange?.(progress);
+  }, [progress, onProgressChange]);
 
   // Restored after mount so the server and client render the same empty form.
   useEffect(() => {
@@ -207,37 +212,19 @@ const CheckoutForm = ({ onOrderSuccess }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-3 md:space-y-6"
     >
-      <div className="space-y-4">
-        <h2 className="font-display text-2xl md:text-3xl text-on-surface">Shipping Details</h2>
-        <div
-          role="progressbar"
-          aria-label="Form completion"
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-valuenow={progress}
-        >
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="font-body text-[10px] font-bold text-outline uppercase tracking-widest">Form Completion</span>
-            <span className={`font-body text-xs font-bold transition-colors duration-500 ${progress === 100 ? 'text-emerald-600' : 'text-primary'}`}>{progress}%</span>
-          </div>
-          <div className="h-1.5 w-full rounded-full bg-surface-dim overflow-hidden">
-            <motion.div
-              className={`h-full rounded-full transition-colors duration-500 ${progress === 100 ? 'bg-emerald-500' : 'bg-primary'}`}
-              initial={false}
-              animate={{ width: `${progress}%` }}
-              transition={{ type: 'spring', stiffness: 120, damping: 24 }}
-            />
-          </div>
-        </div>
+      <div className="md:space-y-4">
+        <h2 className="font-display text-xl md:text-3xl text-on-surface">Shipping Details</h2>
+        {/* Below lg the bar is shown in the sticky navbar instead. */}
+        <CheckoutProgress progress={progress} className="hidden lg:block" />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-2.5 md:space-y-5">
 
         {/* Full Name */}
         <div>
-          <label className="font-body text-[10px] font-bold text-outline uppercase tracking-widest mb-2 block">Full Name</label>
+          <label className="font-body text-[10px] font-bold text-outline uppercase tracking-widest mb-1 md:mb-2 block">Full Name</label>
           <div className="relative">
             <input
               id="checkout-fullName"
@@ -255,7 +242,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
 
         {/* Phone */}
         <div>
-          <label className="font-body text-[10px] font-bold text-outline uppercase tracking-widest mb-2 block">Phone Number</label>
+          <label className="font-body text-[10px] font-bold text-outline uppercase tracking-widest mb-1 md:mb-2 block">Phone Number</label>
           <div className={`relative pr-10 flex items-center border rounded-xl overflow-hidden bg-white transition-all ${errors.phoneNumber ? 'border-error ring-2 ring-error/10' : 'border-outline-variant focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10'}`}>
             <PhoneInput
               id="checkout-phoneNumber"
@@ -273,11 +260,11 @@ const CheckoutForm = ({ onOrderSuccess }) => {
 
         {/* Zone */}
         <div>
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-1 md:mb-3">
             <label className="font-body text-[10px] font-bold text-outline uppercase tracking-widest block">Select Delivery Zone</label>
             <FieldCheck valid={isFieldValid('district')} />
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2 md:gap-3">
             {[
               { label: 'Inside Dhaka', charge: '60 tk' },
               { label: 'Outside Dhaka', charge: '120 tk' },
@@ -290,7 +277,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between text-left ${
+                className={`px-3 py-1.5 md:p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between text-left ${
                   formData.district === label
                     ? 'border-primary bg-primary/5'
                     : errors.district
@@ -313,7 +300,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
 
         {/* Address */}
         <div>
-          <label className="font-body text-[10px] font-bold text-outline uppercase tracking-widest mb-2 block">Full Address</label>
+          <label className="font-body text-[10px] font-bold text-outline uppercase tracking-widest mb-1 md:mb-2 block">Full Address</label>
           <div className="relative">
             <input
               id="checkout-address"
@@ -331,10 +318,10 @@ const CheckoutForm = ({ onOrderSuccess }) => {
 
         {/* Order Summary */}
         <div className="bg-surface-container-low rounded-2xl border border-surface-dim overflow-hidden">
-          <div className="px-5 py-4 border-b border-surface-dim">
+          <div className="hidden md:block px-5 py-4 border-b border-surface-dim">
             <h3 className="font-display text-lg text-on-surface">Order Summary</h3>
           </div>
-          <div className="px-5 py-4 space-y-2.5">
+          <div className="px-3 py-2 space-y-1 md:px-5 md:py-4 md:space-y-2.5">
             <div className="flex justify-between text-sm">
               <span className="text-tertiary">Subtotal</span>
               <span className="font-medium text-on-surface">{subtotal}৳</span>
@@ -343,7 +330,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
               <span className="text-tertiary">Shipping</span>
               <span className="font-medium text-on-surface">{shippingCharge}৳</span>
             </div>
-            <div className="flex justify-between font-bold text-base border-t border-surface-dim pt-2.5 mt-1">
+            <div className="flex justify-between font-bold text-base border-t border-surface-dim pt-1 md:pt-2.5 mt-1">
               <span className="text-on-surface">Total</span>
               <span className="text-primary">{grandTotal}৳</span>
             </div>
@@ -357,7 +344,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
           whileHover={{ scale: isLoading ? 1 : 1.02 }}
           whileTap={{ scale: isLoading ? 1 : 0.97 }}
           transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-          className="w-full bg-primary text-on-primary font-body font-bold py-4 rounded-full uppercase tracking-[0.2em] shadow-xl shadow-primary/20 flex items-center justify-center gap-3 disabled:bg-outline disabled:cursor-not-allowed transition-colors"
+          className="w-full bg-primary text-on-primary font-body font-bold py-3 md:py-4 rounded-full uppercase tracking-[0.2em] shadow-xl shadow-primary/20 flex items-center justify-center gap-3 disabled:bg-outline disabled:cursor-not-allowed transition-colors"
         >
           {isLoading ? (
             <span className="flex items-center gap-2">

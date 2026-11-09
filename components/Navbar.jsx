@@ -49,7 +49,7 @@ function loadCategories() {
   return categoriesRequest;
 }
 
-const Navbar = ({ categories: initialCategories }) => {
+const Navbar = ({ categories: initialCategories, belowHeader }) => {
   const { getCartCount, setIsDrawerOpen } = useCart();
   const cartCount = getCartCount();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -146,6 +146,8 @@ const Navbar = ({ categories: initialCategories }) => {
           ))}
         </div>
       </nav>
+
+      {belowHeader}
 
       {/* Mobile Menu */}
       <AnimatePresence>

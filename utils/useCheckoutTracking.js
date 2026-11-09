@@ -66,6 +66,7 @@ export function useCheckoutTracking(snapshot) {
   const snapshotKey = snapshot ? JSON.stringify(snapshot) : null;
   const latestKey = useRef(null);
   const lastSentKey = useRef(null);
+  const trackedPhone = useRef(null);
   const token = useRef(null);
   const paused = useRef(false);
   const inFlight = useRef(false);
@@ -126,7 +127,12 @@ export function useCheckoutTracking(snapshot) {
     latestKey.current = snapshotKey;
     clearTimeout(timer.current);
     if (snapshotKey && !paused.current) {
-      timer.current = setTimeout(send, SAVE_DEBOUNCE_MS);
+      // A new valid number is the one thing needed to call the customer back,
+      // so save it at once in case they leave right after typing it.
+      const { phone } = JSON.parse(snapshotKey);
+      const isNewPhone = phone !== trackedPhone.current;
+      trackedPhone.current = phone;
+      timer.current = setTimeout(send, isNewPhone ? 0 : SAVE_DEBOUNCE_MS);
     }
   }, [snapshotKey, send]);
 
