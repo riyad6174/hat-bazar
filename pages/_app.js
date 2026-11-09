@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <Toaster position="bottom-center" />
       <CartDrawer />
-      {router.pathname !== '/checkout' && <FloatingCart />}
+      {router.pathname !== '/checkout' && !router.pathname.startsWith('/admin') && <FloatingCart />}
       <AnimatePresence mode="wait">
         <motion.div
           key={router.route}

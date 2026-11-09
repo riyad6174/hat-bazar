@@ -1,8 +1,21 @@
 import { google } from 'googleapis';
 import { connectDB } from '@/lib/mongodb';
 import Order from '@/models/Order';
+import { markCheckoutCompleted } from '@/lib/checkoutSessions';
+
+const DUPLICATE_KEY = 11000;
+
+async function completeCheckoutSession(details) {
+  try {
+    await markCheckoutCompleted(details);
+  } catch (err) {
+    console.error('[MongoDB] Checkout completion failed:', err.message);
+  }
+}
 
 export default async (req, res) => {
+  let claimedOrder = null;
+
   try {
     if (req.method !== 'POST') {
       return res.status(405).json({ message: 'Method not allowed' });
@@ -29,6 +42,7 @@ export default async (req, res) => {
       orderDate,
       submissionTime,
       sheetName,
+      checkoutToken,
     } = req.body;
 
     // Validate required fields
@@ -60,6 +74,49 @@ export default async (req, res) => {
       return res.status(400).json({
         message: 'Invalid items format: must be valid JSON',
       });
+    }
+
+    const successResponse = {
+      message: 'Order data submitted successfully!',
+      data: {
+        phone,
+        name,
+        district,
+        address,
+        items: parsedItems,
+        totalPrice,
+        shippingCharge,
+        grandTotal,
+        orderId,
+        orderDate,
+      },
+    };
+
+    // Save to MongoDB first: the unique orderId makes this the atomic claim on
+    // the order, so a double submit or retry can't add a second Sheets row.
+    // Must be awaited before responding; serverless functions terminate after
+    // res.send(), so unawaited promises are silently dropped.
+    try {
+      await connectDB();
+      claimedOrder = await Order.create({
+        name,
+        phone,
+        district,
+        address,
+        items,
+        totalPrice: Number(totalPrice),
+        shippingCharge: Number(shippingCharge),
+        grandTotal: Number(grandTotal),
+        orderId,
+        orderDate,
+        submissionTime,
+      });
+    } catch (err) {
+      if (err.code === DUPLICATE_KEY) {
+        await completeCheckoutSession({ phone, token: checkoutToken, orderId });
+        return res.status(200).json(successResponse);
+      }
+      console.error('[MongoDB] Order save failed:', err.message);
     }
 
     const auth = new google.auth.GoogleAuth({
@@ -142,47 +199,21 @@ export default async (req, res) => {
     console.log(`Rows updated: ${response.data.updates.updatedCells}`);
     // Optional: Log tableRange from response to verify (e.g., console.log(response.data.tableRange))
 
-    // Save to MongoDB — must be awaited before responding; serverless functions
-    // terminate after res.send(), so unawaited promises are silently dropped.
-    try {
-      await connectDB();
-      await Order.create({
-        name,
-        phone,
-        district,
-        address,
-        items,
-        totalPrice: Number(totalPrice),
-        shippingCharge: Number(shippingCharge),
-        grandTotal: Number(grandTotal),
-        orderId,
-        orderDate,
-        submissionTime,
-      });
-    } catch (err) {
-      console.error('[MongoDB] Order save failed:', err.message);
-    }
+    await completeCheckoutSession({ phone, token: checkoutToken, orderId });
 
-    return res.status(200).json({
-      message: 'Order data submitted successfully!',
-      data: {
-        phone,
-        name,
-        district,
-        address,
-        items: parsedItems,
-        totalPrice,
-        shippingCharge,
-        grandTotal,
-        orderId,
-        orderDate,
-      },
-    });
+    return res.status(200).json(successResponse);
   } catch (error) {
     console.error('API error:', {
       message: error.message,
       stack: error.stack,
     });
+    // The customer is told this order failed, so it must not stay in the
+    // admin panel, and the checkout stays open for a retry.
+    if (claimedOrder) {
+      await Order.deleteOne({ _id: claimedOrder._id }).catch((err) =>
+        console.error('[MongoDB] Order rollback failed:', err.message)
+      );
+    }
     return res.status(500).json({
       message: 'Failed to submit order data',
       error: error.message,

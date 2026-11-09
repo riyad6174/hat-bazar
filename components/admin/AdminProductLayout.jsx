@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FiPackage, FiPlus, FiList, FiLogOut, FiGrid, FiChevronDown, FiChevronRight, FiMenu, FiX, FiTag } from 'react-icons/fi';
+import { FiPackage, FiPlus, FiList, FiLogOut, FiGrid, FiChevronDown, FiChevronRight, FiMenu, FiX, FiTag, FiShoppingCart } from 'react-icons/fi';
+import { CountBadge } from '@/components/admin/orderDisplay';
+import { useAbandonedBadge } from '@/components/admin/useAbandonedBadge';
 
-function NavItem({ href, label, icon: Icon, active, sub }) {
+function NavItem({ href, label, icon: Icon, active, sub, badge }) {
   return (
     <Link href={href} className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${sub ? 'pl-8 text-xs' : ''} ${active ? 'bg-white text-slate-900 shadow-sm font-semibold' : 'text-slate-500 hover:text-slate-800 hover:bg-white/60'}`}>
       {Icon && <Icon className={`w-4 h-4 flex-shrink-0 ${active ? 'text-slate-700' : ''}`} />}
-      {label}
+      <span className="flex-1">{label}</span>
+      <CountBadge count={badge} />
     </Link>
   );
 }
@@ -46,6 +49,8 @@ export default function AdminProductLayout({ children, title }) {
   }
 
   const path = router.pathname;
+  // That page clears the counter itself, so don't flash the old value there.
+  const abandonedCount = useAbandonedBadge({ waitForSeen: path === '/admin/abandoned-orders' });
 
   const sidebar = (
     <aside className="w-56 flex-shrink-0 flex flex-col bg-slate-100 border-r border-slate-200 min-h-full">
@@ -68,6 +73,7 @@ export default function AdminProductLayout({ children, title }) {
 
         <div className="pt-2 border-t border-slate-200">
           <NavItem href="/admin/orders" label="Orders" icon={FiGrid} active={false} />
+          <NavItem href="/admin/abandoned-orders" label="Abandoned Orders" icon={FiShoppingCart} active={path === '/admin/abandoned-orders'} badge={abandonedCount} />
         </div>
       </nav>
 

@@ -10,6 +10,9 @@ import {
 } from 'react-icons/fi';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import AbandonedOrdersTable from '@/components/admin/AbandonedOrdersTable';
+import { CountBadge, formatPhone, parseItems, parseItemQty } from '@/components/admin/orderDisplay';
+import { useAbandonedBadge } from '@/components/admin/useAbandonedBadge';
 
 const ORDER_STATUS_CONFIG = {
   pending: { label: 'Pending', color: 'bg-yellow-50', badge: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: FiClock, btn: 'bg-yellow-600' },
@@ -25,13 +28,6 @@ const RESPONSE_STATUS_CONFIG = {
   fake_order: { label: 'Fake Order', badge: 'bg-purple-100 text-purple-700', icon: FiAlertTriangle },
   null: { label: 'Not Called', badge: 'bg-yellow-100 text-yellow-700', icon: FiPhone },
 };
-
-function formatPhone(phone) {
-  if (!phone) return '';
-  if (phone.startsWith('+88')) return phone.slice(3);
-  if (phone.startsWith('88') && phone.length > 11) return phone.slice(2);
-  return phone;
-}
 
 function formatOrderTime(order) {
   if (order.submissionTime) {
@@ -61,31 +57,6 @@ function OrderTime({ order }) {
   );
 }
 
-function parseItems(itemsStr) {
-  try {
-    const arr = JSON.parse(itemsStr || '[]');
-    return arr.map((it) => (
-      <div key={Math.random()} className="mb-1 last:mb-0">
-        <span className="font-medium">{it.title || it.name || 'Item'}</span>
-        <span className="text-gray-400 mx-1">×</span>
-        <span className="text-blue-600 font-semibold">{it.quantity || 1}</span>
-        {it.selectedColor && <span className="block text-[10px] text-gray-500">{it.selectedColor}</span>}
-      </div>
-    ));
-  } catch {
-    return <span className="text-gray-400 italic">No items</span>;
-  }
-}
-
-function parseItemQty(itemsStr) {
-  try {
-    const arr = JSON.parse(itemsStr || '[]');
-    return arr.reduce((sum, it) => sum + (Number(it.quantity) || 1), 0);
-  } catch {
-    return 0;
-  }
-}
-
 export default function AdminOrders() {
   const router = useRouter();
   const [admin, setAdmin] = useState(null);
@@ -111,6 +82,8 @@ export default function AdminOrders() {
   const [noteSaving, setNoteSaving] = useState(false);
 
   const debounceRef = useRef(null);
+  const abandonedCount = useAbandonedBadge();
+  const activeTab = router.query.tab === 'abandoned' ? 'abandoned' : 'orders';
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
@@ -256,6 +229,10 @@ export default function AdminOrders() {
               <Link href="/admin/products" className="text-sm px-4 py-1.5 rounded-md text-slate-600 hover:bg-slate-200 transition-colors font-medium">
                 Products
               </Link>
+              <Link href="/admin/abandoned-orders" className="text-sm px-4 py-1.5 rounded-md text-slate-600 hover:bg-slate-200 transition-colors font-medium flex items-center gap-1.5">
+                Abandoned Orders
+                <CountBadge count={abandonedCount} />
+              </Link>
             </nav>
           </div>
           <div className="flex items-center gap-4">
@@ -287,6 +264,29 @@ export default function AdminOrders() {
             </div>
           </div>
 
+          {/* Tabs */}
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl w-fit mb-6">
+            {[
+              { key: 'orders', label: 'Completed Orders', href: '/admin/orders' },
+              { key: 'abandoned', label: 'Abandoned Orders', href: '/admin/orders?tab=abandoned', count: abandonedCount },
+            ].map((tab) => (
+              <Link
+                key={tab.key}
+                href={tab.href}
+                shallow
+                replace
+                className={`text-sm px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${activeTab === tab.key ? 'bg-white shadow-sm font-semibold text-blue-700' : 'text-slate-600 hover:bg-slate-200 font-medium'}`}
+              >
+                {tab.label}
+                <CountBadge count={tab.count} />
+              </Link>
+            ))}
+          </div>
+
+          {activeTab === 'abandoned' ? (
+            <AbandonedOrdersTable />
+          ) : (
+          <>
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {[
@@ -500,6 +500,8 @@ export default function AdminOrders() {
               </div>
             )}
           </div>
+          </>
+          )}
         </main>
 
         {/* Update Order Modal */}
