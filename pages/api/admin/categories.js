@@ -4,6 +4,7 @@ import Product from '@/models/Product';
 import { verifyAdmin } from '@/lib/auth';
 import { getCategoriesWithCounts } from '@/lib/catalog';
 import { slugifyCategory } from '@/lib/categoryUtils';
+import { invalidateSearchIndex } from '@/lib/search';
 
 function pickFields(body) {
   const data = {};
@@ -44,6 +45,7 @@ export default async function handler(req, res) {
         data.sortOrder = (last?.sortOrder || 0) + 1;
       }
       const category = await Category.create(data);
+      invalidateSearchIndex();
       return res.status(201).json({ category });
     }
 
@@ -56,6 +58,7 @@ export default async function handler(req, res) {
       }
       const category = await Category.findByIdAndUpdate(id, data, { new: true, runValidators: true });
       if (!category) return res.status(404).json({ message: 'Not found' });
+      invalidateSearchIndex();
       return res.status(200).json({ category });
     }
 
@@ -63,6 +66,7 @@ export default async function handler(req, res) {
       const { id } = req.query;
       await Product.updateMany({ categories: id }, { $pull: { categories: id } });
       await Category.findByIdAndDelete(id);
+      invalidateSearchIndex();
       return res.status(200).json({ message: 'Deleted' });
     }
 

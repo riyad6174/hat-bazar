@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCart } from '@/context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import SearchPanel, { SearchToggle } from '@/components/SearchBar';
 import {
   RiDropLine,
   RiWaterFlashLine,
@@ -53,6 +54,8 @@ const Navbar = ({ categories: initialCategories, belowHeader }) => {
   const { getCartCount, setIsDrawerOpen } = useCart();
   const cartCount = getCartCount();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
   const [allCategories, setAllCategories] = useState(initialCategories || categoriesCache || []);
 
   useEffect(() => {
@@ -101,6 +104,11 @@ const Navbar = ({ categories: initialCategories, belowHeader }) => {
               Shop
             </Link>
 
+            <SearchToggle
+              open={searchOpen}
+              onToggle={() => { setSearchOpen((o) => !o); setMobileMenuOpen(false); }}
+            />
+
             <button
               onClick={() => setIsDrawerOpen(true)}
               className="text-on-surface flex items-center relative hover:text-primary transition-colors cursor-pointer p-2"
@@ -115,7 +123,7 @@ const Navbar = ({ categories: initialCategories, belowHeader }) => {
             </button>
 
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => { setMobileMenuOpen(!mobileMenuOpen); setSearchOpen(false); }}
               className="md:hidden text-on-surface p-2"
               aria-label="Toggle menu"
             >
@@ -126,6 +134,8 @@ const Navbar = ({ categories: initialCategories, belowHeader }) => {
           </div>
         </div>
       </header>
+
+      <SearchPanel open={searchOpen} onClose={closeSearch} />
 
       {/* Desktop Category Nav */}
       <nav className="hidden md:block bg-surface-container/80 backdrop-blur-md border-b border-surface-dim py-3 overflow-x-auto scrollbar-hide">

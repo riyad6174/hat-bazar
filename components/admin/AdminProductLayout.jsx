@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FiPackage, FiPlus, FiList, FiLogOut, FiGrid, FiChevronDown, FiChevronRight, FiMenu, FiX, FiTag, FiShoppingCart } from 'react-icons/fi';
+import { FiPackage, FiPlus, FiList, FiLogOut, FiGrid, FiChevronDown, FiChevronRight, FiMenu, FiX, FiTag, FiShoppingCart, FiSearch } from 'react-icons/fi';
 import { CountBadge } from '@/components/admin/orderDisplay';
 import { useAbandonedBadge } from '@/components/admin/useAbandonedBadge';
 
@@ -74,6 +74,7 @@ export default function AdminProductLayout({ children, title }) {
         <div className="pt-2 border-t border-slate-200">
           <NavItem href="/admin/orders" label="Orders" icon={FiGrid} active={false} />
           <NavItem href="/admin/abandoned-orders" label="Abandoned Orders" icon={FiShoppingCart} active={path === '/admin/abandoned-orders'} badge={abandonedCount} />
+          <NavItem href="/admin/search-analytics" label="Search Analytics" icon={FiSearch} active={path === '/admin/search-analytics'} />
         </div>
       </nav>
 

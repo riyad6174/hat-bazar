@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -8,10 +8,12 @@ import { connectDB } from '@/lib/mongodb';
 import Product from '@/models/Product';
 import { normalizeDbProduct, getCategoriesWithCounts } from '@/lib/catalog';
 import { getProductCategories } from '@/lib/categoryUtils';
+import { trackSearch } from '@/utils/searchTracking';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const SORT_OPTIONS = [
+  { value: 'relevance', label: 'Best match', queryOnly: true },
   { value: 'newest', label: 'Newest' },
   { value: 'price-asc', label: 'Price: Low to High' },
   { value: 'price-desc', label: 'Price: High to Low' },
@@ -32,19 +34,78 @@ export async function getServerSideProps() {
   }
 }
 
+function parseCategories(value) {
+  const raw = Array.isArray(value) ? value.join(',') : value || '';
+  return [...new Set(raw.split(',').map((s) => s.trim()).filter(Boolean))];
+}
+
 export default function ShopPage({ dbProducts = [], categories = [] }) {
   const router = useRouter();
-  const { category } = router.query;
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('newest');
+  // URL is the source of truth for search + categories (shareable, back-button friendly).
+  const searchQuery = typeof router.query.q === 'string' ? router.query.q : '';
+  const selectedCategories = useMemo(() => parseCategories(router.query.category), [router.query.category]);
+  const categoryKey = selectedCategories.join(',');
+
+  const [searchInput, setSearchInput] = useState(searchQuery);
+  const [sortBy, setSortBy] = useState('relevance');
   const [showFilters, setShowFilters] = useState(false);
   const [priceRange, setPriceRange] = useState([0, 5000]);
-  const [selectedCategories, setSelectedCategories] = useState(category ? [category] : []);
+  const [searchResult, setSearchResult] = useState(null); // { products, relaxed }
+  const [searching, setSearching] = useState(false);
 
-  // Keep the filter in sync when navbar/category links change ?category= on this page.
+  const updateUrl = useCallback(
+    (next) => {
+      const query = { ...router.query, ...next };
+      Object.keys(query).forEach((k) => {
+        if (query[k] === '' || query[k] == null) delete query[k];
+      });
+      router.replace({ pathname: '/shop', query }, undefined, { shallow: true, scroll: false });
+    },
+    [router]
+  );
+
+  // Keep the input in sync when the URL changes from elsewhere (navbar search, back button).
   useEffect(() => {
-    setSelectedCategories(category ? [category] : []);
-  }, [category]);
+    setSearchInput((prev) => (prev.trim() === searchQuery.trim() ? prev : searchQuery));
+  }, [searchQuery]);
+
+  // Debounce typing into the URL.
+  useEffect(() => {
+    if (searchInput.trim() === searchQuery.trim()) return;
+    const t = setTimeout(() => updateUrl({ q: searchInput.trim() }), 300);
+    return () => clearTimeout(t);
+  }, [searchInput, searchQuery, updateUrl]);
+
+  useEffect(() => {
+    if (searchQuery.trim()) trackSearch(searchQuery, 'shop');
+  }, [searchQuery]);
+
+  // Ranked server-side search whenever there is a query.
+  useEffect(() => {
+    const q = searchQuery.trim();
+    if (!q) {
+      setSearchResult(null);
+      setSearching(false);
+      return;
+    }
+    const controller = new AbortController();
+    setSearching(true);
+    const params = new URLSearchParams({ q, limit: '50' });
+    if (categoryKey) params.set('categories', categoryKey);
+    fetch(`/api/public/search?${params}`, { signal: controller.signal })
+      .then((r) => (r.ok ? r.json() : { products: [], relaxed: false }))
+      .then((data) => {
+        setSearchResult({ products: data.products || [], relaxed: !!data.relaxed });
+        setSearching(false);
+      })
+      .catch((err) => {
+        if (err.name !== 'AbortError') {
+          setSearchResult({ products: [], relaxed: false });
+          setSearching(false);
+        }
+      });
+    return () => controller.abort();
+  }, [searchQuery, categoryKey]);
 
   const allProducts = useMemo(() => [...dbProducts, ...staticProducts], [dbProducts]);
 
@@ -55,27 +116,26 @@ export default function ShopPage({ dbProducts = [], categories = [] }) {
 
   const categoryName = (slug) => categories.find(c => c.slug === slug)?.name || slug;
 
+  const hasQuery = searchQuery.trim().length > 0;
+  const effectiveSort = !hasQuery && sortBy === 'relevance' ? 'newest' : sortBy;
+
   const filteredProducts = useMemo(() => {
-    let result = [...allProducts];
-
-    if (selectedCategories.length > 0) {
-      result = result.filter(p =>
-        getProductCategories(p).some(c => selectedCategories.includes(c.slug))
-      );
-    }
-
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      result = result.filter(p =>
-        p.name?.toLowerCase().includes(q) ||
-        getProductCategories(p).some(c => c.name.toLowerCase().includes(q)) ||
-        p.description?.toLowerCase().includes(q)
-      );
+    let result;
+    if (hasQuery) {
+      // Server already applied the query + category filter and ranked by relevance.
+      result = [...(searchResult?.products || [])];
+    } else {
+      result = [...allProducts];
+      if (selectedCategories.length > 0) {
+        result = result.filter(p =>
+          getProductCategories(p).some(c => selectedCategories.includes(c.slug))
+        );
+      }
     }
 
     result = result.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1]);
 
-    switch (sortBy) {
+    switch (effectiveSort) {
       case 'price-asc':
         result.sort((a, b) => a.price - b.price);
         break;
@@ -90,22 +150,39 @@ export default function ShopPage({ dbProducts = [], categories = [] }) {
     }
 
     return result;
-  }, [allProducts, selectedCategories, searchQuery, sortBy, priceRange]);
+  }, [hasQuery, searchResult, allProducts, selectedCategories, effectiveSort, priceRange]);
+
+  const setCategories = (list) => updateUrl({ category: list.join(',') });
 
   const toggleCategory = (cat) => {
-    setSelectedCategories(prev =>
-      prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
+    setCategories(
+      selectedCategories.includes(cat)
+        ? selectedCategories.filter(c => c !== cat)
+        : [...selectedCategories, cat]
     );
   };
 
+  const clearSearch = () => {
+    setSearchInput('');
+    updateUrl({ q: '' });
+  };
+
   const resetFilters = () => {
-    setSelectedCategories([]);
-    setSearchQuery('');
+    setSearchInput('');
     setPriceRange([0, 5000]);
-    setSortBy('newest');
+    setSortBy('relevance');
+    updateUrl({ q: '', category: '' });
   };
 
   const activeFilterCount = selectedCategories.length + (searchQuery ? 1 : 0) + (priceRange[0] > 0 || priceRange[1] < 5000 ? 1 : 0);
+
+  const heading = hasQuery
+    ? `Results for “${searchQuery}”`
+    : selectedCategories.length === 1
+      ? categoryName(selectedCategories[0])
+      : selectedCategories.length > 1
+        ? `${selectedCategories.length} Categories`
+        : 'Shop All';
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -119,10 +196,10 @@ export default function ShopPage({ dbProducts = [], categories = [] }) {
           className="mb-8"
         >
           <h1 className="font-display text-3xl md:text-5xl text-on-surface mb-2">
-            {selectedCategories.length === 1 ? categoryName(selectedCategories[0]) : 'Shop All'}
+            {heading}
           </h1>
           <p className="font-body text-sm text-tertiary">
-            {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+            {searching ? 'Searching…' : `${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''}`}
           </p>
         </motion.header>
 
@@ -131,11 +208,13 @@ export default function ShopPage({ dbProducts = [], categories = [] }) {
           <div className="relative flex-grow">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
             <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full border border-surface-dim bg-white font-body text-sm focus:outline-none focus:border-primary transition-colors"
+              type="search"
+              placeholder="Search products or categories..."
+              value={searchInput}
+              maxLength={100}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') updateUrl({ q: searchInput.trim() }); }}
+              className="w-full pl-10 pr-10 py-2.5 rounded-full border border-surface-dim bg-white font-body text-sm focus:outline-none focus:border-primary transition-colors"
             />
           </div>
           <div className="flex gap-2">
@@ -156,11 +235,11 @@ export default function ShopPage({ dbProducts = [], categories = [] }) {
               )}
             </button>
             <select
-              value={sortBy}
+              value={effectiveSort}
               onChange={(e) => setSortBy(e.target.value)}
               className="px-4 py-2.5 rounded-full border border-surface-dim bg-white font-body text-sm focus:outline-none focus:border-primary transition-colors cursor-pointer"
             >
-              {SORT_OPTIONS.map(opt => (
+              {SORT_OPTIONS.filter(opt => hasQuery || !opt.queryOnly).map(opt => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
@@ -171,7 +250,7 @@ export default function ShopPage({ dbProducts = [], categories = [] }) {
         {availableCategories.length > 0 && (
           <div className="flex gap-2 overflow-x-auto scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap pb-1 mb-6">
             <button
-              onClick={() => setSelectedCategories([])}
+              onClick={() => setCategories([])}
               className={`flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
                 selectedCategories.length === 0
                   ? 'bg-primary text-white'
@@ -194,6 +273,40 @@ export default function ShopPage({ dbProducts = [], categories = [] }) {
               </button>
             ))}
           </div>
+        )}
+
+        {/* Active filters */}
+        {(hasQuery || selectedCategories.length > 0) && (
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            {hasQuery && (
+              <button
+                onClick={clearSearch}
+                className="flex items-center gap-1 pl-3 pr-2 py-1 rounded-full bg-primary/10 text-primary font-body text-xs font-semibold"
+              >
+                &ldquo;{searchQuery}&rdquo;
+                <span className="material-symbols-outlined text-sm">close</span>
+              </button>
+            )}
+            {selectedCategories.map(slug => (
+              <button
+                key={slug}
+                onClick={() => toggleCategory(slug)}
+                className="flex items-center gap-1 pl-3 pr-2 py-1 rounded-full bg-primary/10 text-primary font-body text-xs font-semibold"
+              >
+                {categoryName(slug)}
+                <span className="material-symbols-outlined text-sm">close</span>
+              </button>
+            ))}
+            <button onClick={resetFilters} className="font-body text-xs text-tertiary hover:text-primary hover:underline ml-1">
+              Clear all
+            </button>
+          </div>
+        )}
+
+        {hasQuery && !searching && searchResult?.relaxed && filteredProducts.length > 0 && (
+          <p className="font-body text-sm text-tertiary mb-4">
+            No exact match for all words &mdash; showing related products.
+          </p>
         )}
 
         {/* Filter Panel */}
@@ -232,7 +345,9 @@ export default function ShopPage({ dbProducts = [], categories = [] }) {
         )}
 
         {/* Product Grid */}
-        {filteredProducts.length > 0 ? (
+        {searching && !searchResult ? (
+          <div className="text-center py-16 font-body text-tertiary">Searching…</div>
+        ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-8">
             {filteredProducts.map(product => (
               <ProductCard key={product.id || product._id} product={product} />

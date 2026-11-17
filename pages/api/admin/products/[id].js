@@ -2,6 +2,7 @@ import { connectDB } from '@/lib/mongodb';
 import Product from '@/models/Product';
 import { resolveCategoryIds } from '@/lib/catalog';
 import { verifyAdmin } from '@/lib/auth';
+import { invalidateSearchIndex } from '@/lib/search';
 
 export default async function handler(req, res) {
   const admin = verifyAdmin(req);
@@ -25,11 +26,13 @@ export default async function handler(req, res) {
         runValidators: true,
       });
       if (!product) return res.status(404).json({ message: 'Not found' });
+      invalidateSearchIndex();
       return res.status(200).json({ product });
     }
 
     if (req.method === 'DELETE') {
       await Product.findByIdAndDelete(id);
+      invalidateSearchIndex();
       return res.status(200).json({ message: 'Deleted' });
     }
 

@@ -3,6 +3,7 @@ import Product from '@/models/Product';
 import '@/models/Category';
 import { resolveCategoryIds } from '@/lib/catalog';
 import { verifyAdmin } from '@/lib/auth';
+import { invalidateSearchIndex } from '@/lib/search';
 
 export default async function handler(req, res) {
   const admin = verifyAdmin(req);
@@ -23,6 +24,7 @@ export default async function handler(req, res) {
       const body = { ...req.body };
       body.categories = await resolveCategoryIds(body.categories);
       const product = await Product.create(body);
+      invalidateSearchIndex();
       return res.status(201).json({ product });
     }
 

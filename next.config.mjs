@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 const nextConfig = {
+  // A stray E:\package-lock.json makes Next infer E:\ as the workspace root.
+  // Pin it to this project so builds/dev always share one .next directory.
+  outputFileTracingRoot: __dirname,
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,

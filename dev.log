@@ -1,0 +1,60 @@
+npm warn Unknown user config "legacy-peer-devs". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> hat-bazar@0.1.0 dev
+> next dev
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of E:\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * E:\hat-bazar\package-lock.json
+
+ ⚠ Port 3000 is in use by process 12388, using available port 3001 instead.
+   ▲ Next.js 15.5.15
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.0.72:3001
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 126.5s
+ ○ Compiling /api/public/search ...
+ ✓ Compiled /api/public/search in 72.1s (272 modules)
+ GET /api/public/search?q=gluta&limit=5 200 in 42704ms
+ ○ Compiling / ...
+ ✓ Compiled / in 28.9s (956 modules)
+Warning: viewport meta tags should not be used in _document.js's <Head>. https://nextjs.org/docs/messages/no-document-viewport-meta
+ GET / 200 in 37690ms
+ ○ Compiling /api/public/search ...
+ ✓ Compiled /api/public/search in 602ms (298 modules)
+ GET /api/public/search?q=cerave&limit=3 200 in 2884ms
+ GET /api/public/search?q=serum&limit=3 200 in 9ms
+ GET /api/public/search?q=mielle&limit=3 200 in 6ms
+ GET /api/public/search?q=snail&limit=3 200 in 10ms
+ GET /api/public/search?q=%E0%A6%B8%E0%A6%BF%E0%A6%B0%E0%A6%BE%E0%A6%AE&limit=3 200 in 10ms
+ GET /api/public/search?q=creme&limit=3 200 in 8ms
+ GET /api/public/search?q=vitamin%20c&limit=3 200 in 7ms
+ GET /api/public/search?q=nia&limit=3 200 in 5ms
+ GET /api/public/search?q=shampoo&limit=3 200 in 6ms
+Warning: viewport meta tags should not be used in _document.js's <Head>. https://nextjs.org/docs/messages/no-document-viewport-meta
+ GET / 200 in 3085ms
+ GET /api/public/search?q=3w&limit=3 200 in 69ms
+ GET /api/public/search?q=laneige&limit=3 200 in 8ms
+ GET /api/public/search?q=nagano&limit=3 200 in 10ms
+ GET /api/public/search?q=waranya&limit=3 200 in 8ms
+ GET /api/public/search?q=fahsai&limit=3 200 in 10ms
+ GET /api/public/search?q=osufi&limit=3 200 in 11ms
+ GET /api/public/search?q=christian%20dean&limit=3 200 in 12ms
+ GET /api/public/search?q=manee&limit=3 200 in 8ms
+ ✓ Compiled in 5.8s (986 modules)
+ ✓ Compiled in 2.1s (986 modules)
+ ✓ Compiled in 3.8s (939 modules)
+ ✓ Compiled in 2s (667 modules)
+ ⚠ Found a change in next.config.mjs. Restarting the server to apply the changes...
+   ▲ Next.js 15.5.15
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.0.72:3001
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 14s
